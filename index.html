@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Cloud Architecture Dashboard - Ome Robab</title>
+    <title>Enterprise Cloud Architecture Console - Ome Robab</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         body {
-            background: #0b1120;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.3) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+            background-color: #090d16;
             color: #e2e8f0;
             display: flex;
             justify-content: center;
@@ -24,78 +21,67 @@
             padding: 40px 20px;
         }
         .container {
-            background: rgba(15, 23, 42, 0.95);
+            background-color: #111827;
             width: 100%;
-            max-width: 1020px;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
+            max-width: 1000px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            border: 1px solid #1e293b;
-            animation: fadeIn 0.6s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            border: 1px solid #1f2937;
         }
         .header {
-            background: #0f172a;
-            border-bottom: 1px solid #1e293b;
-            padding: 40px 35px;
-            text-align: center;
-            position: relative;
+            background-color: #1f2937;
+            border-bottom: 1px solid #374151;
+            padding: 32px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .header h1 {
-            font-size: 28px;
+        .header-title h1 {
+            font-size: 24px;
             font-weight: 700;
-            color: #f8fafc;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            color: #f9fafb;
+            letter-spacing: -0.3px;
         }
-        .header p {
-            font-size: 14px;
-            color: #94a3b8;
-            font-weight: 400;
+        .header-title p {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-top: 4px;
         }
         .status-badge {
             display: inline-flex;
             align-items: center;
-            background: rgba(16, 185, 129, 0.1);
+            background-color: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: #10b981;
-            padding: 6px 18px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 6px;
             font-size: 12px;
             font-weight: 600;
-            margin-top: 20px;
         }
         .dot {
-            height: 8px;
-            width: 8px;
+            height: 7px;
+            width: 7px;
             background-color: #10b981;
             border-radius: 50%;
             display: inline-block;
             margin-right: 8px;
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
         }
         .content {
-            padding: 40px 35px;
+            padding: 35px;
         }
         .section-title {
             font-size: 12px;
-            color: #38bdf8;
-            border-bottom: 1px solid #1e293b;
+            color: #60a5fa;
+            border-bottom: 1px solid #1f2937;
             padding-bottom: 8px;
-            margin-bottom: 20px;
-            margin-top: 36px;
+            margin-bottom: 18px;
+            margin-top: 32px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
         .section-title:first-child {
             margin-top: 0;
@@ -103,118 +89,117 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
+            gap: 14px;
         }
         .info-card {
-            background: #1e293b;
-            padding: 18px 20px;
-            border-radius: 10px;
-            border: 1px solid #334155;
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            background-color: #1a2234;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid #2d3748;
+            transition: border-color 0.2s ease;
         }
         .info-card:hover {
-            border-color: #38bdf8;
-            transform: translateY(-2px);
+            border-color: #3b82f6;
         }
         .info-card label {
             display: block;
             font-size: 11px;
-            color: #64748b;
+            color: #718096;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
         .info-card span {
             font-size: 14px;
-            color: #f1f5f9;
+            color: #edf2f7;
             font-weight: 600;
         }
         .metric-value {
-            font-size: 16px !important;
-            color: #10b981 !important;
+            font-size: 15px !important;
+            color: #34d399 !important;
             font-weight: 700 !important;
         }
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .tech-tag {
-            background: #1e293b;
+            background-color: #1a2234;
             color: #93c5fd;
-            border: 1px solid #334155;
-            padding: 8px 14px;
-            border-radius: 8px;
+            border: 1px solid #2d3748;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 12px;
             font-weight: 500;
         }
         .workflow-box {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            padding: 24px;
-            border-radius: 10px;
+            background-color: #1a2234;
+            border: 1px solid #2d3748;
+            padding: 20px;
+            border-radius: 8px;
         }
         .workflow-step {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             font-size: 13px;
-            color: #94a3b8;
-            line-height: 1.6;
+            color: #a0aec0;
+            line-height: 1.5;
         }
         .workflow-step:last-child {
             margin-bottom: 0;
         }
         .step-num {
-            background: #2563eb;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
+            background-color: #2563eb;
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            margin-right: 14px;
+            margin-right: 12px;
             flex-shrink: 0;
             margin-top: 1px;
         }
         .workflow-step strong {
-            color: #f1f5f9;
+            color: #e2e8f0;
         }
         .btn-group {
             display: flex;
-            gap: 14px;
-            justify-content: center;
-            margin-top: 36px;
+            gap: 12px;
+            justify-content: flex-start;
+            margin-top: 30px;
         }
         .btn {
-            background: #2563eb;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
             font-size: 13px;
             transition: background-color 0.2s ease;
         }
         .btn:hover {
-            background: #1d4ed8;
+            background-color: #1d4ed8;
         }
         .btn-secondary {
-            background: #1e293b;
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background-color: #1a2234;
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
         }
         .footer {
-            background: #0f172a;
+            background-color: #0d131f;
             text-align: center;
-            padding: 20px;
+            padding: 18px;
             font-size: 12px;
             color: #64748b;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid #1f2937;
         }
     </style>
 </head>
@@ -223,10 +208,12 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Cloud Computing Assignment Portfolio</h1>
-            <p>Automated Enterprise Infrastructure & Continuous Deployment (CI/CD)</p>
+            <div class="header-title">
+                <h1>Cloud Architecture Dashboard</h1>
+                <p>Automated Enterprise Infrastructure & Continuous Integration Pipeline</p>
+            </div>
             <div class="status-badge">
-                <span class="dot"></span> Live Deployment Active on Vercel Edge Network
+                <span class="dot"></span> System Operational
             </div>
         </div>
 
@@ -258,33 +245,33 @@
                 </div>
                 <div class="info-card">
                     <label>Project Scope</label>
-                    <span>Cloud Infrastructure & Static Hosting</span>
+                    <span>Cloud Infrastructure & Web Deployment</span>
                 </div>
             </div>
 
             <!-- System Live Metrics -->
-            <div class="section-title">Live Server & Resource Metrics</div>
+            <div class="section-title">Live Performance & Resource Metrics</div>
             <div class="grid">
                 <div class="info-card">
-                    <label>Edge Network Latency</label>
+                    <label>Edge Latency</label>
                     <span class="metric-value">14 ms (Optimal)</span>
                 </div>
                 <div class="info-card">
-                    <label>Server Uptime Status</label>
+                    <label>System Uptime</label>
                     <span class="metric-value">99.99% Operational</span>
                 </div>
                 <div class="info-card">
-                    <label>Bandwidth Utilization</label>
-                    <span class="metric-value">Unmetered Global CDN</span>
+                    <label>CDN Network</label>
+                    <span class="metric-value">Global Edge Distribution</span>
                 </div>
                 <div class="info-card">
-                    <label>SSL Certificate Health</label>
-                    <span class="metric-value">100% Valid & Active</span>
+                    <label>Security SSL</label>
+                    <span class="metric-value">256-Bit TLS Encrypted</span>
                 </div>
             </div>
 
             <!-- Cloud Infrastructure Details -->
-            <div class="section-title">Cloud Infrastructure & Environment Specs</div>
+            <div class="section-title">Cloud Infrastructure Specs</div>
             <div class="grid">
                 <div class="info-card">
                     <label>Repository ID</label>
@@ -292,155 +279,90 @@
                 </div>
                 <div class="info-card">
                     <label>Hosting Ecosystem</label>
-                    <span>Vercel Edge Network (Global CDN)</span>
+                    <span>Vercel Edge Network</span>
                 </div>
                 <div class="info-card">
-                    <label>Deployment Pipeline</label>
-                    <span>Git Webhook Continuous Integration (CI/CD)</span>
+                    <label>CI/CD Pipeline</label>
+                    <span>Git Webhook Continuous Integration</span>
                 </div>
                 <div class="info-card">
-                    <label>Security Standards</label>
-                    <span>TLS/SSL Certified (Automated HTTPS)</span>
+                    <label>Security Standard</label>
+                    <span>HTTPS / SSL Certified</span>
                 </div>
                 <div class="info-card">
-                    <label>Server Edge Region</label>
-                    <span>Global Anycast CDN Distribution</span>
+                    <label>Edge Routing</label>
+                    <span>Global Anycast CDN</span>
                 </div>
                 <div class="info-card">
-                    <label>System Architecture</label>
-                    <span>Serverless Edge Microservices</span>
-                </div>
-            </div>
-
-            <!-- Advanced System Architecture Modules -->
-            <div class="section-title">Advanced Cloud Architecture Modules</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Global Load Balancer</label>
-                    <span>Anycast IP Traffic Routing</span>
-                </div>
-                <div class="info-card">
-                    <label>Edge Caching Engine</label>
-                    <span>Instant Static Asset Delivery</span>
-                </div>
-                <div class="info-card">
-                    <label>Version Control Sync</label>
-                    <span>Real-time GitHub Webhook Integration</span>
-                </div>
-                <div class="info-card">
-                    <label>Runtime Environment</label>
-                    <span>Node.js & Vercel Serverless Functions</span>
+                    <label>Architecture Type</label>
+                    <span>Serverless Microservices</span>
                 </div>
             </div>
 
-            <!-- System Performance Analytics -->
-            <div class="section-title">System Performance & Reliability Analytics</div>
+            <!-- System Analytics -->
+            <div class="section-title">Reliability Analytics</div>
             <div class="grid">
                 <div class="info-card">
-                    <label>HTTP Response Time</label>
+                    <label>Response Time</label>
                     <span>&lt; 50ms Global Average</span>
                 </div>
                 <div class="info-card">
                     <label>Packet Loss Rate</label>
-                    <span>0.00% Zero-Loss Delivery</span>
+                    <span>0.00% Zero-Loss</span>
                 </div>
                 <div class="info-card">
-                    <label>Edge Node Failover</label>
-                    <span>Automatic Redundancy Active</span>
+                    <label>Node Redundancy</label>
+                    <span>Automated Failover Active</span>
                 </div>
                 <div class="info-card">
-                    <label>Traffic Surge Handling</label>
-                    <span>Auto-Scaling Cloud Infrastructure</span>
-                </div>
-            </div>
-
-            <!-- Performance Metrics & DevOps Stats -->
-            <div class="section-title">DevOps Performance & Build Metrics</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Build Compilation Time</label>
-                    <span>&lt; 3.5 Seconds (Optimized)</span>
-                </div>
-                <div class="info-card">
-                    <label>Deployment Triggers</label>
-                    <span>Automated Push Event Integration</span>
-                </div>
-                <div class="info-card">
-                    <label>Version Control Branch</label>
-                    <span>Main Production Branch</span>
-                </div>
-                <div class="info-card">
-                    <label>Cache Policy</label>
-                    <span>Smart Edge Caching Enabled</span>
-                </div>
-            </div>
-
-            <!-- Cloud Security & Compliance -->
-            <div class="section-title">Cloud Security & Governance</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Data Encryption</label>
-                    <span>End-to-End Transport Layer Security</span>
-                </div>
-                <div class="info-card">
-                    <label>Access Control</label>
-                    <span>Role-Based Git Authentication</span>
-                </div>
-                <div class="info-card">
-                    <label>Disaster Recovery</label>
-                    <span>Automated Snapshot Backups</span>
-                </div>
-                <div class="info-card">
-                    <label>Compliance Status</label>
-                    <span>Enterprise Web Standards Met</span>
+                    <label>Build Time</label>
+                    <span>&lt; 3.5s Optimized Compilation</span>
                 </div>
             </div>
 
             <!-- Technology Stack -->
-            <div class="section-title">Core Technical Stack & Skills</div>
+            <div class="section-title">Technical Stack & Core Competencies</div>
             <div class="tech-stack">
-                <span class="tech-tag">HTML5 Markup Structure</span>
-                <span class="tech-tag">Advanced CSS3 Animations</span>
-                <span class="tech-tag">Git Version Control System</span>
-                <span class="tech-tag">GitHub Cloud Repository</span>
-                <span class="tech-tag">Vercel Edge Platform</span>
-                <span class="tech-tag">Continuous Integration (CI/CD)</span>
-                <span class="tech-tag">Serverless Deployment</span>
-                <span class="tech-tag">Responsive UI/UX Design</span>
+                <span class="tech-tag">HTML5 Architecture</span>
+                <span class="tech-tag">CSS3 Enterprise Layout</span>
+                <span class="tech-tag">Git Version Control</span>
+                <span class="tech-tag">GitHub Repository Management</span>
+                <span class="tech-tag">Vercel Cloud Platform</span>
+                <span class="tech-tag">CI/CD Pipeline Automation</span>
             </div>
 
-            <!-- System Architecture Pipeline -->
-            <div class="section-title">End-to-End Cloud Deployment Workflow</div>
+            <!-- Workflow Steps -->
+            <div class="section-title">Deployment Lifecycle Pipeline</div>
             <div class="workflow-box">
                 <div class="workflow-step">
                     <div class="step-num">1</div>
-                    <div><strong>Local Source Code Authoring:</strong> Designed semantic UI structure and custom CSS styling files locally.</div>
+                    <div><strong>Local Source Authoring:</strong> Structured clean responsive code and semantic markup locally.</div>
                 </div>
                 <div class="workflow-step">
                     <div class="step-num">2</div>
-                    <div><strong>Version Control Commit:</strong> Committed changes and pushed the code to the primary branch of the <code>cloud-project</code> GitHub repository.</div>
+                    <div><strong>Version Control Commit:</strong> Pushed updates to the main branch of <code>cloud-project</code> GitHub repository.</div>
                 </div>
                 <div class="workflow-step">
                     <div class="step-num">3</div>
-                    <div><strong>Automated CI/CD Trigger:</strong> Vercel's automated Git integration detected code changes and initiated an instant build lifecycle.</div>
+                    <div><strong>Automated Build Execution:</strong> Vercel webhook detected code push and initiated automated compilation.</div>
                 </div>
                 <div class="workflow-step">
                     <div class="step-num">4</div>
-                    <div><strong>Global Edge Distribution:</strong> Compiled assets were automatically pushed to high-speed CDN edge nodes worldwide.</div>
+                    <div><strong>Global CDN Deployment:</strong> Assets instantly published across high-speed Edge nodes worldwide.</div>
                 </div>
             </div>
 
             <!-- Action Buttons -->
             <div class="btn-group">
-                <a href="https://github.com" target="_blank" class="btn">View GitHub Repository</a>
-                <a href="#" class="btn btn-secondary">System Status: Operational</a>
+                <a href="https://github.com" target="_blank" class="btn">View Source Code</a>
+                <a href="#" class="btn btn-secondary">System Status: Active</a>
             </div>
 
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            Designed, Formatted & Deployed by Ome Robab | Cloud Computing Academic Assessment &copy; 2026
+            Designed & Maintained by Ome Robab | Cloud Computing Academic Assessment &copy; 2026
         </div>
     </div>
 
