@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Computing Assignment - Advanced Portfolio</title>
+    <title>Cloud Computing Enterprise Dashboard - Ome Robaba</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #090d16 0%, #111827 100%);
             color: #f8fafc;
             display: flex;
             justify-content: center;
@@ -21,35 +21,35 @@
             padding: 20px;
         }
         .container {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
             width: 100%;
-            max-width: 750px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            max-width: 850px;
+            border-radius: 18px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1s ease-in-out;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .header {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
-            padding: 35px 20px;
+            padding: 40px 25px;
             text-align: center;
             position: relative;
         }
         .header h1 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         .header p {
             font-size: 14px;
-            opacity: 0.85;
+            opacity: 0.9;
         }
         .status-badge {
             display: inline-flex;
@@ -57,7 +57,7 @@
             background: rgba(16, 185, 129, 0.2);
             border: 1px solid #10b981;
             color: #34d399;
-            padding: 5px 14px;
+            padding: 6px 16px;
             border-radius: 30px;
             font-size: 12px;
             font-weight: 600;
@@ -70,7 +70,7 @@
             border-radius: 50%;
             display: inline-block;
             margin-right: 8px;
-            box-shadow: 0 0 8px #34d399;
+            box-shadow: 0 0 10px #34d399;
             animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
@@ -79,37 +79,39 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
         .content {
-            padding: 30px;
+            padding: 35px;
         }
         .section-title {
-            font-size: 15px;
+            font-size: 14px;
             color: #60a5fa;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 6px;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            font-weight: 600;
+            margin-bottom: 18px;
+            margin-top: 30px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         .section-title:first-child {
             margin-top: 0;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 15px;
         }
         .info-card {
             background: rgba(255, 255, 255, 0.03);
-            padding: 14px 18px;
+            padding: 15px 18px;
             border-radius: 10px;
             border-left: 4px solid #3b82f6;
-            transition: transform 0.2s ease, background 0.2s ease;
+            transition: all 0.25s ease;
         }
         .info-card:hover {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.06);
+            border-left-color: #60a5fa;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.15);
         }
         .info-card label {
             display: block;
@@ -117,7 +119,7 @@
             color: #94a3b8;
             font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .info-card span {
             font-size: 14px;
@@ -128,21 +130,51 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
         .tech-tag {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(59, 130, 246, 0.12);
             color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 5px 12px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            padding: 6px 12px;
             border-radius: 6px;
             font-size: 12px;
             font-weight: 500;
         }
+        .workflow-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+        .workflow-step:last-child {
+            margin-bottom: 0;
+        }
+        .step-num {
+            background: #2563eb;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
         .footer {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(10, 15, 30, 0.9);
             text-align: center;
-            padding: 18px;
+            padding: 20px;
             font-size: 12px;
             color: #94a3b8;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -155,16 +187,16 @@
         <!-- Header -->
         <div class="header">
             <h1>Cloud Computing Assignment</h1>
-            <p>Enterprise-Grade Static Web Application Deployment</p>
+            <p>Automated CI/CD Web Infrastructure Dashboard</p>
             <div class="status-badge">
-                <span class="dot"></span> Live Deployment on Vercel Cloud
+                <span class="dot"></span> Live Deployment Active on Vercel
             </div>
         </div>
 
         <!-- Content Body -->
         <div class="content">
-            <!-- Student Information -->
-            <div class="section-title">Academic Profile</div>
+            <!-- Academic Profile -->
+            <div class="section-title">Academic & Student Profile</div>
             <div class="grid">
                 <div class="info-card">
                     <label>Student Name</label>
@@ -179,46 +211,67 @@
                     <span>University of Chenab (UChenab)</span>
                 </div>
                 <div class="info-card">
-                    <label>Course Subject</label>
+                    <label>Course Title</label>
                     <span>Cloud Computing Architecture</span>
                 </div>
             </div>
 
-            <!-- Technical Architecture -->
-            <div class="section-title">Cloud Infrastructure Details</div>
+            <!-- Cloud Infrastructure Details -->
+            <div class="section-title">Cloud Infrastructure & Deployment Specs</div>
             <div class="grid">
                 <div class="info-card">
-                    <label>Repository ID</label>
+                    <label>Repository Name</label>
                     <span>cloud-project</span>
                 </div>
                 <div class="info-card">
                     <label>Hosting Ecosystem</label>
-                    <span>Vercel Edge Network (Hobby Tier)</span>
+                    <span>Vercel Edge Network (Global CDN)</span>
                 </div>
                 <div class="info-card">
-                    <label>Deployment Model</label>
-                    <span>Continuous Deployment (CI/CD Pipeline)</span>
+                    <label>Deployment Pipeline</label>
+                    <span>Automated Git-to-Cloud CI/CD</span>
                 </div>
                 <div class="info-card">
-                    <label>Security Protocol</label>
-                    <span>Automatic SSL / HTTPS Certified</span>
+                    <label>Security & Protocols</label>
+                    <span>SSL Certified Secure (HTTPS)</span>
                 </div>
             </div>
 
-            <!-- Tech Stack Section -->
-            <div class="section-title">Technology Stack</div>
+            <!-- Technology Stack -->
+            <div class="section-title">Core Technology Stack</div>
             <div class="tech-stack">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3 UI Design</span>
+                <span class="tech-tag">HTML5 Markup</span>
+                <span class="tech-tag">Advanced CSS3 Styling</span>
                 <span class="tech-tag">Git Version Control</span>
-                <span class="tech-tag">GitHub Repository</span>
+                <span class="tech-tag">GitHub Remote Repository</span>
                 <span class="tech-tag">Vercel Cloud Platform</span>
+            </div>
+
+            <!-- CI/CD Workflow Steps -->
+            <div class="section-title">Deployment Pipeline Workflow</div>
+            <div class="workflow-box">
+                <div class="workflow-step">
+                    <div class="step-num">1</div>
+                    <span>Developed and formatted responsive UI architecture files locally.</span>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">2</div>
+                    <span>Committed and pushed code changes to the remote GitHub repository.</span>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">3</div>
+                    <span>Vercel webhook triggered instant automated build and compilation.</span>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">4</div>
+                    <span>Application successfully published to global edge servers.</span>
+                </div>
             </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
-            Successfully Deployed & Verified for Academic Submission &copy; 2026
+            Designed & Deployed for Cloud Computing Academic Assessment &copy; 2026
         </div>
     </div>
 
