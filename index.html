@@ -184,6 +184,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
         .img-card:hover {
             transform: translateY(-5px);
@@ -380,7 +381,7 @@
             border: 1px solid #38bdf8;
             border-radius: 20px;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             padding: 25px;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
             position: relative;
@@ -493,12 +494,12 @@
                 </div>
             </div>
 
-            <!-- TAB 2: AIRPORTS HUB -->
+            <!-- TAB 2: AIRPORTS HUB (ALL REGIONS COVERED WITH FLIGHT & AIRPORT DATA) -->
             <div id="airports" class="tab-content">
                 <div class="section-title">Major International Airports of Pakistan</div>
                 
                 <div class="filter-container">
-                    <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Karachi, Lahore)..." onkeyup="filterAirports()">
+                    <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Karachi, Peshawar, Quetta)..." onkeyup="filterAirports()">
                     <button class="filter-btn active" onclick="filterByProvince('all', this)">All Regions</button>
                     <button class="filter-btn" onclick="filterByProvince('Punjab', this)">Punjab</button>
                     <button class="filter-btn" onclick="filterByProvince('Sindh', this)">Sindh</button>
@@ -508,7 +509,8 @@
 
                 <div class="grid" id="airportGrid">
                     
-                    <div class="img-card" data-province="Punjab" data-search="islamabad isb opis iiap">
+                    <!-- PUNJAB AIRPORTS -->
+                    <div class="img-card" data-province="Punjab" data-search="islamabad isb opis iiap punjab" onclick="showFullInfoModal('Islamabad International Airport (ISB)', 'OPIS', 'Punjab', '14ms', 'Runway 10L/28R & 10R/28L Active', '24°C, Clear Sky', '28/32 Gates', 'PK-302 (Karachi), PA-402 (Jeddah), EK-612 (Dubai)', 'Primary Strategic Capital Hub with CAT-III ILS System.')">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
                             <div>
@@ -523,13 +525,12 @@
                                 </div>
                             </div>
                             <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('Islamabad International (ISB)', '14ms', 'Runway 10L/28R & 10R/28L Active', '24°C, Clear Sky (Wind 12 kts)', '28/32 Gates Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="img-card" data-province="Punjab" data-search="lahore lhe opla aiia">
+                    <div class="img-card" data-province="Punjab" data-search="lahore lhe opla aiia punjab" onclick="showFullInfoModal('Allama Iqbal Intl Airport, Lahore (LHE)', 'OPLA', 'Punjab', '16ms', 'Runway 36R/18L Active', '22°C, Mild Haze', '18/24 Gates', 'PA-402 (Jeddah), PK-303 (Karachi), QR-628 (Doha)', 'Main Aviation Gateway of Punjab with Advanced Smart Fog Landing Tech.')">
                         <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
                         <div class="img-card-body">
                             <div>
@@ -544,13 +545,13 @@
                                 </div>
                             </div>
                             <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('Allama Iqbal Intl (LHE)', '16ms', 'Runway 36R/18L Active', '22°C, Mild Haze', '18/24 Gates Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="img-card" data-province="Sindh" data-search="karachi khi opkc jiap">
+                    <!-- SINDH AIRPORT -->
+                    <div class="img-card" data-province="Sindh" data-search="karachi khi opkc jiap sindh" onclick="showFullInfoModal('Jinnah International Airport, Karachi (KHI)', 'OPKC', 'Sindh', '22ms', 'Runway 25L/07R Active', '29°C, Coastal Wind', '31/42 Stands', 'PK-302 (Islamabad), SV-701 (Riyadh), FZ-334 (Dubai)', 'Largest Cargo & Passenger Aviation Hub in South Sindh.')">
                         <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
                         <div class="img-card-body">
                             <div>
@@ -561,12 +562,73 @@
                                 </div>
                                 <div class="airport-tag-bar">
                                     <span class="tag-pill">Primary Cargo</span>
-                                    <span class="tag-pill">42 Stand Positions</span>
+                                    <span class="tag-pill">42 Stands</span>
                                 </div>
                             </div>
                             <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('Jinnah Intl (KHI)', '22ms', 'Runway 25L/07R Active', '29°C, Coastal Wind 16 kts', '31/42 Stands Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPK AIRPORTS -->
+                    <div class="img-card" data-province="KPK" data-search="peshawar pew opps bkip kpk" onclick="showFullInfoModal('Bacha Khan Intl Airport, Peshawar (PEW)', 'OPPS', 'KPK', '18ms', 'Runway 17/35 Active', '20°C, Clear Sky', '8/12 Gates', 'ER-501 (Dubai), PK-217 (Abu Dhabi), PA-601 (Sharjah)', 'Key International Gateway for Khyber Pakhtunkhwa Region.')">
+                        <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
+                        <div class="img-card-body">
+                            <div>
+                                <div class="img-card-title">Bacha Khan Intl, Peshawar (PEW)</div>
+                                <div class="img-card-sub">
+                                    <span>BKIP / OPPS (KPK)</span>
+                                    <span style="color:#34d399; font-weight:bold;">Active (18ms)</span>
+                                </div>
+                                <div class="airport-tag-bar">
+                                    <span class="tag-pill">KPK Regional Hub</span>
+                                    <span class="tag-pill">12 Gates</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BALOCHISTAN AIRPORTS -->
+                    <div class="img-card" data-province="Balochistan" data-search="quetta uet opqt qiap balochistan" onclick="showFullInfoModal('Quetta International Airport (UET)', 'OPQT', 'Balochistan', '26ms', 'Runway 13/31 Active', '16°C, Dry Sky', '4/8 Stands', '9P-801 (Islamabad), PK-325 (Karachi), G9-541 (Sharjah)', 'High-Altitude International Command Hub in Balochistan.')">
+                        <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
+                        <div class="img-card-body">
+                            <div>
+                                <div class="img-card-title">Quetta International (UET)</div>
+                                <div class="img-card-sub">
+                                    <span>QIAP / OPQT (Balochistan)</span>
+                                    <span style="color:#34d399; font-weight:bold;">Active (26ms)</span>
+                                </div>
+                                <div class="airport-tag-bar">
+                                    <span class="tag-pill">Balochistan Hub</span>
+                                    <span class="tag-pill">8 Stands</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="img-card" data-province="Balochistan" data-search="gwadar gwd opgd giap balochistan" onclick="showFullInfoModal('New Gwadar International Airport (GWD)', 'OPGD', 'Balochistan', '28ms', 'Runway 06/24 Active', '27°C, Sunny', '3/10 Stands', 'PK-303 (Karachi), PK-112 (Muscat), Strategic Cargo Flights', 'CPEC Flagship Deep-Sea Port Aviation Gateway.')">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
+                        <div class="img-card-body">
+                            <div>
+                                <div class="img-card-title">New Gwadar International (GWD)</div>
+                                <div class="img-card-sub">
+                                    <span>GIAP / OPGD (Balochistan)</span>
+                                    <span style="color:#34d399; font-weight:bold;">Active (28ms)</span>
+                                </div>
+                                <div class="airport-tag-bar">
+                                    <span class="tag-pill">CPEC Gateway</span>
+                                    <span class="tag-pill">Long Runway</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
                             </div>
                         </div>
                     </div>
@@ -574,7 +636,7 @@
                 </div>
             </div>
 
-            <!-- TAB 3: BOOKING (WITH ADVANCED VALIDATION FOR NAME & CNIC) -->
+            <!-- TAB 3: BOOKING -->
             <div id="booking" class="tab-content">
                 <div class="section-title">Live Passenger Ticket Reservation System</div>
                 <div class="interactive-box">
@@ -759,17 +821,21 @@
 
         </div>
 
-        <!-- TELEMETRY MODAL -->
+        <!-- FULL AIRPORT & FLIGHT INFO MODAL -->
         <div class="modal-overlay" id="telemetryModal">
             <div class="modal-box">
                 <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
                 <h2 id="modalTitle" style="color:#38bdf8; font-size:18px; margin-bottom:15px;">Airport Telemetry</h2>
                 <div class="interactive-box">
                     <div style="font-size:13px; line-height:1.8;">
-                        <p><strong>Gateway Latency:</strong> <span id="modalLatency" style="color:#34d399;">14ms</span></p>
-                        <p><strong>Runway Configuration:</strong> <span id="modalRunway" style="color:#f8fafc;">Active</span></p>
-                        <p><strong>Aviation Weather METAR:</strong> <span id="modalWeather" style="color:#38bdf8;">Clear</span></p>
-                        <p><strong>Terminal Capacity:</strong> <span id="modalCapacity" style="color:#fbbf24;">Optimal</span></p>
+                        <p><strong>Province / Region:</strong> <span id="modalProvince" style="color:#fbbf24;">-</span></p>
+                        <p><strong>ICAO Code:</strong> <span id="modalIcao" style="color:#38bdf8;">-</span></p>
+                        <p><strong>Gateway Latency:</strong> <span id="modalLatency" style="color:#34d399;">-</span></p>
+                        <p><strong>Runway Configuration:</strong> <span id="modalRunway" style="color:#f8fafc;">-</span></p>
+                        <p><strong>Aviation Weather METAR:</strong> <span id="modalWeather" style="color:#38bdf8;">-</span></p>
+                        <p><strong>Terminal Gates & Stands:</strong> <span id="modalCapacity" style="color:#fbbf24;">-</span></p>
+                        <p><strong>Active Flights Operating:</strong> <span id="modalFlights" style="color:#34d399; font-weight:bold;">-</span></p>
+                        <p style="margin-top:10px; font-size:11px; color:#cbd5e1; border-top:1px solid rgba(255,255,255,0.1); padding-top:8px;"><strong>Overview:</strong> <span id="modalOverview">-</span></p>
                     </div>
                 </div>
             </div>
@@ -815,12 +881,16 @@
             });
         }
 
-        function showTelemetryModal(name, latency, runway, weather, capacity) {
-            document.getElementById('modalTitle').innerText = name + ' - Realtime Diagnostics';
+        function showFullInfoModal(name, icao, province, latency, runway, weather, capacity, flights, overview) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalIcao').innerText = icao;
+            document.getElementById('modalProvince').innerText = province;
             document.getElementById('modalLatency').innerText = latency;
             document.getElementById('modalRunway').innerText = runway;
             document.getElementById('modalWeather').innerText = weather;
             document.getElementById('modalCapacity').innerText = capacity;
+            document.getElementById('modalFlights').innerText = flights;
+            document.getElementById('modalOverview').innerText = overview;
             document.getElementById('telemetryModal').classList.add('active');
         }
 
@@ -828,7 +898,6 @@
             document.getElementById('telemetryModal').classList.remove('active');
         }
 
-        // Live Validation Logic for Name and CNIC
         function validateInputs() {
             const nameInput = document.getElementById('paxName');
             const cnicInput = document.getElementById('paxCnic');
