@@ -1155,8 +1155,44 @@
             }
         }
 
+        // Fixed Web Audio API Emergency Siren Generator (Resumes context on click)
+        function playEmergencySiren() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioCtx = new AudioContext();
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sawtooth';
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+            osc.frequency.setValueAtTime(500, now);
+            osc.frequency.linearRampToValueAtTime(1200, now + 0.4);
+            osc.frequency.linearRampToValueAtTime(500, now + 0.8);
+            osc.frequency.linearRampToValueAtTime(1200, now + 1.2);
+            osc.frequency.linearRampToValueAtTime(500, now + 1.6);
+            osc.frequency.linearRampToValueAtTime(1200, now + 2.0);
+
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 2.2);
+
+            osc.start(now);
+            osc.stop(now + 2.2);
+        }
+
         function triggerEmergency() {
-            document.getElementById('emergencyStatus').innerHTML = `<span style="color:#ef4444; font-weight:bold;"><i class="fa-solid fa-triangle-exclamation"></i> CRASH FIRE RESCUE DISPATCHED TO RUNWAY 10L!</span>`;
+            playEmergencySiren();
+            document.getElementById('emergencyStatus').innerHTML = `
+                <div style="background:rgba(220, 38, 38, 0.25); border:2px solid #ef4444; padding:15px; border-radius:12px; color:#f87171; font-weight:bold; font-size:13px; animation: pulse 0.8s infinite;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> HIGH-ALERT WARNING: CRASH FIRE RESCUE (CFR) UNITS DISPATCHED TO RUNWAY 10L!
+                </div>
+            `;
         }
 
         // Radar Canvas Animation
