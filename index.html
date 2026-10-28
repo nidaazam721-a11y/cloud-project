@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Cloud Architecture Dashboard - Ome Robab</title>
+    <title>Enterprise Cloud Architecture Console - Ome Robab</title>
     <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +27,7 @@
             background: rgba(11, 17, 32, 0.95);
             backdrop-filter: blur(25px);
             width: 100%;
-            max-width: 1200px;
+            max-width: 1250px;
             border-radius: 24px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.15);
             overflow: hidden;
@@ -48,7 +48,7 @@
             box-shadow: inset 0 -10px 25px rgba(0, 0, 0, 0.3);
         }
         .header h1 {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
@@ -134,6 +134,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .section-title:first-child { margin-top: 0; }
 
@@ -194,7 +196,7 @@
 
         #archCanvas {
             width: 100%;
-            height: 190px;
+            height: 200px;
             background: #030712;
             border-radius: 12px;
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -202,7 +204,7 @@
 
         .chart-container {
             position: relative;
-            height: 220px;
+            height: 230px;
             width: 100%;
         }
 
@@ -214,7 +216,7 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 12px;
             color: #38bdf8;
-            height: 140px;
+            height: 150px;
             overflow-y: auto;
         }
         .terminal-line { margin-bottom: 4px; }
@@ -241,7 +243,72 @@
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
 
-        /* Sub-Page Dedicated View (Dynamic Page Navigation) */
+        /* Controls & Sliders */
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .toggle-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #fff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #1e293b;
+            outline: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            box-shadow: 0 0 8px #38bdf8;
+        }
+
+        /* Progress Bar */
+        .progress-bar-bg {
+            width: 100%;
+            background: #1e293b;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #34d399);
+            transition: width 0.3s ease;
+        }
+
+        /* Sub-Page Navigation */
         .page-view {
             display: none;
             padding: 30px;
@@ -289,6 +356,17 @@
             color: #94a3b8;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
+
+        select {
+            background: #0f172a;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 6px 12px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -309,72 +387,82 @@
             <button class="tab-btn" onclick="switchTab('architecture', this)"><i class="fa-solid fa-network-wired"></i> Architecture</button>
             <button class="tab-btn" onclick="switchTab('telemetry', this)"><i class="fa-solid fa-chart-line"></i> Telemetry</button>
             <button class="tab-btn" onclick="switchTab('pipeline', this)"><i class="fa-solid fa-code-branch"></i> CI/CD Pipeline</button>
+            <button class="tab-btn" onclick="switchTab('security', this)"><i class="fa-solid fa-shield-halved"></i> Security & Cost</button>
         </div>
 
         <!-- MAIN DASHBOARD CONTENT -->
         <div class="content" id="dashboardContent">
             <!-- TAB 1: OVERVIEW -->
             <div id="overview" class="tab-content active">
-                <div class="section-title">Academic & Student Credentials (Click to open full sub-page)</div>
+                <div class="section-title">Academic & Student Credentials (Click to open sub-page)</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="openPage('student-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Student Name</label>
                         <span>Ome Robab</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('degree-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Degree Program</label>
                         <span>BS Software Engineering</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('university-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Institution</label>
                         <span>University of Chenab</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('course-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Course Title</label>
                         <span>Cloud Computing</span>
                     </div>
                 </div>
 
-                <div class="section-title">Live Server & Diagnostics</div>
+                <div class="section-title">Live Server Diagnostics</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="openPage('latency-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Global Latency</label>
-                        <span style="color:#34d399; font-weight:bold;">14 ms (Optimal)</span>
+                        <span id="latencyVal" style="color:#34d399; font-weight:bold;">14 ms (Optimal)</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('uptime-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>System Uptime</label>
                         <span style="color:#34d399; font-weight:bold;">99.99% Operational</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('ssl-page')">
-                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>SSL Security</label>
-                        <span style="color:#34d399; font-weight:bold;">Active & Certified</span>
+                        <span style="color:#34d399; font-weight:bold;">TLS v1.3 Verified</span>
                     </div>
                 </div>
             </div>
 
             <!-- TAB 2: ARCHITECTURE -->
             <div id="architecture" class="tab-content">
-                <div class="section-title">Live Enterprise Architecture Simulation</div>
+                <div class="section-title">
+                    Live Enterprise Architecture Traffic Visualizer
+                    <div>
+                        <select onchange="changeRegion(this.value)">
+                            <option value="us">US-East Node (14ms)</option>
+                            <option value="eu">EU-Central Node (42ms)</option>
+                            <option value="asia">AP-South Node (88ms)</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="interactive-box">
                     <canvas id="archCanvas"></canvas>
                 </div>
                 <div style="margin-top:15px; display:flex; gap:10px;">
                     <button class="btn" onclick="openPage('architecture-page')">
-                        <i class="fa-solid fa-network-wired"></i> Open Complete Topology Sub-Page
+                        <i class="fa-solid fa-sitemap"></i> View Full Topology Breakdown
                     </button>
                 </div>
             </div>
 
             <!-- TAB 3: TELEMETRY -->
             <div id="telemetry" class="tab-content">
-                <div class="section-title">Real-time Telemetry & Analytics</div>
+                <div class="section-title">Real-time Telemetry & Live Traffic Streams</div>
                 <div class="interactive-box">
                     <div class="chart-container">
                         <canvas id="telemetryChart"></canvas>
@@ -386,9 +474,57 @@
             <div id="pipeline" class="tab-content">
                 <div class="section-title">Automated CI/CD Build Engine</div>
                 <div class="interactive-box">
-                    <button class="btn" onclick="runPipeline()"><i class="fa-solid fa-play"></i> Trigger Live Build</button>
-                    <div class="terminal" id="terminalLog" style="margin-top:15px;">
-                        <div class="terminal-line">[SYSTEM] Cloud environment active. Ready for build triggers.</div>
+                    <button class="btn" onclick="runPipeline()"><i class="fa-solid fa-play"></i> Trigger Pipeline Execution</button>
+                    <div class="progress-bar-bg" style="margin-top:15px;">
+                        <div class="progress-bar-fill" id="pipeProgress"></div>
+                    </div>
+                    <div class="terminal" id="terminalLog">
+                        <div class="terminal-line">[SYSTEM] Cloud environment active. Standby for build triggers.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: SECURITY & COST -->
+            <div id="security" class="tab-content">
+                <div class="section-title">Infrastructure Governance & Security Toggles</div>
+                <div class="interactive-box">
+                    <div class="control-group">
+                        <div>
+                            <span style="font-size: 13px; font-weight: 600;">DDoS Shield Guard:</span>
+                            <button class="toggle-btn active" id="ddosBtn" onclick="toggleSecurity('ddosBtn')">ENABLED</button>
+                        </div>
+                        <div>
+                            <span style="font-size: 13px; font-weight: 600;">Smart Edge Cache:</span>
+                            <button class="toggle-btn active" id="cacheBtn" onclick="toggleSecurity('cacheBtn')">ENABLED</button>
+                        </div>
+                        <div>
+                            <span style="font-size: 13px; font-weight: 600;">Auto-Scaling Nodes:</span>
+                            <button class="toggle-btn active" id="scaleBtn" onclick="toggleSecurity('scaleBtn')">ACTIVE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">Interactive Multi-Cloud Cost Estimator</div>
+                <div class="interactive-box">
+                    <div class="slider-container">
+                        <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1;">
+                            <span>Monthly Traffic Volume: <strong id="trafficText">500 GB</strong></span>
+                        </div>
+                        <input type="range" min="100" max="10000" value="500" class="slider" id="trafficSlider" oninput="calculateCost(this.value)">
+                        <div class="grid" style="margin-top: 15px;">
+                            <div class="clickable-card" style="border-left-color: #38bdf8;">
+                                <label>Vercel Edge</label>
+                                <span id="costVercel" style="color:#34d399; font-weight:700;">$12.50 / mo</span>
+                            </div>
+                            <div class="clickable-card" style="border-left-color: #f59e0b;">
+                                <label>AWS CloudFront</label>
+                                <span id="costAWS" style="color:#f59e0b; font-weight:700;">$42.50 / mo</span>
+                            </div>
+                            <div class="clickable-card" style="border-left-color: #f43f5e;">
+                                <label>Cloudflare Pages</label>
+                                <span id="costCF" style="color:#f43f5e; font-weight:700;">$0.00 / mo</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -399,7 +535,7 @@
         <!-- Sub-Page 1: Student Profile Page -->
         <div id="student-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Student Profile Details</div>
+            <div class="section-title">Student Architect Profile</div>
             <div class="interactive-box">
                 <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
                 <p style="color:#cbd5e1; font-size:14px; margin-bottom:15px;">
@@ -424,7 +560,7 @@
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    This degree focuses on design principles, cloud computing, distributed systems, containerization, and modern deployment architectures.
+                    This degree focuses on software design patterns, distributed cloud systems, web application performance, and DevOps automation.
                 </p>
             </div>
         </div>
@@ -432,11 +568,11 @@
         <!-- Sub-Page 3: University Page -->
         <div id="university-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Institution Profile</div>
+            <div class="section-title">Institution Overview</div>
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Faculty of Computer Science & Software Engineering — Fostering innovative practical assessments in cloud architecture and enterprise automation.
+                    Faculty of Computer Science & Software Engineering — Delivering hands-on enterprise cloud training.
                 </p>
             </div>
         </div>
@@ -444,11 +580,11 @@
         <!-- Sub-Page 4: Course Page -->
         <div id="course-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Course Overview</div>
+            <div class="section-title">Course Information</div>
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">Cloud Computing Architecture</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Assessment Project: Automated Static Hosting, Multi-Region CDN Routing, and Continuous Deployment via Webhooks.
+                    Project Scope: Automated Static Web Hosting, Multi-Region CDN Routing, and Continuous Integration Pipelines.
                 </p>
             </div>
         </div>
@@ -478,7 +614,7 @@
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">End-to-End Edge Architecture</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    User Requests -> Anycast DNS Routing -> Vercel Edge Serverless Microservice -> Smart Caching Node.
+                    Client Requests -> Anycast DNS Routing -> Vercel Edge Serverless Engine -> Global Smart Cache.
                 </p>
             </div>
         </div>
@@ -488,9 +624,9 @@
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Edge Network Latency Metrics</div>
             <div class="interactive-box">
-                <h3 style="color:#38bdf8;">Average Response Time: 14ms</h3>
+                <h3 style="color:#38bdf8;">Average Latency: 14ms</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Dynamic Anycast routing connects the user directly to the geographically closest edge datacenter.
+                    Anycast routing connects users to the nearest CDN edge node.
                 </p>
             </div>
         </div>
@@ -498,11 +634,11 @@
         <!-- Sub-Page 8: Uptime Sub-Page -->
         <div id="uptime-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">High Availability & SLA Uptime</div>
+            <div class="section-title">High Availability & SLA</div>
             <div class="interactive-box">
                 <h3 style="color:#34d399;">99.99% Guaranteed SLA Uptime</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Built with automated failover routing across 12 global regions.
+                    Automated multi-region failover ensures zero downtime.
                 </p>
             </div>
         </div>
@@ -510,11 +646,11 @@
         <!-- Sub-Page 9: SSL Security Sub-Page -->
         <div id="ssl-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Cloud Security Audit & SSL Encryption</div>
+            <div class="section-title">SSL / TLS Security</div>
             <div class="interactive-box">
-                <h3 style="color:#38bdf8;">TLS v1.3 Standard Enforced</h3>
+                <h3 style="color:#38bdf8;">TLS v1.3 Verified</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Automated Let's Encrypt certificate renewal with HSTS and Layer 7 DDoS mitigation active.
+                    Automated SSL certificate renewals with Layer 7 DDoS mitigation.
                 </p>
             </div>
         </div>
@@ -584,7 +720,7 @@
 
         function drawArchitecture() {
             canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = 190;
+            canvas.height = 200;
             const w = canvas.width;
             const h = canvas.height;
 
@@ -631,17 +767,60 @@
         }
         drawArchitecture();
 
-        // 5. CI/CD Build Engine Trigger
-        function runPipeline() {
+        // 5. Region Switching Logic
+        let baseLatency = 14;
+        function changeRegion(region) {
+            if(region === 'us') baseLatency = 14;
+            if(region === 'eu') baseLatency = 42;
+            if(region === 'asia') baseLatency = 88;
+            document.getElementById('latencyVal').innerText = baseLatency + " ms (Optimal)";
+            addLog(`Switched primary region to: ${region.toUpperCase()}`, "warn");
+        }
+
+        // 6. Security Toggles
+        function toggleSecurity(id) {
+            const btn = document.getElementById(id);
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerText = 'DISABLED';
+                addLog(`Module [${id.replace('Btn', '').toUpperCase()}] Disabled`, 'warn');
+            } else {
+                btn.classList.add('active');
+                btn.innerText = 'ACTIVE';
+                addLog(`Module [${id.replace('Btn', '').toUpperCase()}] Activated`, 'success');
+            }
+        }
+
+        // 7. Cost Calculator
+        function calculateCost(gb) {
+            document.getElementById('trafficText').innerText = gb + ' GB';
+            document.getElementById('costVercel').innerText = `$${(gb * 0.025).toFixed(2)} / mo`;
+            document.getElementById('costAWS').innerText = `$${(gb * 0.085).toFixed(2)} / mo`;
+            document.getElementById('costCF').innerText = `$0.00 / mo (Free Tier)`;
+        }
+
+        // 8. Terminal Log Helper
+        function addLog(msg, type = '') {
             const term = document.getElementById('terminalLog');
-            term.innerHTML += `<div class="terminal-line terminal-warn">[${new Date().toLocaleTimeString()}] Git webhook triggered by user action...</div>`;
-            setTimeout(() => {
-                term.innerHTML += `<div class="terminal-line">[${new Date().toLocaleTimeString()}] Compiling static assets and optimizing bundle...</div>`;
-            }, 800);
-            setTimeout(() => {
-                term.innerHTML += `<div class="terminal-line terminal-success">[${new Date().toLocaleTimeString()}] DEPLOYMENT SUCCESSFUL! Live in 2.1s across 12 Edge Nodes.</div>`;
-                term.scrollTop = term.scrollHeight;
-            }, 2000);
+            const line = document.createElement('div');
+            line.className = 'terminal-line ' + (type === 'success' ? 'terminal-success' : type === 'warn' ? 'terminal-warn' : '');
+            line.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            term.appendChild(line);
+            term.scrollTop = term.scrollHeight;
+        }
+
+        // 9. CI/CD Build Engine Trigger
+        function runPipeline() {
+            const progress = document.getElementById('pipeProgress');
+            progress.style.width = '0%';
+            addLog("Webhook triggered manually...", "warn");
+            
+            setTimeout(() => { progress.style.width = '40%'; addLog("Compiling static bundle..."); }, 600);
+            setTimeout(() => { progress.style.width = '80%'; addLog("Pushing assets to 12 Edge Regions..."); }, 1400);
+            setTimeout(() => { 
+                progress.style.width = '100%'; 
+                addLog("DEPLOYMENT SUCCESSFUL! Build live across global CDN.", "success");
+            }, 2200);
         }
     </script>
 </body>
