@@ -29,9 +29,9 @@
             width: 100%;
             max-width: 1350px;
             border-radius: 24px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 50px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 50px rgba(56, 189, 248, 0.25);
             overflow: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            border: 1px solid rgba(56, 189, 248, 0.4);
             animation: fadeIn 0.8s ease-in-out;
             position: relative;
         }
@@ -39,25 +39,25 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Aesthetic Airport & Airplane Banner Header */
+        /* Aesthetic Airport Terminal & Aeroplane Banner */
         .header {
-            background: linear-gradient(135deg, rgba(3, 105, 161, 0.85), rgba(29, 78, 216, 0.85), rgba(4, 120, 87, 0.85)), 
+            background: linear-gradient(135deg, rgba(3, 105, 161, 0.88), rgba(29, 78, 216, 0.88), rgba(4, 120, 87, 0.88)), 
                         url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1400&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 50px 25px;
+            padding: 55px 25px;
             text-align: center;
             position: relative;
-            box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.6);
-            border-bottom: 2px solid rgba(56, 189, 248, 0.4);
+            box-shadow: inset 0 -25px 45px rgba(0, 0, 0, 0.7);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.5);
         }
         .header h1 {
             font-size: 32px;
             font-weight: 800;
             margin-bottom: 8px;
             letter-spacing: 0.8px;
-            text-shadow: 0 3px 12px rgba(0,0,0,0.8);
+            text-shadow: 0 3px 12px rgba(0,0,0,0.9);
         }
         .header p {
             font-size: 13px;
@@ -65,12 +65,12 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
         .status-badge {
             display: inline-flex;
             align-items: center;
-            background: rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.35);
             border: 1px solid #34d399;
             color: #34d399;
             padding: 6px 20px;
@@ -78,7 +78,7 @@
             font-size: 12px;
             font-weight: 700;
             margin-top: 18px;
-            box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -102,7 +102,7 @@
         .nav-tabs {
             display: flex;
             background: rgba(2, 6, 23, 0.95);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
             overflow-x: auto;
         }
         .tab-btn {
@@ -122,8 +122,8 @@
         .tab-btn:hover, .tab-btn.active {
             color: #38bdf8;
             border-bottom-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.08);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            background: rgba(56, 189, 248, 0.1);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
         }
 
         .content { padding: 30px; }
@@ -133,7 +133,7 @@
         .section-title {
             font-size: 13px;
             color: #38bdf8;
-            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.35);
             padding-bottom: 8px;
             margin-bottom: 20px;
             margin-top: 25px;
@@ -154,21 +154,21 @@
             gap: 18px;
         }
         .clickable-card {
-            background: rgba(255, 255, 255, 0.025);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(56, 189, 248, 0.04));
             backdrop-filter: blur(12px);
             padding: 18px 22px;
             border-radius: 14px;
             border-left: 4px solid #38bdf8;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
         }
         .clickable-card:hover {
             transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.08);
             border-left-color: #34d399;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
         }
         .clickable-card label {
             display: block;
@@ -185,8 +185,8 @@
         }
 
         .weather-card {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.6));
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.65));
+            border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 14px;
             padding: 16px;
             cursor: pointer;
@@ -195,7 +195,7 @@
         .weather-card:hover {
             transform: translateY(-3px);
             border-color: #34d399;
-            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.2);
+            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.25);
         }
 
         .quick-btn {
@@ -220,10 +220,10 @@
         }
 
         .img-card {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.3);
             transition: all 0.3s ease;
             position: relative;
             display: flex;
@@ -233,7 +233,7 @@
         .img-card:hover {
             transform: translateY(-5px);
             border-color: #38bdf8;
-            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.35);
         }
         .img-card img {
             width: 100%;
@@ -255,9 +255,9 @@
             padding: 3px 8px;
             border-radius: 6px;
             font-weight: 600;
-            background: rgba(56, 189, 248, 0.12);
+            background: rgba(56, 189, 248, 0.15);
             color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         .card-actions {
@@ -271,8 +271,8 @@
             font-size: 11px;
             font-weight: 700;
             border-radius: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.15);
             color: #38bdf8;
             cursor: pointer;
             transition: all 0.2s;
@@ -294,7 +294,7 @@
             flex: 1;
             min-width: 200px;
             background: #030712;
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            border: 1px solid rgba(56, 189, 248, 0.4);
             padding: 9px 14px;
             border-radius: 10px;
             color: #fff;
@@ -302,8 +302,8 @@
             outline: none;
         }
         .filter-btn {
-            background: rgba(30, 41, 59, 0.9);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: rgba(30, 41, 59, 0.92);
+            border: 1px solid rgba(56, 189, 248, 0.3);
             color: #94a3b8;
             padding: 8px 14px;
             border-radius: 8px;
@@ -319,12 +319,12 @@
         }
 
         .interactive-box {
-            background: rgba(15, 23, 42, 0.75);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.5));
+            border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 16px;
             padding: 20px;
             margin-top: 15px;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6);
         }
 
         #radarCanvas {
@@ -332,8 +332,8 @@
             height: 250px;
             background: #030712;
             border-radius: 12px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         .chart-container {
@@ -351,12 +351,12 @@
         }
         .data-table th, .data-table td {
             padding: 10px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
         .data-table th {
             color: #38bdf8;
             font-weight: 700;
-            background: rgba(56, 189, 248, 0.08);
+            background: rgba(56, 189, 248, 0.1);
         }
         .badge-status {
             padding: 3px 8px;
@@ -364,13 +364,13 @@
             font-size: 10px;
             font-weight: 700;
         }
-        .badge-green { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid #34d399; }
-        .badge-yellow { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid #fbbf24; }
+        .badge-green { background: rgba(16, 185, 129, 0.28); color: #34d399; border: 1px solid #34d399; }
+        .badge-yellow { background: rgba(245, 158, 11, 0.28); color: #fbbf24; border: 1px solid #fbbf24; }
 
         .form-control {
             width: 100%;
             background: #030712;
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            border: 1px solid rgba(56, 189, 248, 0.4);
             padding: 9px 12px;
             border-radius: 8px;
             color: #fff;
@@ -379,7 +379,7 @@
         }
         .form-control.error {
             border-color: #f87171 !important;
-            background: rgba(239, 68, 68, 0.1) !important;
+            background: rgba(239, 68, 68, 0.12) !important;
         }
 
         .error-msg {
@@ -414,7 +414,7 @@
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.88);
+            background: rgba(2, 6, 23, 0.9);
             backdrop-filter: blur(14px);
             display: none;
             justify-content: center;
@@ -430,7 +430,7 @@
             width: 100%;
             max-width: 650px;
             padding: 25px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
             position: relative;
             animation: modalIn 0.3s ease-out;
         }
@@ -454,7 +454,7 @@
             padding: 20px;
             font-size: 12px;
             color: #94a3b8;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             letter-spacing: 0.5px;
         }
 
@@ -506,19 +506,19 @@
                 <div class="section-title"><i class="fa-solid fa-terminal"></i> System Command Metadata</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('System Administrator Details', 'Ome Robab', 'Software Engineer & System Architect responsible for designing Pakistan Civil Aviation AOMS cloud console architecture.')">
-                        <label>System Administrator</label>
+                        <label><i class="fa-solid fa-user-shield"></i> System Administrator</label>
                         <span>Ome Robab</span>
                     </div>
                     <div class="clickable-card" onclick="showInfoModal('Console Architecture', 'Enterprise Cloud & AOMS', 'Built with single-page Client Rendering Engine, Chart.js POS analytics, HTML5 Radar Canvas, and real-time PNR Generation algorithm.')">
-                        <label>Console Architecture</label>
+                        <label><i class="fa-solid fa-network-wired"></i> Console Architecture</label>
                         <span>Enterprise Cloud & AOMS</span>
                     </div>
                     <div class="clickable-card" onclick="showInfoModal('Civil Aviation Authority', 'National Command Hub', 'Centralized telemetry hub managing flight schedules, fuel hydrant systems, and emergency dispatch protocols across Pakistan.')">
-                        <label>Civil Aviation Authority</label>
+                        <label><i class="fa-solid fa-landmark"></i> Civil Aviation Authority</label>
                         <span>National Command Hub</span>
                     </div>
                     <div class="clickable-card" onclick="showInfoModal('System Deployment Status', 'Fully Operational - Node 9', 'All 9 primary international airport telemetry nodes are online with average response latency below 20ms.')">
-                        <label>System Deployment Status</label>
+                        <label><i class="fa-solid fa-satellite"></i> System Deployment Status</label>
                         <span>Fully Operational - Node 9</span>
                     </div>
                 </div>
@@ -527,20 +527,20 @@
                 <div class="section-title"><i class="fa-solid fa-chart-line"></i> Aviation Performance Indicators</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="switchTab('airports', document.querySelectorAll('.tab-btn')[1])">
-                        <label>Connected Airports</label>
-                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-plane-circle-check"></i> 9 Major Airports Active</span>
+                        <label><i class="fa-solid fa-plane-circle-check"></i> Connected Airports</label>
+                        <span style="color:#34d399; font-weight:bold;">9 Major Airports Active</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('manifest', document.querySelectorAll('.tab-btn')[5])">
-                        <label>Bookings Engine Status</label>
-                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-ticket"></i> Live PNR Engine Active</span>
+                        <label><i class="fa-solid fa-ticket"></i> Bookings Engine Status</label>
+                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;">Live PNR Engine Active</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('missed', document.querySelectorAll('.tab-btn')[3])">
-                        <label>Missed Claims Desk</label>
-                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;"><i class="fa-solid fa-rotate-right"></i> Standby & Refund Online</span>
+                        <label><i class="fa-solid fa-rotate-right"></i> Missed Claims Desk</label>
+                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;">Standby & Refund Online</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('refuel', document.querySelectorAll('.tab-btn')[7])">
-                        <label>Jet-A1 Fuel Stock</label>
-                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-gas-pump"></i> 1.2M Liters (Hydrant Ready)</span>
+                        <label><i class="fa-solid fa-gas-pump"></i> Jet-A1 Fuel Stock</label>
+                        <span style="color:#34d399; font-weight:bold;">1.2M Liters (Hydrant Ready)</span>
                     </div>
                 </div>
 
@@ -573,16 +573,16 @@
                 <div class="section-title"><i class="fa-solid fa-server"></i> Cloud System Infrastructure Health</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('Cloud Edge Node Health', 'Vercel Serverless Edge', 'Status: 100% Operational | Response Latency: 12ms | Auto-Scaling Enabled.')">
-                        <label>Server Edge Uptime</label>
-                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-server"></i> 100% Edge Active</span>
+                        <label><i class="fa-solid fa-cloud"></i> Server Edge Uptime</label>
+                        <span style="color:#34d399; font-weight:bold;">100% Edge Active</span>
                     </div>
                     <div class="clickable-card" onclick="showInfoModal('Database Sync Diagnostic', 'Real-time Passenger Sync', 'PNR Database connected via JavaScript memory array with instant Manifest view.')">
-                        <label>Database Sync Protocol</label>
-                        <span style="color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-database"></i> Realtime DB Ready</span>
+                        <label><i class="fa-solid fa-database"></i> Database Sync Protocol</label>
+                        <span style="color:#38bdf8; font-weight:bold;">Realtime DB Ready</span>
                     </div>
                     <div class="clickable-card" onclick="showInfoModal('Security SSL Status', 'TLS 1.3 / SSL Encryption', 'All passenger details (CNIC & PNR) processed via client-side validated input layers.')">
-                        <label>Security & SSL Shield</label>
-                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-shield-halved"></i> SSL Active</span>
+                        <label><i class="fa-solid fa-shield-halved"></i> Security & SSL Shield</label>
+                        <span style="color:#34d399; font-weight:bold;">SSL Active</span>
                     </div>
                 </div>
 
@@ -599,7 +599,7 @@
 
             <!-- TAB 2: AIRPORTS HUB -->
             <div id="airports" class="tab-content">
-                <div class="section-title">Major International Airports of Pakistan</div>
+                <div class="section-title"><i class="fa-solid fa-building-ngo"></i> Major International Airports & Airfields of Pakistan</div>
                 
                 <div class="filter-container">
                     <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Sialkot, LHE, KHI)..." onkeyup="filterAirports()">
@@ -616,7 +616,7 @@
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Islamabad International (ISB)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Islamabad International (ISB)</div>
                                 <div class="img-card-sub">
                                     <span>IIAP / OPIS (Punjab)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (14ms)</span>
@@ -636,7 +636,7 @@
                         <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Allama Iqbal Intl, Lahore (LHE)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Allama Iqbal Intl, Lahore (LHE)</div>
                                 <div class="img-card-sub">
                                     <span>AIIA / OPLA (Punjab)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (16ms)</span>
@@ -656,7 +656,7 @@
                         <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=600&auto=format&fit=crop" alt="Sialkot Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Sialkot International (SKT)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Sialkot International (SKT)</div>
                                 <div class="img-card-sub">
                                     <span>SIAP / OPST (Punjab)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (15ms)</span>
@@ -676,7 +676,7 @@
                         <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Jinnah Intl, Karachi (KHI)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Jinnah Intl, Karachi (KHI)</div>
                                 <div class="img-card-sub">
                                     <span>JIAP / OPKC (Sindh)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (22ms)</span>
@@ -696,7 +696,7 @@
                         <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Bacha Khan Intl, Peshawar (PEW)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Bacha Khan Intl, Peshawar (PEW)</div>
                                 <div class="img-card-sub">
                                     <span>BKIP / OPPS (KPK)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (18ms)</span>
@@ -716,7 +716,7 @@
                         <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">Quetta International (UET)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> Quetta International (UET)</div>
                                 <div class="img-card-sub">
                                     <span>QIAP / OPQT (Balochistan)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (26ms)</span>
@@ -736,7 +736,7 @@
                         <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
                         <div class="img-card-body">
                             <div>
-                                <div class="img-card-title">New Gwadar International (GWD)</div>
+                                <div class="img-card-title"><i class="fa-solid fa-plane-departure"></i> New Gwadar International (GWD)</div>
                                 <div class="img-card-sub">
                                     <span>GIAP / OPGD (Balochistan)</span>
                                     <span style="color:#34d399; font-weight:bold;">Active (28ms)</span>
@@ -757,22 +757,22 @@
 
             <!-- TAB 3: BOOKING -->
             <div id="booking" class="tab-content">
-                <div class="section-title">Live Passenger Ticket Reservation System</div>
+                <div class="section-title"><i class="fa-solid fa-ticket"></i> Live Passenger Ticket Reservation Engine</div>
                 <div class="interactive-box">
-                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:12px;"><i class="fa-solid fa-plane-flight"></i> Book a Flight Ticket</h3>
+                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:12px;"><i class="fa-solid fa-plane-up"></i> Issue Verified Flight E-Ticket</h3>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:12px;">
                         <div>
-                            <label style="font-size:11px; color:#94a3b8;">Passenger Full Name</label>
+                            <label style="font-size:11px; color:#94a3b8;"><i class="fa-solid fa-user"></i> Passenger Full Name</label>
                             <input type="text" class="form-control" id="paxName" placeholder="e.g. Ome Robab" oninput="validateInputs()">
                             <div class="error-msg" id="nameError"><i class="fa-solid fa-triangle-exclamation"></i> Invalid Name! Only alphabets allowed (min 3 letters).</div>
                         </div>
                         <div>
-                            <label style="font-size:11px; color:#94a3b8;">Passport / CNIC Number</label>
+                            <label style="font-size:11px; color:#94a3b8;"><i class="fa-solid fa-id-card"></i> Passport / CNIC Number</label>
                             <input type="text" class="form-control" id="paxCnic" placeholder="e.g. 34101-1234567-1 or 13 digits" oninput="validateInputs()">
                             <div class="error-msg" id="cnicError"><i class="fa-solid fa-triangle-exclamation"></i> Invalid CNIC structure! Format: 13 digits or XXXXX-XXXXXXX-X</div>
                         </div>
                         <div>
-                            <label style="font-size:11px; color:#94a3b8;">Select Airline & Route</label>
+                            <label style="font-size:11px; color:#94a3b8;"><i class="fa-solid fa-route"></i> Select Airline & Route</label>
                             <select id="paxFlight" class="form-control">
                                 <option value="PIA | PK-302 (KHI to ISB)">PIA | PK-302 (Karachi to Islamabad)</option>
                                 <option value="Airblue | PA-402 (LHE to JED)">Airblue | PA-402 (Lahore to Jeddah)</option>
@@ -781,7 +781,7 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size:11px; color:#94a3b8;">Travel Class</label>
+                            <label style="font-size:11px; color:#94a3b8;"><i class="fa-solid fa-chair"></i> Travel Class</label>
                             <select id="paxClass" class="form-control">
                                 <option value="Economy">Economy Class</option>
                                 <option value="Executive Economy">Executive Economy</option>
@@ -796,9 +796,9 @@
 
             <!-- TAB 4: MISSED FLIGHT DESK -->
             <div id="missed" class="tab-content">
-                <div class="section-title">Missed Flight Recovery, Rescheduling & Refund Desk</div>
+                <div class="section-title"><i class="fa-solid fa-plane-slash"></i> Missed Flight Recovery, Rescheduling & Refund Desk</div>
                 <div class="interactive-box" style="border-color:#f59e0b;">
-                    <h3 style="color:#fbbf24; font-size:14px; margin-bottom:10px;"><i class="fa-solid fa-plane-slash"></i> Passenger Missed Flight Recovery Assistant</h3>
+                    <h3 style="color:#fbbf24; font-size:14px; margin-bottom:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Passenger Missed Flight Recovery Assistant</h3>
                     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:12px;">
                         <div>
                             <label style="font-size:11px; color:#94a3b8;">Ticket PNR Code</label>
@@ -829,7 +829,7 @@
 
             <!-- TAB 5: SCHEDULES -->
             <div id="schedules" class="tab-content">
-                <div class="section-title">Pakistan Domestic & International Schedules</div>
+                <div class="section-title"><i class="fa-solid fa-calendar-days"></i> Pakistan Domestic & International Flight Schedules</div>
                 <div class="interactive-box">
                     <table class="data-table">
                         <thead>
@@ -844,7 +844,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>PK-302</td>
+                                <td><i class="fa-solid fa-plane"></i> PK-302</td>
                                 <td>PIA (Pakistan Intl)</td>
                                 <td>Karachi (KHI)</td>
                                 <td>Islamabad (ISB)</td>
@@ -852,7 +852,7 @@
                                 <td><span class="badge-status badge-green">In-Flight</span></td>
                             </tr>
                             <tr>
-                                <td>PA-402</td>
+                                <td><i class="fa-solid fa-plane"></i> PA-402</td>
                                 <td>Airblue</td>
                                 <td>Lahore (LHE)</td>
                                 <td>Jeddah (JED)</td>
@@ -860,7 +860,7 @@
                                 <td><span class="badge-status badge-yellow">Boarding</span></td>
                             </tr>
                             <tr>
-                                <td>G9-567</td>
+                                <td><i class="fa-solid fa-plane"></i> G9-567</td>
                                 <td>Air Arabia</td>
                                 <td>Sialkot (SKT)</td>
                                 <td>Sharjah (SHJ)</td>
@@ -874,7 +874,7 @@
 
             <!-- TAB 6: MANIFEST -->
             <div id="manifest" class="tab-content">
-                <div class="section-title">Passenger Manifest & Verified Tickets DB</div>
+                <div class="section-title"><i class="fa-solid fa-users"></i> Passenger Manifest & Verified Tickets Database</div>
                 <div class="interactive-box">
                     <table class="data-table">
                         <thead>
@@ -904,7 +904,7 @@
             <!-- TAB 7: RADAR -->
             <div id="radar" class="tab-content">
                 <div class="section-title">
-                    Air Traffic Control (ATC) Radar Sweep Across Pakistan
+                    <i class="fa-solid fa-satellite-dish"></i> Air Traffic Control (ATC) Radar Sweep Across Pakistan Airspace
                 </div>
                 <div class="interactive-box">
                     <canvas id="radarCanvas"></canvas>
@@ -913,14 +913,14 @@
 
             <!-- TAB 8: FUEL & GROUND -->
             <div id="refuel" class="tab-content">
-                <div class="section-title">Refueling & Ground Dispatch</div>
+                <div class="section-title"><i class="fa-solid fa-gas-pump"></i> Refueling, Hydrant & Ground Dispatch Operations</div>
                 <div class="grid">
                     <div class="clickable-card">
-                        <label>Hydrant Fuel Truck #01</label>
+                        <label><i class="fa-solid fa-truck-droplet"></i> Hydrant Fuel Truck #01</label>
                         <span style="color:#34d399; font-weight:bold;">Refueling Flight PA-402 (Jet-A1)</span>
                     </div>
                     <div class="clickable-card">
-                        <label>Baggage Tug Fleet</label>
+                        <label><i class="fa-solid fa-truck-ramp-box"></i> Baggage Tug Fleet</label>
                         <span style="color:#34d399; font-weight:bold;">18 / 20 Operational</span>
                     </div>
                 </div>
@@ -928,9 +928,9 @@
 
             <!-- TAB 9: EMERGENCY -->
             <div id="emergency" class="tab-content">
-                <div class="section-title">Crash Fire Rescue (CFR) Panel</div>
+                <div class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Crash Fire Rescue (CFR) Command Panel</div>
                 <div class="interactive-box" style="border-color:#ef4444;">
-                    <h3 style="color:#f87171; font-size:14px; margin-bottom:10px;">Runway Emergency Override</h3>
+                    <h3 style="color:#f87171; font-size:14px; margin-bottom:10px;"><i class="fa-solid fa-fire-extinguisher"></i> Runway Emergency Override & Dispatch</h3>
                     <button class="btn btn-danger" onclick="triggerEmergency()"><i class="fa-solid fa-bell"></i> DISPATCH CRASH FIRE RESCUE (CFR)</button>
                     <div id="emergencyStatus" style="margin-top:12px; font-size:12px;"></div>
                 </div>
@@ -938,7 +938,7 @@
 
             <!-- TAB 10: RETAIL POS -->
             <div id="retail" class="tab-content">
-                <div class="section-title">Duty-Free Retail Analytics</div>
+                <div class="section-title"><i class="fa-solid fa-shop"></i> Duty-Free Retail & Terminal POS Analytics</div>
                 <div class="interactive-box">
                     <div class="chart-container">
                         <canvas id="retailChart"></canvas>
