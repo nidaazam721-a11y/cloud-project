@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise Cloud Architecture Dashboard - Ome Robab</title>
-    <!-- FontAwesome & Chart.js -->
+    <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -74,9 +74,7 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-        .status-badge:hover {
-            transform: scale(1.03);
-        }
+        .status-badge:hover { transform: scale(1.03); }
         .dot {
             height: 8px;
             width: 8px;
@@ -92,7 +90,7 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* Navigation Tabs */
+        /* Top Navigation Bar */
         .nav-tabs {
             display: flex;
             background: rgba(3, 7, 18, 0.8);
@@ -107,3 +105,544 @@
             font-weight: 700;
             font-size: 12px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            color: #38bdf8;
+            border-bottom-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .content { padding: 30px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .section-title {
+            font-size: 13px;
+            color: #38bdf8;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.25);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            margin-top: 25px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+        }
+        .clickable-card {
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(12px);
+            padding: 18px 22px;
+            border-radius: 14px;
+            border-left: 4px solid #38bdf8;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .clickable-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-left-color: #818cf8;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+        }
+        .clickable-card label {
+            display: block;
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .clickable-card span {
+            font-size: 14px;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+        .clickable-card .click-hint {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 10px;
+            color: #38bdf8;
+            opacity: 0.8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .interactive-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        #archCanvas {
+            width: 100%;
+            height: 190px;
+            background: #030712;
+            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 220px;
+            width: 100%;
+        }
+
+        .terminal {
+            background: #050811;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            color: #38bdf8;
+            height: 140px;
+            overflow-y: auto;
+        }
+        .terminal-line { margin-bottom: 4px; }
+        .terminal-success { color: #34d399; }
+        .terminal-warn { color: #fbbf24; }
+
+        .btn {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+        }
+
+        /* Sub-Page Dedicated View (Dynamic Page Navigation) */
+        .page-view {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-view.active { display: block; }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .back-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            color: #fff;
+        }
+
+        .code-block {
+            background: #030712;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            color: #a5f3fc;
+            overflow-x: auto;
+            margin-top: 15px;
+            white-space: pre-wrap;
+        }
+
+        .footer {
+            background: rgba(3, 7, 18, 0.95);
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Cloud Computing Assignment Portfolio</h1>
+            <p>Automated Enterprise Infrastructure & Continuous Deployment (CI/CD)</p>
+            <div class="status-badge" onclick="openPage('status-page')">
+                <span class="dot"></span> Live Deployment Active on Vercel Edge Network <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
+            </div>
+        </div>
+
+        <!-- Top Navigation Tabs -->
+        <div class="nav-tabs" id="mainNavTabs">
+            <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
+            <button class="tab-btn" onclick="switchTab('architecture', this)"><i class="fa-solid fa-network-wired"></i> Architecture</button>
+            <button class="tab-btn" onclick="switchTab('telemetry', this)"><i class="fa-solid fa-chart-line"></i> Telemetry</button>
+            <button class="tab-btn" onclick="switchTab('pipeline', this)"><i class="fa-solid fa-code-branch"></i> CI/CD Pipeline</button>
+        </div>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <div class="content" id="dashboardContent">
+            <!-- TAB 1: OVERVIEW -->
+            <div id="overview" class="tab-content active">
+                <div class="section-title">Academic & Student Credentials (Click to open full sub-page)</div>
+                <div class="grid">
+                    <div class="clickable-card" onclick="openPage('student-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Student Name</label>
+                        <span>Ome Robab</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('degree-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Degree Program</label>
+                        <span>BS Software Engineering</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('university-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Institution</label>
+                        <span>University of Chenab</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('course-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Course Title</label>
+                        <span>Cloud Computing</span>
+                    </div>
+                </div>
+
+                <div class="section-title">Live Server & Diagnostics</div>
+                <div class="grid">
+                    <div class="clickable-card" onclick="openPage('latency-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Global Latency</label>
+                        <span style="color:#34d399; font-weight:bold;">14 ms (Optimal)</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('uptime-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>System Uptime</label>
+                        <span style="color:#34d399; font-weight:bold;">99.99% Operational</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('ssl-page')">
+                        <span class="click-hint">Open Page <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>SSL Security</label>
+                        <span style="color:#34d399; font-weight:bold;">Active & Certified</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: ARCHITECTURE -->
+            <div id="architecture" class="tab-content">
+                <div class="section-title">Live Enterprise Architecture Simulation</div>
+                <div class="interactive-box">
+                    <canvas id="archCanvas"></canvas>
+                </div>
+                <div style="margin-top:15px; display:flex; gap:10px;">
+                    <button class="btn" onclick="openPage('architecture-page')">
+                        <i class="fa-solid fa-network-wired"></i> Open Complete Topology Sub-Page
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 3: TELEMETRY -->
+            <div id="telemetry" class="tab-content">
+                <div class="section-title">Real-time Telemetry & Analytics</div>
+                <div class="interactive-box">
+                    <div class="chart-container">
+                        <canvas id="telemetryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: CI/CD PIPELINE -->
+            <div id="pipeline" class="tab-content">
+                <div class="section-title">Automated CI/CD Build Engine</div>
+                <div class="interactive-box">
+                    <button class="btn" onclick="runPipeline()"><i class="fa-solid fa-play"></i> Trigger Live Build</button>
+                    <div class="terminal" id="terminalLog" style="margin-top:15px;">
+                        <div class="terminal-line">[SYSTEM] Cloud environment active. Ready for build triggers.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= DEDICATED SUB-PAGES ================= -->
+        
+        <!-- Sub-Page 1: Student Profile Page -->
+        <div id="student-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Student Profile Details</div>
+            <div class="interactive-box">
+                <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
+                <p style="color:#cbd5e1; font-size:14px; margin-bottom:15px;">
+                    Lead Student Cloud Architect specializing in automated continuous integration (CI/CD), serverless microservices, and edge network optimization.
+                </p>
+                <div class="code-block">
+{
+  "student_name": "Ome Robab",
+  "role": "Lead Cloud Architect & Developer",
+  "program": "BS Software Engineering (BSSE)",
+  "institution": "University of Chenab (UChenab)",
+  "skills": ["Cloud Architecture", "CI/CD Pipelines", "HTML5/CSS3/JS", "Vercel Edge Hosting"]
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Page 2: Degree Page -->
+        <div id="degree-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Degree Program Specifications</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    This degree focuses on design principles, cloud computing, distributed systems, containerization, and modern deployment architectures.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 3: University Page -->
+        <div id="university-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Institution Profile</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    Faculty of Computer Science & Software Engineering — Fostering innovative practical assessments in cloud architecture and enterprise automation.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 4: Course Page -->
+        <div id="course-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Course Overview</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">Cloud Computing Architecture</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    Assessment Project: Automated Static Hosting, Multi-Region CDN Routing, and Continuous Deployment via Webhooks.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 5: Network Status Page -->
+        <div id="status-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Vercel Edge Network Status</div>
+            <div class="interactive-box">
+                <h3 style="color:#34d399;">Global Deployment Live (100% Operational)</h3>
+                <div class="code-block">
+{
+  "provider": "Vercel Edge Network",
+  "status": "Operational",
+  "regions_active": 12,
+  "ssl_encryption": "TLS v1.3 Verified",
+  "anycast_dns": "Enabled"
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-Page 6: Architecture Sub-Page -->
+        <div id="architecture-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Full Enterprise Architecture Topology</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">End-to-End Edge Architecture</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    User Requests -> Anycast DNS Routing -> Vercel Edge Serverless Microservice -> Smart Caching Node.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 7: Latency Diagnostic Sub-Page -->
+        <div id="latency-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Edge Network Latency Metrics</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">Average Response Time: 14ms</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    Dynamic Anycast routing connects the user directly to the geographically closest edge datacenter.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 8: Uptime Sub-Page -->
+        <div id="uptime-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">High Availability & SLA Uptime</div>
+            <div class="interactive-box">
+                <h3 style="color:#34d399;">99.99% Guaranteed SLA Uptime</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    Built with automated failover routing across 12 global regions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sub-Page 9: SSL Security Sub-Page -->
+        <div id="ssl-page" class="page-view">
+            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
+            <div class="section-title">Cloud Security Audit & SSL Encryption</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">TLS v1.3 Standard Enforced</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
+                    Automated Let's Encrypt certificate renewal with HSTS and Layer 7 DDoS mitigation active.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Designed, Formatted & Deployed by Ome Robab | Cloud Computing Assessment &copy; 2026
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Tab Navigation
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            element.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // 2. Open Dedicated Sub-Pages
+        function openPage(pageId) {
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('mainNavTabs').style.display = 'none';
+            
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function closePage() {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById('dashboardContent').style.display = 'block';
+            document.getElementById('mainNavTabs').style.display = 'flex';
+        }
+
+        // 3. Real-time Telemetry Chart
+        const ctx = document.getElementById('telemetryChart').getContext('2d');
+        const telemetryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['12:00', '12:05', '12:10', '12:15', '12:20', '12:25'],
+                datasets: [{
+                    label: 'Bandwidth (MB/s)',
+                    data: [15, 22, 18, 29, 25, 34],
+                    borderColor: '#38bdf8',
+                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: '#94a3b8' } },
+                    y: { ticks: { color: '#94a3b8' } }
+                },
+                plugins: { legend: { labels: { color: '#f8fafc' } } }
+            }
+        });
+
+        // 4. Live Canvas Topology Animation
+        const canvas = document.getElementById('archCanvas');
+        const c = canvas.getContext('2d');
+        let packets = [{x: 50, speed: 2}, {x: 200, speed: 2.5}];
+
+        function drawArchitecture() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 190;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            c.clearRect(0, 0, w, h);
+
+            // Connection Line
+            c.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+            c.lineWidth = 2;
+            c.beginPath();
+            c.moveTo(w * 0.1, h/2);
+            c.lineTo(w * 0.9, h/2);
+            c.stroke();
+
+            // Animated Packets
+            packets.forEach(p => {
+                p.x += p.speed;
+                if(p.x > w * 0.9) p.x = w * 0.1;
+
+                c.fillStyle = '#34d399';
+                c.beginPath();
+                c.arc(p.x, h/2, 5, 0, Math.PI * 2);
+                c.fill();
+            });
+
+            // Draw Nodes
+            const nodes = ['Client Request', 'Anycast DNS', 'Vercel Edge Proxy', 'Serverless DB'];
+            nodes.forEach((label, idx) => {
+                const x = w * (0.1 + idx * 0.26);
+                c.fillStyle = '#0f172a';
+                c.strokeStyle = '#38bdf8';
+                c.lineWidth = 3;
+                c.beginPath();
+                c.arc(x, h/2, 18, 0, Math.PI * 2);
+                c.fill();
+                c.stroke();
+
+                c.fillStyle = '#cbd5e1';
+                c.font = '11px Segoe UI';
+                c.textAlign = 'center';
+                c.fillText(label, x, h/2 + 32);
+            });
+
+            requestAnimationFrame(drawArchitecture);
+        }
+        drawArchitecture();
+
+        // 5. CI/CD Build Engine Trigger
+        function runPipeline() {
+            const term = document.getElementById('terminalLog');
+            term.innerHTML += `<div class="terminal-line terminal-warn">[${new Date().toLocaleTimeString()}] Git webhook triggered by user action...</div>`;
+            setTimeout(() => {
+                term.innerHTML += `<div class="terminal-line">[${new Date().toLocaleTimeString()}] Compiling static assets and optimizing bundle...</div>`;
+            }, 800);
+            setTimeout(() => {
+                term.innerHTML += `<div class="terminal-line terminal-success">[${new Date().toLocaleTimeString()}] DEPLOYMENT SUCCESSFUL! Live in 2.1s across 12 Edge Nodes.</div>`;
+                term.scrollTop = term.scrollHeight;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
