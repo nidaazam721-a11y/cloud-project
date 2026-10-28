@@ -330,6 +330,18 @@
             font-size: 12px;
             outline: none;
         }
+        .form-control.error {
+            border-color: #f87171 !important;
+            background: rgba(239, 68, 68, 0.08) !important;
+        }
+
+        .error-msg {
+            color: #f87171;
+            font-size: 10px;
+            margin-top: 4px;
+            display: none;
+            font-weight: 600;
+        }
 
         .btn {
             background: linear-gradient(135deg, #0284c7, #2563eb);
@@ -559,85 +571,24 @@
                         </div>
                     </div>
 
-                    <div class="img-card" data-province="KPK" data-search="peshawar pew opps bkip">
-                        <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
-                        <div class="img-card-body">
-                            <div>
-                                <div class="img-card-title">Bacha Khan Intl, Peshawar (PEW)</div>
-                                <div class="img-card-sub">
-                                    <span>BKIP / OPPS (KPK)</span>
-                                    <span style="color:#34d399; font-weight:bold;">Active (18ms)</span>
-                                </div>
-                                <div class="airport-tag-bar">
-                                    <span class="tag-pill">Regional Hub</span>
-                                    <span class="tag-pill">12 Gates</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('Bacha Khan Intl (PEW)', '18ms', 'Runway 17/35 Active', '20°C, Clear Sky', '8/12 Gates Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="img-card" data-province="Balochistan" data-search="quetta uet opqt qiap">
-                        <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
-                        <div class="img-card-body">
-                            <div>
-                                <div class="img-card-title">Quetta International (UET)</div>
-                                <div class="img-card-sub">
-                                    <span>QIAP / OPQT (Balochistan)</span>
-                                    <span style="color:#34d399; font-weight:bold;">Active (26ms)</span>
-                                </div>
-                                <div class="airport-tag-bar">
-                                    <span class="tag-pill">High-Altitude Node</span>
-                                    <span class="tag-pill">8 Stands</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('Quetta International (UET)', '26ms', 'Runway 13/31 Active', '16°C, Dry Sky', '4/8 Stands Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="img-card" data-province="Balochistan" data-search="gwadar gwd opgd giap">
-                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
-                        <div class="img-card-body">
-                            <div>
-                                <div class="img-card-title">New Gwadar International (GWD)</div>
-                                <div class="img-card-sub">
-                                    <span>GIAP / OPGD (Balochistan)</span>
-                                    <span style="color:#34d399; font-weight:bold;">Active (28ms)</span>
-                                </div>
-                                <div class="airport-tag-bar">
-                                    <span class="tag-pill">CPEC Strategic Hub</span>
-                                    <span class="tag-pill">Long Runway</span>
-                                </div>
-                            </div>
-                            <div class="card-actions">
-                                <button class="action-btn-sm" onclick="showTelemetryModal('New Gwadar Intl (GWD)', '28ms', 'Runway 06/24 Active', '27°C, Sunny', '3/10 Stands Occupied')"><i class="fa-solid fa-chart-line"></i> Inspect Telemetry</button>
-                                <button class="action-btn-sm" onclick="switchTab('schedules', document.querySelectorAll('.tab-btn')[4])"><i class="fa-solid fa-calendar"></i> Flight Board</button>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
-            <!-- TAB 3: BOOKING -->
+            <!-- TAB 3: BOOKING (WITH ADVANCED VALIDATION FOR NAME & CNIC) -->
             <div id="booking" class="tab-content">
                 <div class="section-title">Live Passenger Ticket Reservation System</div>
                 <div class="interactive-box">
                     <h3 style="color:#38bdf8; font-size:14px; margin-bottom:12px;"><i class="fa-solid fa-plane-flight"></i> Book a Flight Ticket</h3>
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:12px;">
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:12px;">
                         <div>
                             <label style="font-size:11px; color:#94a3b8;">Passenger Full Name</label>
-                            <input type="text" class="form-control" id="paxName" placeholder="e.g. Muhammad Ali">
+                            <input type="text" class="form-control" id="paxName" placeholder="e.g. Ome Robab" oninput="validateInputs()">
+                            <div class="error-msg" id="nameError"><i class="fa-solid fa-triangle-exclamation"></i> Invalid Name! Only alphabets allowed (min 3 letters).</div>
                         </div>
                         <div>
                             <label style="font-size:11px; color:#94a3b8;">Passport / CNIC Number</label>
-                            <input type="text" class="form-control" id="paxCnic" placeholder="34101-XXXXXXX-X">
+                            <input type="text" class="form-control" id="paxCnic" placeholder="e.g. 34101-1234567-1 or 13 digits" oninput="validateInputs()">
+                            <div class="error-msg" id="cnicError"><i class="fa-solid fa-triangle-exclamation"></i> Invalid CNIC structure! Format: 13 digits or XXXXX-XXXXXXX-X</div>
                         </div>
                         <div>
                             <label style="font-size:11px; color:#94a3b8;">Select Airline & Route</label>
@@ -765,13 +716,6 @@
             <div id="radar" class="tab-content">
                 <div class="section-title">
                     Air Traffic Control (ATC) Radar Sweep Across Pakistan
-                    <div>
-                        <select id="hubSelect" onchange="alert('Control Tower Switched')">
-                            <option value="isb">Islamabad Intl (ISB)</option>
-                            <option value="lhe">Lahore Allama Iqbal (LHE)</option>
-                            <option value="khi">Karachi Jinnah (KHI)</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="interactive-box">
                     <canvas id="radarCanvas"></canvas>
@@ -884,36 +828,93 @@
             document.getElementById('telemetryModal').classList.remove('active');
         }
 
+        // Live Validation Logic for Name and CNIC
+        function validateInputs() {
+            const nameInput = document.getElementById('paxName');
+            const cnicInput = document.getElementById('paxCnic');
+            const nameError = document.getElementById('nameError');
+            const cnicError = document.getElementById('cnicError');
+
+            const nameRegex = /^[A-Za-z\s]{3,}$/;
+            const cnicRegex = /^(\d{5}-\d{7}-\d{1}|\d{13})$/;
+
+            let isValid = true;
+
+            if (nameInput.value.trim() !== "" && !nameRegex.test(nameInput.value.trim())) {
+                nameInput.classList.add('error');
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameInput.classList.remove('error');
+                nameError.style.display = 'none';
+            }
+
+            if (cnicInput.value.trim() !== "" && !cnicRegex.test(cnicInput.value.trim())) {
+                cnicInput.classList.add('error');
+                cnicError.style.display = 'block';
+                isValid = false;
+            } else {
+                cnicInput.classList.remove('error');
+                cnicError.style.display = 'none';
+            }
+
+            return isValid;
+        }
+
         function bookTicket() {
-            const name = document.getElementById('paxName').value;
-            const cnic = document.getElementById('paxCnic').value;
+            const nameInput = document.getElementById('paxName');
+            const cnicInput = document.getElementById('paxCnic');
             const flight = document.getElementById('paxFlight').value;
             const paxClass = document.getElementById('paxClass').value;
             const res = document.getElementById('bookingResult');
 
-            if(name && cnic) {
-                const pnr = "PK-PNR-" + Math.floor(1000 + Math.random() * 9000);
-                const seat = Math.floor(1 + Math.random() * 30) + (['A','B','C','D'][Math.floor(Math.random() * 4)]);
+            const name = nameInput.value.trim();
+            const cnic = cnicInput.value.trim();
 
-                res.innerHTML = `
-                    <div style="background:rgba(52, 211, 153, 0.15); border:1px solid #34d399; padding:12px; border-radius:10px; color:#34d399;">
-                        <strong><i class="fa-solid fa-circle-check"></i> Ticket Issued Successfully!</strong><br>
-                        Passenger: <strong>${name}</strong> | PNR: <strong>${pnr}</strong> | Seat: <strong>${seat}</strong><br>
-                        Flight: <strong>${flight}</strong> (${paxClass})
-                    </div>
-                `;
+            const nameRegex = /^[A-Za-z\s]{3,}$/;
+            const cnicRegex = /^(\d{5}-\d{7}-\d{1}|\d{13})$/;
 
-                const manifest = document.getElementById('paxManifestBody');
-                const row = manifest.insertRow(0);
-                row.innerHTML = `<td>${pnr}</td><td>${name}</td><td>${flight}</td><td>${paxClass}</td><td>Seat ${seat}</td><td><span class="badge-status badge-green">Confirmed</span></td>`;
+            let errorMsg = "";
 
-                bookingCount++;
-                document.getElementById('bookingCountText').innerText = bookingCount + " Live Bookings";
-                document.getElementById('paxName').value = '';
-                document.getElementById('paxCnic').value = '';
-            } else {
-                res.innerHTML = `<span style="color:#ef4444;">Please fill in both Name and CNIC.</span>`;
+            if(!nameRegex.test(name)) {
+                errorMsg += "<br>• Invalid Name Spelling! Minimum 3 letters required without numbers/symbols.";
+                nameInput.classList.add('error');
+                document.getElementById('nameError').style.display = 'block';
             }
+            if(!cnicRegex.test(cnic)) {
+                errorMsg += "<br>• Invalid CNIC / Passport Structure! Must be 13 digits or in XXXXX-XXXXXXX-X format.";
+                cnicInput.classList.add('error');
+                document.getElementById('cnicError').style.display = 'block';
+            }
+
+            if(errorMsg !== "") {
+                res.innerHTML = `<div style="color:#f87171; background:rgba(239, 68, 68, 0.15); border:1px solid #f87171; padding:10px; border-radius:10px;"><strong>Validation Failed:</strong>${errorMsg}</div>`;
+                return;
+            }
+
+            const pnr = "PK-PNR-" + Math.floor(1000 + Math.random() * 9000);
+            const seat = Math.floor(1 + Math.random() * 30) + (['A','B','C','D'][Math.floor(Math.random() * 4)]);
+
+            res.innerHTML = `
+                <div style="background:rgba(52, 211, 153, 0.15); border:1px solid #34d399; padding:12px; border-radius:10px; color:#34d399;">
+                    <strong><i class="fa-solid fa-circle-check"></i> Ticket Issued Successfully!</strong><br>
+                    Passenger: <strong>${name}</strong> | CNIC: <strong>${cnic}</strong><br>
+                    PNR: <strong>${pnr}</strong> | Seat: <strong>${seat}</strong> | Flight: <strong>${flight}</strong> (${paxClass})
+                </div>
+            `;
+
+            const manifest = document.getElementById('paxManifestBody');
+            const row = manifest.insertRow(0);
+            row.innerHTML = `<td>${pnr}</td><td>${name}</td><td>${flight}</td><td>${paxClass}</td><td>Seat ${seat}</td><td><span class="badge-status badge-green">Confirmed</span></td>`;
+
+            bookingCount++;
+            document.getElementById('bookingCountText').innerText = bookingCount + " Live Bookings";
+            nameInput.value = '';
+            cnicInput.value = '';
+            nameInput.classList.remove('error');
+            cnicInput.classList.remove('error');
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('cnicError').style.display = 'none';
         }
 
         function processMissedFlight() {
