@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Cloud Architecture Console - Ome Robab</title>
+    <title>Enterprise Cloud Architecture Console & Airport Telemetry - Ome Robab</title>
     <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -194,7 +194,7 @@
             margin-top: 15px;
         }
 
-        #archCanvas {
+        #archCanvas, #radarCanvas {
             width: 100%;
             height: 200px;
             background: #030712;
@@ -292,7 +292,6 @@
             box-shadow: 0 0 8px #38bdf8;
         }
 
-        /* Progress Bar */
         .progress-bar-bg {
             width: 100%;
             background: #1e293b;
@@ -375,7 +374,7 @@
         <!-- Header -->
         <div class="header">
             <h1>Cloud Computing Assignment Portfolio</h1>
-            <p>Automated Enterprise Infrastructure & Continuous Deployment (CI/CD)</p>
+            <p>Automated Enterprise Infrastructure, Global Airport Telemetry & CI/CD</p>
             <div class="status-badge" onclick="openPage('status-page')">
                 <span class="dot"></span> Live Deployment Active on Vercel Edge Network <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
             </div>
@@ -384,6 +383,7 @@
         <!-- Top Navigation Tabs -->
         <div class="nav-tabs" id="mainNavTabs">
             <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
+            <button class="tab-btn" onclick="switchTab('airport', this)"><i class="fa-solid fa-plane-departure"></i> Airport Cloud Hub</button>
             <button class="tab-btn" onclick="switchTab('architecture', this)"><i class="fa-solid fa-network-wired"></i> Architecture</button>
             <button class="tab-btn" onclick="switchTab('telemetry', this)"><i class="fa-solid fa-chart-line"></i> Telemetry</button>
             <button class="tab-btn" onclick="switchTab('pipeline', this)"><i class="fa-solid fa-code-branch"></i> CI/CD Pipeline</button>
@@ -392,6 +392,7 @@
 
         <!-- MAIN DASHBOARD CONTENT -->
         <div class="content" id="dashboardContent">
+            
             <!-- TAB 1: OVERVIEW -->
             <div id="overview" class="tab-content active">
                 <div class="section-title">Academic & Student Credentials (Click to open sub-page)</div>
@@ -438,7 +439,54 @@
                 </div>
             </div>
 
-            <!-- TAB 2: ARCHITECTURE -->
+            <!-- TAB 2: AIRPORT CLOUD HUB (NEW FEATURE) -->
+            <div id="airport" class="tab-content">
+                <div class="section-title">
+                    Global Airport Flight Cloud Hub & Radar Node
+                    <div>
+                        <select id="airportSelect" onchange="changeAirport(this.value)">
+                            <option value="isb">Islamabad Intl (ISB) - Pakistan</option>
+                            <option value="dxb">Dubai Intl (DXB) - UAE</option>
+                            <option value="lhr">London Heathrow (LHR) - UK</option>
+                            <option value="jfk">New York JFK (JFK) - USA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Live Airport Flight Diagnostics -->
+                <div class="grid">
+                    <div class="clickable-card" onclick="openPage('airport-node-page')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Airport Edge Node Latency</label>
+                        <span id="aptLatency" style="color:#34d399; font-weight:bold;">18 ms (ISB Node)</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('airport-flight-page')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Tracked Active Flights</label>
+                        <span id="aptFlights" style="color:#38bdf8; font-weight:bold;">342 In-Flight</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('airport-weather-page')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Aviation Weather API</label>
+                        <span id="aptWeather" style="color:#34d399; font-weight:bold;">Clear Sky (Optimal)</span>
+                    </div>
+                    <div class="clickable-card" onclick="openPage('airport-luggage-page')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
+                        <label>Luggage DB Cloud Sync</label>
+                        <span style="color:#34d399; font-weight:bold;">100% Synced</span>
+                    </div>
+                </div>
+
+                <!-- Live Flight Radar Simulation Canvas -->
+                <div class="interactive-box">
+                    <label style="font-size: 12px; color: #94a3b8; font-weight: 700; margin-bottom: 10px; display: block;">
+                        <i class="fa-solid fa-radar"></i> AIRPORT RADAR & EDGE TELEMETRY
+                    </label>
+                    <canvas id="radarCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- TAB 3: ARCHITECTURE -->
             <div id="architecture" class="tab-content">
                 <div class="section-title">
                     Live Enterprise Architecture Traffic Visualizer
@@ -460,7 +508,7 @@
                 </div>
             </div>
 
-            <!-- TAB 3: TELEMETRY -->
+            <!-- TAB 4: TELEMETRY -->
             <div id="telemetry" class="tab-content">
                 <div class="section-title">Real-time Telemetry & Live Traffic Streams</div>
                 <div class="interactive-box">
@@ -470,7 +518,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: CI/CD PIPELINE -->
+            <!-- TAB 5: CI/CD PIPELINE -->
             <div id="pipeline" class="tab-content">
                 <div class="section-title">Automated CI/CD Build Engine</div>
                 <div class="interactive-box">
@@ -484,7 +532,7 @@
                 </div>
             </div>
 
-            <!-- TAB 5: SECURITY & COST -->
+            <!-- TAB 6: SECURITY & COST -->
             <div id="security" class="tab-content">
                 <div class="section-title">Infrastructure Governance & Security Toggles</div>
                 <div class="interactive-box">
@@ -532,14 +580,14 @@
 
         <!-- ================= DEDICATED SUB-PAGES ================= -->
         
-        <!-- Sub-Page 1: Student Profile Page -->
+        <!-- Sub-Page 1: Student Profile -->
         <div id="student-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Student Architect Profile</div>
             <div class="interactive-box">
                 <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
                 <p style="color:#cbd5e1; font-size:14px; margin-bottom:15px;">
-                    Lead Student Cloud Architect specializing in automated continuous integration (CI/CD), serverless microservices, and edge network optimization.
+                    Lead Student Cloud Architect specializing in automated continuous integration (CI/CD), airport telemetry microservices, and edge network optimization.
                 </p>
                 <div class="code-block">
 {
@@ -547,7 +595,7 @@
   "role": "Lead Cloud Architect & Developer",
   "program": "BS Software Engineering (BSSE)",
   "institution": "University of Chenab (UChenab)",
-  "skills": ["Cloud Architecture", "CI/CD Pipelines", "HTML5/CSS3/JS", "Vercel Edge Hosting"]
+  "skills": ["Cloud Architecture", "Airport Telemetry Hub", "CI/CD Pipelines", "HTML5/CSS3/JS"]
 }
                 </div>
             </div>
@@ -560,7 +608,7 @@
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    This degree focuses on software design patterns, distributed cloud systems, web application performance, and DevOps automation.
+                    Focuses on distributed cloud platforms, real-time aviation APIs, containerized deployment, and software engineering methodologies.
                 </p>
             </div>
         </div>
@@ -572,7 +620,7 @@
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Faculty of Computer Science & Software Engineering — Delivering hands-on enterprise cloud training.
+                    Faculty of Computer Science & Software Engineering — Delivering high-level cloud assessment solutions.
                 </p>
             </div>
         </div>
@@ -584,7 +632,7 @@
             <div class="interactive-box">
                 <h3 style="color:#38bdf8;">Cloud Computing Architecture</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Project Scope: Automated Static Web Hosting, Multi-Region CDN Routing, and Continuous Integration Pipelines.
+                    Project Scope: Static Cloud Hosting, Global Airport Radar Node Simulation, and Continuous Deployment.
                 </p>
             </div>
         </div>
@@ -600,57 +648,56 @@
   "provider": "Vercel Edge Network",
   "status": "Operational",
   "regions_active": 12,
-  "ssl_encryption": "TLS v1.3 Verified",
-  "anycast_dns": "Enabled"
+  "airport_hubs_linked": ["ISB", "DXB", "LHR", "JFK"]
 }
                 </div>
             </div>
         </div>
 
-        <!-- Sub-Page 6: Architecture Sub-Page -->
-        <div id="architecture-page" class="page-view">
+        <!-- Sub-Page 6: Airport Node Page -->
+        <div id="airport-node-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Full Enterprise Architecture Topology</div>
+            <div class="section-title">Airport Cloud Edge Gateway Specs</div>
             <div class="interactive-box">
-                <h3 style="color:#38bdf8;">End-to-End Edge Architecture</h3>
+                <h3 style="color:#38bdf8;">Direct Airport Gateway Synchronization</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Client Requests -> Anycast DNS Routing -> Vercel Edge Serverless Engine -> Global Smart Cache.
+                    Connects flight radar towers directly to Vercel Serverless Edge Nodes for under 20ms flight status pings.
                 </p>
             </div>
         </div>
 
-        <!-- Sub-Page 7: Latency Diagnostic Sub-Page -->
-        <div id="latency-page" class="page-view">
+        <!-- Sub-Page 7: Airport Flight Tracking Page -->
+        <div id="airport-flight-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Edge Network Latency Metrics</div>
+            <div class="section-title">Active Flight Tracking Telemetry</div>
             <div class="interactive-box">
-                <h3 style="color:#38bdf8;">Average Latency: 14ms</h3>
+                <h3 style="color:#38bdf8;">Real-Time Aviation Data Streaming</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Anycast routing connects users to the nearest CDN edge node.
+                    Streams altitude, airspeed, and GPS coordinates directly into cloud databases using WebSockets.
                 </p>
             </div>
         </div>
 
-        <!-- Sub-Page 8: Uptime Sub-Page -->
-        <div id="uptime-page" class="page-view">
+        <!-- Sub-Page 8: Airport Weather Page -->
+        <div id="airport-weather-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">High Availability & SLA</div>
+            <div class="section-title">Aviation Weather API Sync</div>
             <div class="interactive-box">
-                <h3 style="color:#34d399;">99.99% Guaranteed SLA Uptime</h3>
+                <h3 style="color:#34d399;">Aviation Weather Services Online</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Automated multi-region failover ensures zero downtime.
+                    Pulls METAR and TAF meteorological reports continuously for cloud flight dispatchers.
                 </p>
             </div>
         </div>
 
-        <!-- Sub-Page 9: SSL Security Sub-Page -->
-        <div id="ssl-page" class="page-view">
+        <!-- Sub-Page 9: Airport Luggage Page -->
+        <div id="airport-luggage-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">SSL / TLS Security</div>
+            <div class="section-title">Baggage RFID Cloud Logistics</div>
             <div class="interactive-box">
-                <h3 style="color:#38bdf8;">TLS v1.3 Verified</h3>
+                <h3 style="color:#38bdf8;">RFID Tag Tracking & Inventory</h3>
                 <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Automated SSL certificate renewals with Layer 7 DDoS mitigation.
+                    Syncs thousands of scanned baggage RFID tags every minute into global NoSQL edge storage.
                 </p>
             </div>
         </div>
@@ -687,7 +734,73 @@
             document.getElementById('mainNavTabs').style.display = 'flex';
         }
 
-        // 3. Real-time Telemetry Chart
+        // 3. Airport Selection Logic (Dynamic Updates)
+        function changeAirport(apt) {
+            const data = {
+                'isb': { latency: '18 ms (ISB Node)', flights: '342 In-Flight', weather: 'Clear Sky (Optimal)' },
+                'dxb': { latency: '12 ms (DXB Node)', flights: '890 In-Flight', weather: 'Sunny / Hazy' },
+                'lhr': { latency: '28 ms (LHR Node)', flights: '620 In-Flight', weather: 'Light Rain / Cloudy' },
+                'jfk': { latency: '35 ms (JFK Node)', flights: '750 In-Flight', weather: 'Clear / Wind 12kts' }
+            };
+
+            document.getElementById('aptLatency').innerText = data[apt].latency;
+            document.getElementById('aptFlights').innerText = data[apt].flights;
+            document.getElementById('aptWeather').innerText = data[apt].weather;
+            addLog(`Switched primary Airport Cloud Hub to: ${apt.toUpperCase()}`, "success");
+        }
+
+        // 4. Radar Canvas Animation (Airport Visualizer)
+        const radarCanvas = document.getElementById('radarCanvas');
+        const rc = radarCanvas.getContext('2d');
+        let angle = 0;
+
+        function drawRadar() {
+            radarCanvas.width = radarCanvas.parentElement.clientWidth;
+            radarCanvas.height = 200;
+            const w = radarCanvas.width;
+            const h = radarCanvas.height;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            rc.clearRect(0, 0, w, h);
+
+            // Radar Circles
+            rc.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+            rc.lineWidth = 1;
+            rc.beginPath(); rc.arc(cx, cy, 40, 0, Math.PI * 2); rc.stroke();
+            rc.beginPath(); rc.arc(cx, cy, 80, 0, Math.PI * 2); rc.stroke();
+
+            // Sweeping Radar Line
+            angle += 0.03;
+            rc.strokeStyle = '#34d399';
+            rc.lineWidth = 2;
+            rc.beginPath();
+            rc.moveTo(cx, cy);
+            rc.lineTo(cx + Math.cos(angle) * 80, cy + Math.sin(angle) * 80);
+            rc.stroke();
+
+            // Airport Flight Dots
+            const flights = [
+                {x: cx + 30, y: cy - 20, code: 'PK-302'},
+                {x: cx - 50, y: cy + 30, code: 'EK-604'},
+                {x: cx + 60, y: cy + 40, code: 'BA-117'}
+            ];
+
+            flights.forEach(f => {
+                rc.fillStyle = '#38bdf8';
+                rc.beginPath();
+                rc.arc(f.x, f.y, 4, 0, Math.PI * 2);
+                rc.fill();
+                rc.fillStyle = '#94a3b8';
+                rc.font = '9px Segoe UI';
+                rc.fillText(f.code, f.x + 6, f.y + 3);
+            });
+
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+
+        // 5. Chart.js Telemetry
         const ctx = document.getElementById('telemetryChart').getContext('2d');
         const telemetryChart = new Chart(ctx, {
             type: 'line',
@@ -713,7 +826,7 @@
             }
         });
 
-        // 4. Live Canvas Topology Animation
+        // 6. Canvas Topology Animation
         const canvas = document.getElementById('archCanvas');
         const c = canvas.getContext('2d');
         let packets = [{x: 50, speed: 2}, {x: 200, speed: 2.5}];
@@ -726,7 +839,6 @@
 
             c.clearRect(0, 0, w, h);
 
-            // Connection Line
             c.strokeStyle = 'rgba(56, 189, 248, 0.3)';
             c.lineWidth = 2;
             c.beginPath();
@@ -734,7 +846,6 @@
             c.lineTo(w * 0.9, h/2);
             c.stroke();
 
-            // Animated Packets
             packets.forEach(p => {
                 p.x += p.speed;
                 if(p.x > w * 0.9) p.x = w * 0.1;
@@ -745,8 +856,7 @@
                 c.fill();
             });
 
-            // Draw Nodes
-            const nodes = ['Client Request', 'Anycast DNS', 'Vercel Edge Proxy', 'Serverless DB'];
+            const nodes = ['Airport Gate', 'Anycast DNS', 'Vercel Edge Proxy', 'Aviation DB'];
             nodes.forEach((label, idx) => {
                 const x = w * (0.1 + idx * 0.26);
                 c.fillStyle = '#0f172a';
@@ -767,17 +877,13 @@
         }
         drawArchitecture();
 
-        // 5. Region Switching Logic
-        let baseLatency = 14;
+        // 7. Security & Cost Helpers
         function changeRegion(region) {
-            if(region === 'us') baseLatency = 14;
-            if(region === 'eu') baseLatency = 42;
-            if(region === 'asia') baseLatency = 88;
-            document.getElementById('latencyVal').innerText = baseLatency + " ms (Optimal)";
+            const l = {us: 14, eu: 42, asia: 88};
+            document.getElementById('latencyVal').innerText = l[region] + " ms (Optimal)";
             addLog(`Switched primary region to: ${region.toUpperCase()}`, "warn");
         }
 
-        // 6. Security Toggles
         function toggleSecurity(id) {
             const btn = document.getElementById(id);
             if (btn.classList.contains('active')) {
@@ -791,7 +897,6 @@
             }
         }
 
-        // 7. Cost Calculator
         function calculateCost(gb) {
             document.getElementById('trafficText').innerText = gb + ' GB';
             document.getElementById('costVercel').innerText = `$${(gb * 0.025).toFixed(2)} / mo`;
@@ -799,7 +904,6 @@
             document.getElementById('costCF').innerText = `$0.00 / mo (Free Tier)`;
         }
 
-        // 8. Terminal Log Helper
         function addLog(msg, type = '') {
             const term = document.getElementById('terminalLog');
             const line = document.createElement('div');
@@ -809,17 +913,15 @@
             term.scrollTop = term.scrollHeight;
         }
 
-        // 9. CI/CD Build Engine Trigger
         function runPipeline() {
             const progress = document.getElementById('pipeProgress');
             progress.style.width = '0%';
             addLog("Webhook triggered manually...", "warn");
-            
-            setTimeout(() => { progress.style.width = '40%'; addLog("Compiling static bundle..."); }, 600);
+            setTimeout(() => { progress.style.width = '40%'; addLog("Compiling static bundle & airport APIs..."); }, 600);
             setTimeout(() => { progress.style.width = '80%'; addLog("Pushing assets to 12 Edge Regions..."); }, 1400);
             setTimeout(() => { 
                 progress.style.width = '100%'; 
-                addLog("DEPLOYMENT SUCCESSFUL! Build live across global CDN.", "success");
+                addLog("DEPLOYMENT SUCCESSFUL! Airport Cloud Hub live globally.", "success");
             }, 2200);
         }
     </script>
