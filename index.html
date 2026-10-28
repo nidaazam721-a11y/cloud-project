@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Airport Command Dashboard & Cloud Console - Ome Robab</title>
+    <title>Enterprise Airport Operating Management System (AOMS) & Cloud Console - Ome Robab</title>
     <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +27,7 @@
             background: rgba(11, 17, 32, 0.95);
             backdrop-filter: blur(25px);
             width: 100%;
-            max-width: 1250px;
+            max-width: 1300px;
             border-radius: 24px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.15);
             overflow: hidden;
@@ -48,7 +48,7 @@
             box-shadow: inset 0 -10px 25px rgba(0, 0, 0, 0.3);
         }
         .header h1 {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
@@ -93,19 +93,19 @@
         /* Top Navigation Bar */
         .nav-tabs {
             display: flex;
-            background: rgba(3, 7, 18, 0.8);
+            background: rgba(3, 7, 18, 0.85);
             border-bottom: 1px solid rgba(56, 189, 248, 0.2);
             overflow-x: auto;
         }
         .tab-btn {
-            padding: 14px 20px;
+            padding: 14px 18px;
             background: transparent;
             border: none;
             color: #94a3b8;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             cursor: pointer;
             transition: all 0.3s;
             border-bottom: 3px solid transparent;
@@ -196,7 +196,7 @@
 
         #radarCanvas, #archCanvas {
             width: 100%;
-            height: 200px;
+            height: 220px;
             background: #030712;
             border-radius: 12px;
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -208,7 +208,7 @@
             width: 100%;
         }
 
-        /* Tables & Lists */
+        /* Tables & Controls */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -233,23 +233,10 @@
         }
         .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #34d399; }
         .badge-yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #fbbf24; }
+        .badge-red { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }
         .badge-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
 
-        .search-box {
-            width: 100%;
-            background: #030712;
-            border: 1px solid #38bdf8;
-            padding: 8px 14px;
-            border-radius: 8px;
-            color: #f8fafc;
-            outline: none;
-            font-size: 12px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
+        .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
             font-size: 11px;
@@ -287,8 +274,11 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+        }
 
-        /* Sub-Page Navigation */
+        /* Sub-Pages Navigation */
         .page-view {
             display: none;
             padding: 30px;
@@ -354,21 +344,23 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Global Airport Command & Cloud Console</h1>
-            <p>Automated Enterprise Aviation Telemetry & Cloud Architecture by Ome Robab</p>
+            <h1>Airport Operating Management System (AOMS)</h1>
+            <p>Enterprise Global Airport Telemetry, ATC Command & Cloud Console by Ome Robab</p>
             <div class="status-badge" onclick="openPage('status-page')">
-                <span class="dot"></span> Live Airport Cloud Gateway Active <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
+                <span class="dot"></span> Live Airport Gateway & Serverless Edge Active <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
             </div>
         </div>
 
-        <!-- Top Navigation Tabs -->
+        <!-- Navigation Bar -->
         <div class="nav-tabs" id="mainNavTabs">
             <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
-            <button class="tab-btn" onclick="switchTab('radar', this)"><i class="fa-solid fa-plane-departure"></i> Flight Radar</button>
+            <button class="tab-btn" onclick="switchTab('radar', this)"><i class="fa-solid fa-plane-departure"></i> ATC Radar</button>
             <button class="tab-btn" onclick="switchTab('schedules', this)"><i class="fa-solid fa-calendar-days"></i> Flight Schedule</button>
-            <button class="tab-btn" onclick="switchTab('runways', this)"><i class="fa-solid fa-road"></i> Runways & ATC</button>
-            <button class="tab-btn" onclick="switchTab('baggage', this)"><i class="fa-solid fa-suitcase-rolling"></i> Baggage Hub</button>
-            <button class="tab-btn" onclick="switchTab('weather', this)"><i class="fa-solid fa-cloud-sun"></i> Weather & METAR</button>
+            <button class="tab-btn" onclick="switchTab('gates', this)"><i class="fa-solid fa-door-open"></i> Gates & Terminals</button>
+            <button class="tab-btn" onclick="switchTab('cargo', this)"><i class="fa-solid fa-boxes-packing"></i> Cargo & Logistics</button>
+            <button class="tab-btn" onclick="switchTab('ground', this)"><i class="fa-solid fa-gas-pump"></i> Fuel & Ground</button>
+            <button class="tab-btn" onclick="switchTab('security', this)"><i class="fa-solid fa-shield-halved"></i> Security & Customs</button>
+            <button class="tab-btn" onclick="switchTab('emergency', this)"><i class="fa-solid fa-triangle-exclamation"></i> Emergency CFR</button>
         </div>
 
         <!-- MAIN DASHBOARD CONTENT -->
@@ -395,35 +387,39 @@
                     </div>
                     <div class="clickable-card" onclick="openPage('course-page')">
                         <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Course Title</label>
-                        <span>Cloud & Airport Telemetry</span>
+                        <label>Course Scope</label>
+                        <span>Enterprise Cloud & AOMS</span>
                     </div>
                 </div>
 
-                <div class="section-title">Airport Cloud Command Hub Diagnostics</div>
+                <div class="section-title">Live Airport Key Performance Indicators (KPIs)</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="openPage('airport-node-page')">
                         <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Active Airport Node</label>
-                        <span style="color:#34d399; font-weight:bold;">Islamabad (ISB) - 18ms</span>
+                        <label>Primary Command Hub</label>
+                        <span style="color:#34d399; font-weight:bold;">Islamabad Intl (ISB)</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('airport-flight-page')">
                         <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Active Flights Tracked</label>
-                        <span style="color:#38bdf8; font-weight:bold;">342 In-Flight</span>
+                        <label>Daily Aircraft Movements</label>
+                        <span style="color:#38bdf8; font-weight:bold;">482 Operations</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('airport-luggage-page')">
                         <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Baggage RFID Sync</label>
-                        <span style="color:#34d399; font-weight:bold;">100% Operational</span>
+                        <label>Luggage RFID Processing</label>
+                        <span style="color:#34d399; font-weight:bold;">14,820 Bags (100% Synced)</span>
+                    </div>
+                    <div class="clickable-card">
+                        <label>Jet-A1 Fuel Stock</label>
+                        <span style="color:#34d399; font-weight:bold;">1.2M Liters (Optimal)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: FLIGHT RADAR -->
+            <!-- TAB 2: ATC RADAR -->
             <div id="radar" class="tab-content">
                 <div class="section-title">
-                    Global Flight Radar & Real-Time Tracking
+                    Air Traffic Control (ATC) Radar Sweep
                     <div>
                         <select id="hubSelect" onchange="changeHub(this.value)">
                             <option value="isb">Islamabad Intl (ISB)</option>
@@ -440,16 +436,22 @@
 
             <!-- TAB 3: FLIGHT SCHEDULES -->
             <div id="schedules" class="tab-content">
-                <div class="section-title">Live Flight Departure & Arrival Board</div>
+                <div class="section-title">Flight Operations & Schedule Console</div>
                 <div class="interactive-box">
-                    <input type="text" class="search-box" id="flightSearch" placeholder="Search by flight number, airline, or destination..." onkeyup="filterFlights()">
+                    <div style="display:flex; gap:10px; margin-bottom:15px; flex-wrap:wrap;">
+                        <input type="text" class="form-control" id="newFlightNo" placeholder="Flight No (e.g. PK-808)" style="flex:1;">
+                        <input type="text" class="form-control" id="newDest" placeholder="Destination" style="flex:1;">
+                        <button class="btn" onclick="addFlight()"><i class="fa-solid fa-plus"></i> Add New Flight Schedule</button>
+                    </div>
+
                     <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Flight No</th>
                                 <th>Airline</th>
                                 <th>Destination / Origin</th>
-                                <th>Time</th>
+                                <th>Schedule Time</th>
+                                <th>Gate</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -459,6 +461,7 @@
                                 <td>Pakistan International</td>
                                 <td>Karachi (KHI)</td>
                                 <td>14:30 PKT</td>
+                                <td>Gate G-12</td>
                                 <td><span class="badge-status badge-green">In-Flight</span></td>
                             </tr>
                             <tr>
@@ -466,6 +469,7 @@
                                 <td>Emirates</td>
                                 <td>Dubai (DXB)</td>
                                 <td>15:10 PKT</td>
+                                <td>Gate G-15</td>
                                 <td><span class="badge-status badge-yellow">Boarding</span></td>
                             </tr>
                             <tr>
@@ -473,187 +477,141 @@
                                 <td>Qatar Airways</td>
                                 <td>Doha (DOH)</td>
                                 <td>16:00 PKT</td>
+                                <td>Gate G-18</td>
                                 <td><span class="badge-status badge-blue">On Time</span></td>
-                            </tr>
-                            <tr>
-                                <td>PIA-781</td>
-                                <td>PIA Express</td>
-                                <td>London (LHR)</td>
-                                <td>17:45 PKT</td>
-                                <td><span class="badge-status badge-yellow">Delayed</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TAB 4: RUNWAYS & ATC -->
-            <div id="runways" class="tab-content">
-                <div class="section-title">Air Traffic Control & Runway Management</div>
+            <!-- TAB 4: GATES & TERMINALS -->
+            <div id="gates" class="tab-content">
+                <div class="section-title">Passenger Terminal & Departure Gate Control</div>
                 <div class="grid">
                     <div class="clickable-card">
-                        <label>Runway 10L / 28R</label>
-                        <span style="color:#34d399; font-weight:bold;">Active (Landing)</span>
-                        <button class="btn" style="margin-top:10px; padding:4px 10px; font-size:10px;" onclick="toggleRunway(this)">Toggle Maintenance</button>
+                        <label>Gate G-12 (Boeing 777)</label>
+                        <span style="color:#34d399; font-weight:bold;">Boarding Active</span>
+                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: PK-302 | Pax: 280/300</p>
+                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Close Gate</button>
                     </div>
                     <div class="clickable-card">
-                        <label>Runway 10R / 28L</label>
-                        <span style="color:#34d399; font-weight:bold;">Active (Takeoff)</span>
-                        <button class="btn" style="margin-top:10px; padding:4px 10px; font-size:10px;" onclick="toggleRunway(this)">Toggle Maintenance</button>
+                        <label>Gate G-15 (Airbus A380)</label>
+                        <span style="color:#fbbf24; font-weight:bold;">Final Call</span>
+                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: EK-612 | Pax: 410/450</p>
+                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Close Gate</button>
                     </div>
                     <div class="clickable-card">
-                        <label>Runway 12 / 30</label>
-                        <span style="color:#fbbf24; font-weight:bold;">Standby / Hold</span>
-                        <button class="btn" style="margin-top:10px; padding:4px 10px; font-size:10px;" onclick="toggleRunway(this)">Toggle Maintenance</button>
+                        <label>Gate G-18 (Airbus A350)</label>
+                        <span style="color:#38bdf8; font-weight:bold;">Scheduled</span>
+                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: QR-632 | Cleaning in progress</p>
+                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Open Gate</button>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 5: BAGGAGE HUB -->
-            <div id="baggage" class="tab-content">
-                <div class="section-title">Baggage RFID Scanning & Claims Hub</div>
+            <!-- TAB 5: CARGO & LOGISTICS -->
+            <div id="cargo" class="tab-content">
+                <div class="section-title">Air Cargo & Freight Logistics Tracking</div>
                 <div class="interactive-box">
-                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:10px;">Report Lost Baggage / Claim Form</h3>
-                    <div class="form-group">
-                        <label>Passenger Name</label>
-                        <input type="text" class="form-control" id="claimName" placeholder="Enter full name">
+                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:10px;">Air Waybill (AWB) Cargo Search</h3>
+                    <div style="display:flex; gap:10px; margin-bottom:15px;">
+                        <input type="text" class="form-control" id="awbInput" placeholder="Enter Air Waybill Number (e.g. AWB-9021)">
+                        <button class="btn" onclick="trackAwb()"><i class="fa-solid fa-magnifying-glass"></i> Track Cargo</button>
                     </div>
-                    <div class="form-group">
-                        <label>Flight Number</label>
-                        <input type="text" class="form-control" id="claimFlight" placeholder="e.g. PK-302">
-                    </div>
-                    <div class="form-group">
-                        <label>Baggage Tag ID (RFID)</label>
-                        <input type="text" class="form-control" id="claimTag" placeholder="e.g. ISB-94821">
-                    </div>
-                    <button class="btn" onclick="submitClaim()"><i class="fa-solid fa-paper-plane"></i> Submit Baggage Claim</button>
-                    <div id="claimResult" style="margin-top:10px; font-size:12px; color:#34d399;"></div>
+                    <div id="awbResult" style="font-size:12px; color:#34d399;"></div>
                 </div>
             </div>
 
-            <!-- TAB 6: WEATHER & METAR -->
-            <div id="weather" class="tab-content">
-                <div class="section-title">Aviation Meteorological (METAR) Telemetry</div>
+            <!-- TAB 6: FUEL & GROUND HANDLING -->
+            <div id="ground" class="tab-content">
+                <div class="section-title">Ground Handling & Aviation Refueling Dispatch</div>
                 <div class="grid">
                     <div class="clickable-card">
-                        <label>Wind Velocity</label>
-                        <span style="color:#38bdf8;">12 Knots @ 180°</span>
+                        <label>Fuel Truck Dispatcher #01</label>
+                        <span style="color:#34d399; font-weight:bold;">Refueling Flight EK-612</span>
                     </div>
                     <div class="clickable-card">
-                        <label>Visibility</label>
-                        <span style="color:#34d399;">10+ Kilometers (Clear)</span>
+                        <label>Baggage Tug Fleet</label>
+                        <span style="color:#34d399; font-weight:bold;">18/20 Units Active</span>
                     </div>
                     <div class="clickable-card">
-                        <label>Barometric Pressure</label>
-                        <span style="color:#38bdf8;">1013 hPa (QNH)</span>
-                    </div>
-                    <div class="clickable-card">
-                        <label>Temperature / Dew Point</label>
-                        <span style="color:#34d399;">24°C / 14°C</span>
+                        <label>Catering Service Truck</label>
+                        <span style="color:#38bdf8; font-weight:bold;">Docked at Gate G-18</span>
                     </div>
                 </div>
             </div>
+
+            <!-- TAB 7: SECURITY & CUSTOMS -->
+            <div id="security" class="tab-content">
+                <div class="section-title">Customs, Border Control & Biometric Security</div>
+                <div class="interactive-box">
+                    <div class="grid">
+                        <div class="clickable-card">
+                            <label>E-Gates Biometric Scanners</label>
+                            <span style="color:#34d399; font-weight:bold;">100% Functional</span>
+                        </div>
+                        <div class="clickable-card">
+                            <label>X-Ray Threat Scanner AI</label>
+                            <span style="color:#34d399; font-weight:bold;">0 Threat Detected Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 8: EMERGENCY CFR -->
+            <div id="emergency" class="tab-content">
+                <div class="section-title">Crash Fire Rescue (CFR) & Airport Safety</div>
+                <div class="interactive-box" style="border-color:#ef4444;">
+                    <h3 style="color:#f87171; font-size:14px; margin-bottom:10px;">Runway Emergency Override Panel</h3>
+                    <button class="btn btn-danger" onclick="triggerEmergency()"><i class="fa-solid fa-bell"></i> TRIGGER RUNWAY ALARM PROTOCOL</button>
+                    <div id="emergencyStatus" style="margin-top:12px; font-size:12px;"></div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- ================= DEDICATED SUB-PAGES ================= -->
-        
-        <!-- Sub-Page: Student Profile -->
+        <!-- ================= SUB-PAGES ================= -->
         <div id="student-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Student Architect Profile</div>
             <div class="interactive-box">
                 <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
-                <p style="color:#cbd5e1; font-size:14px; margin-bottom:15px;">
-                    Lead Cloud Architect & Developer specializing in aviation cloud telemetry systems, real-time radar mapping, and edge software architectures.
-                </p>
-                <div class="code-block">
-{
-  "student_name": "Ome Robab",
-  "role": "Lead Systems Architect",
-  "program": "BS Software Engineering (BSSE)",
-  "institution": "University of Chenab (UChenab)",
-  "specialization": "Airport Cloud Command & Telemetry"
-}
-                </div>
+                <p style="color:#cbd5e1; font-size:14px;">Lead Cloud & Airport Telemetry Architect at University of Chenab (UChenab).</p>
             </div>
         </div>
-
-        <!-- Sub-Page: Degree -->
         <div id="degree-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Degree Program</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Focuses on advanced distributed backend applications, cloud serverless networks, and real-time data streaming.
-                </p>
-            </div>
+            <div class="interactive-box"><h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3></div>
         </div>
-
-        <!-- Sub-Page: University -->
         <div id="university-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Institution Profile</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Faculty of Computer Science & Software Engineering — Promoting innovation in cloud computing.
-                </p>
-            </div>
+            <div class="section-title">Institution</div>
+            <div class="interactive-box"><h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3></div>
         </div>
-
-        <!-- Sub-Page: Course -->
         <div id="course-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Course Information</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">Cloud Computing & Airport Telemetry</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">
-                    Assessment Project: Global Airport Flight Radar, ATC Runway Control, Baggage Tracking, and Weather Integration.
-                </p>
-            </div>
+            <div class="interactive-box"><h3 style="color:#38bdf8;">Cloud Computing & AOMS Telemetry</h3></div>
         </div>
-
-        <!-- Sub-Page: Network Status -->
         <div id="status-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Airport Cloud Gateway Status</div>
-            <div class="interactive-box">
-                <h3 style="color:#34d399;">100% Operational (Global Radar Online)</h3>
-                <div class="code-block">
-{
-  "gateway_status": "Online",
-  "active_hubs": ["ISB", "DXB", "LHR", "JFK"],
-  "packet_loss": "0.0%"
-}
-                </div>
-            </div>
+            <div class="section-title">Gateway Status</div>
+            <div class="interactive-box"><h3 style="color:#34d399;">All Airport Nodes Synchronized</h3></div>
         </div>
 
-        <!-- Sub-Pages for Airport Cards -->
         <div id="airport-node-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Airport Edge Node Details</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">Islamabad International Airport (ISB)</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">Connected via dedicated low-latency fiber optic backhaul to cloud servers.</p>
-            </div>
+            <div class="interactive-box"><h3>Islamabad Airport Command Node Active</h3></div>
         </div>
         <div id="airport-flight-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Active Flights Data</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">In-Flight Telemetry Stream</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">Tracking altitude, speed, and heading for 342 active commercial flights.</p>
-            </div>
+            <div class="interactive-box"><h3>482 Total Aircraft Movements Tracked</h3></div>
         </div>
         <div id="airport-luggage-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Baggage RFID Sync Log</div>
-            <div class="interactive-box">
-                <h3 style="color:#38bdf8;">Automated Sorting System</h3>
-                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">Over 12,000 bags scanned and synchronized today with zero discrepancies.</p>
-            </div>
+            <div class="interactive-box"><h3>Baggage RFID Sorting Stream 100% Functional</h3></div>
         </div>
 
         <!-- Footer -->
@@ -664,20 +622,16 @@
 
     <!-- JavaScript Engine -->
     <script>
-        // 1. Tab Navigation
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
             element.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
 
-        // 2. Dedicated Sub-Pages Handler
         function openPage(pageId) {
             document.getElementById('dashboardContent').style.display = 'none';
             document.getElementById('mainNavTabs').style.display = 'none';
-            
             document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
@@ -688,14 +642,14 @@
             document.getElementById('mainNavTabs').style.display = 'flex';
         }
 
-        // 3. Flight Radar Canvas Animation
+        // Radar Animation
         const radarCanvas = document.getElementById('radarCanvas');
         const rc = radarCanvas.getContext('2d');
         let angle = 0;
 
         function drawRadar() {
             radarCanvas.width = radarCanvas.parentElement.clientWidth;
-            radarCanvas.height = 200;
+            radarCanvas.height = 220;
             const w = radarCanvas.width;
             const h = radarCanvas.height;
             const cx = w / 2;
@@ -703,33 +657,27 @@
 
             rc.clearRect(0, 0, w, h);
 
-            // Radar Concentric Circles
             rc.strokeStyle = 'rgba(56, 189, 248, 0.2)';
-            rc.lineWidth = 1;
             rc.beginPath(); rc.arc(cx, cy, 50, 0, Math.PI * 2); rc.stroke();
-            rc.beginPath(); rc.arc(cx, cy, 90, 0, Math.PI * 2); rc.stroke();
+            rc.beginPath(); rc.arc(cx, cy, 95, 0, Math.PI * 2); rc.stroke();
 
-            // Radar Sweep Line
             angle += 0.03;
             rc.strokeStyle = '#34d399';
             rc.lineWidth = 2;
             rc.beginPath();
             rc.moveTo(cx, cy);
-            rc.lineTo(cx + Math.cos(angle) * 90, cy + Math.sin(angle) * 90);
+            rc.lineTo(cx + Math.cos(angle) * 95, cy + Math.sin(angle) * 95);
             rc.stroke();
 
-            // Aircraft Blips
             const planes = [
-                {x: cx + 40, y: cy - 30, code: 'PK-302'},
-                {x: cx - 60, y: cy + 25, code: 'EK-612'},
-                {x: cx + 50, y: cy + 50, code: 'QR-632'}
+                {x: cx + 45, y: cy - 35, code: 'PK-302'},
+                {x: cx - 65, y: cy + 30, code: 'EK-612'},
+                {x: cx + 55, y: cy + 55, code: 'QR-632'}
             ];
 
             planes.forEach(p => {
                 rc.fillStyle = '#38bdf8';
-                rc.beginPath();
-                rc.arc(p.x, p.y, 4, 0, Math.PI * 2);
-                rc.fill();
+                rc.beginPath(); rc.arc(p.x, p.y, 4, 0, Math.PI * 2); rc.fill();
                 rc.fillStyle = '#94a3b8';
                 rc.font = '10px Segoe UI';
                 rc.fillText(p.code, p.x + 6, p.y + 3);
@@ -739,50 +687,47 @@
         }
         drawRadar();
 
-        // 4. Flight Search Filter
-        function filterFlights() {
-            const query = document.getElementById('flightSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#flightTableBody tr');
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(query) ? '' : 'none';
-            });
+        // Operational JS Functions
+        function addFlight() {
+            const num = document.getElementById('newFlightNo').value;
+            const dest = document.getElementById('newDest').value;
+            if(num && dest) {
+                const tbody = document.getElementById('flightTableBody');
+                const row = tbody.insertRow(0);
+                row.innerHTML = `<td>${num}</td><td>Charter Flight</td><td>${dest}</td><td>18:00 PKT</td><td>Gate G-20</td><td><span class="badge-status badge-blue">On Time</span></td>`;
+                document.getElementById('newFlightNo').value = '';
+                document.getElementById('newDest').value = '';
+            }
         }
 
-        // 5. Runway Toggle
-        function toggleRunway(btn) {
-            const span = btn.previousElementSibling;
-            if(span.innerText.includes('Active')) {
-                span.innerText = 'Under Maintenance';
+        function toggleGate(btn) {
+            const span = btn.previousElementSibling.previousElementSibling;
+            if(span.innerText.includes('Boarding') || span.innerText.includes('Final')) {
+                span.innerText = 'Gate Closed';
                 span.style.color = '#ef4444';
-                btn.innerText = 'Set Active';
+                btn.innerText = 'Re-open Gate';
             } else {
-                span.innerText = 'Active';
+                span.innerText = 'Boarding Active';
                 span.style.color = '#34d399';
-                btn.innerText = 'Toggle Maintenance';
+                btn.innerText = 'Close Gate';
             }
         }
 
-        // 6. Baggage Claim Submit
-        function submitClaim() {
-            const name = document.getElementById('claimName').value;
-            const flight = document.getElementById('claimFlight').value;
-            const tag = document.getElementById('claimTag').value;
-            const res = document.getElementById('claimResult');
-
-            if(name && flight && tag) {
-                const claimId = "CLM-" + Math.floor(10000 + Math.random() * 90000);
-                res.style.color = '#34d399';
-                res.innerHTML = `Claim successfully registered! Tracking ID: <strong>${claimId}</strong>. Our team is tracing RFID tag ${tag}.`;
-            } else {
-                res.style.color = '#ef4444';
-                res.innerHTML = `Please fill out all required fields to submit your claim.`;
+        function trackAwb() {
+            const input = document.getElementById('awbInput').value;
+            const res = document.getElementById('awbResult');
+            if(input) {
+                res.innerHTML = `AWB <strong>${input}</strong>: In Transit | Cargo Weight: 1,420 kg | Cleared by Customs.`;
             }
         }
 
-        // 7. Hub Switcher
+        function triggerEmergency() {
+            const st = document.getElementById('emergencyStatus');
+            st.innerHTML = `<span style="color:#ef4444; font-weight:bold;"><i class="fa-solid fa-triangle-exclamation"></i> EMERGENCY ALARM ACTIVATED! Crash Fire Rescue units dispatched to Runway 10L.</span>`;
+        }
+
         function changeHub(hub) {
-            alert(`Switched Command Hub to: ${hub.toUpperCase()}`);
+            alert(`Switched Airport Command Hub to: ${hub.toUpperCase()}`);
         }
     </script>
 </body>
