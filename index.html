@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: radial-gradient(circle at 50% 10%, #0f172a 0%, #070913 60%, #020408 100%);
+            background: radial-gradient(circle at 50% 10%, #0a1128 0%, #030712 60%, #010204 100%);
             color: #f8fafc;
             display: flex;
             justify-content: center;
@@ -24,14 +24,14 @@
             padding: 20px 10px;
         }
         .container {
-            background: rgba(11, 17, 32, 0.95);
+            background: rgba(8, 14, 28, 0.95);
             backdrop-filter: blur(25px);
             width: 100%;
             max-width: 1350px;
             border-radius: 24px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 50px rgba(56, 189, 248, 0.2);
             overflow: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.35);
             animation: fadeIn 0.8s ease-in-out;
             position: relative;
         }
@@ -39,25 +39,29 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Aviation Cockpit Header Theme */
         .header {
-            background: linear-gradient(135deg, #0284c7, #2563eb, #059669);
+            background: linear-gradient(135deg, #0369a1, #1d4ed8, #047857);
             color: white;
-            padding: 35px 25px;
+            padding: 40px 25px;
             text-align: center;
             position: relative;
-            box-shadow: inset 0 -10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 -15px 30px rgba(0, 0, 0, 0.4);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.4);
         }
         .header h1 {
             font-size: 30px;
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .header p {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.95;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .status-badge {
             display: inline-flex;
@@ -65,12 +69,12 @@
             background: rgba(16, 185, 129, 0.25);
             border: 1px solid #34d399;
             color: #34d399;
-            padding: 6px 18px;
+            padding: 6px 20px;
             border-radius: 30px;
             font-size: 12px;
             font-weight: 700;
             margin-top: 15px;
-            box-shadow: 0 0 18px rgba(52, 211, 153, 0.4);
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -90,11 +94,11 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* Navigation Bar */
+        /* Navigation Bar HUD Style */
         .nav-tabs {
             display: flex;
-            background: rgba(3, 7, 18, 0.9);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(2, 6, 23, 0.95);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
             overflow-x: auto;
         }
         .tab-btn {
@@ -114,7 +118,8 @@
         .tab-btn:hover, .tab-btn.active {
             color: #38bdf8;
             border-bottom-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.05);
+            background: rgba(56, 189, 248, 0.08);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
 
         .content { padding: 30px; }
@@ -124,7 +129,7 @@
         .section-title {
             font-size: 13px;
             color: #38bdf8;
-            border-bottom: 2px solid rgba(56, 189, 248, 0.25);
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
             padding-bottom: 8px;
             margin-bottom: 20px;
             margin-top: 25px;
@@ -150,16 +155,16 @@
             padding: 18px 22px;
             border-radius: 14px;
             border-left: 4px solid #38bdf8;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
         }
         .clickable-card:hover {
             transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.07);
             border-left-color: #34d399;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
         }
         .clickable-card label {
             display: block;
@@ -175,18 +180,19 @@
             font-weight: 600;
         }
 
+        /* Weather & Terminal HUD Cards */
         .weather-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.6));
+            border: 1px solid rgba(56, 189, 248, 0.25);
             border-radius: 14px;
-            padding: 15px;
+            padding: 16px;
             cursor: pointer;
             transition: all 0.3s;
         }
         .weather-card:hover {
             transform: translateY(-3px);
             border-color: #34d399;
-            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 8px 25px rgba(52, 211, 153, 0.2);
         }
 
         .quick-btn {
@@ -203,17 +209,18 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         }
         .quick-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
 
         .img-card {
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.9);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             transition: all 0.3s ease;
             position: relative;
             display: flex;
@@ -223,7 +230,7 @@
         .img-card:hover {
             transform: translateY(-5px);
             border-color: #38bdf8;
-            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.3);
         }
         .img-card img {
             width: 100%;
@@ -245,9 +252,9 @@
             padding: 3px 8px;
             border-radius: 6px;
             font-weight: 600;
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(56, 189, 248, 0.12);
             color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.25);
         }
 
         .card-actions {
@@ -261,8 +268,8 @@
             font-size: 11px;
             font-weight: 700;
             border-radius: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            background: rgba(56, 189, 248, 0.12);
             color: #38bdf8;
             cursor: pointer;
             transition: all 0.2s;
@@ -284,7 +291,7 @@
             flex: 1;
             min-width: 200px;
             background: #030712;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.35);
             padding: 9px 14px;
             border-radius: 10px;
             color: #fff;
@@ -292,8 +299,8 @@
             outline: none;
         }
         .filter-btn {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             color: #94a3b8;
             padding: 8px 14px;
             border-radius: 8px;
@@ -309,11 +316,12 @@
         }
 
         .interactive-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(56, 189, 248, 0.25);
             border-radius: 16px;
             padding: 20px;
             margin-top: 15px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
         #radarCanvas {
@@ -321,7 +329,8 @@
             height: 250px;
             background: #030712;
             border-radius: 12px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.15);
         }
 
         .chart-container {
@@ -339,12 +348,12 @@
         }
         .data-table th, .data-table td {
             padding: 10px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
         .data-table th {
             color: #38bdf8;
             font-weight: 700;
-            background: rgba(56, 189, 248, 0.05);
+            background: rgba(56, 189, 248, 0.08);
         }
         .badge-status {
             padding: 3px 8px;
@@ -352,13 +361,13 @@
             font-size: 10px;
             font-weight: 700;
         }
-        .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #34d399; }
-        .badge-yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #fbbf24; }
+        .badge-green { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid #34d399; }
+        .badge-yellow { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid #fbbf24; }
 
         .form-control {
             width: 100%;
             background: #030712;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.35);
             padding: 9px 12px;
             border-radius: 8px;
             color: #fff;
@@ -367,7 +376,7 @@
         }
         .form-control.error {
             border-color: #f87171 !important;
-            background: rgba(239, 68, 68, 0.08) !important;
+            background: rgba(239, 68, 68, 0.1) !important;
         }
 
         .error-msg {
@@ -392,17 +401,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6); }
-        .btn-warning { background: linear-gradient(135deg, #d97706, #b45309) !important; }
-        .btn-danger { background: linear-gradient(135deg, #dc2626, #b91c1c) !important; }
+        .btn-warning { background: linear-gradient(135deg, #d97706, #b45309) !important; box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4); }
+        .btn-danger { background: linear-gradient(135deg, #dc2626, #b91c1c) !important; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
 
         /* Modal Popup System */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(14px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -417,7 +427,7 @@
             width: 100%;
             max-width: 650px;
             padding: 25px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
             position: relative;
             animation: modalIn 0.3s ease-out;
         }
@@ -436,12 +446,13 @@
         .modal-close:hover { color: #f87171; }
 
         .footer {
-            background: rgba(3, 7, 18, 0.95);
+            background: rgba(2, 6, 23, 0.95);
             text-align: center;
             padding: 20px;
             font-size: 12px;
             color: #94a3b8;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            letter-spacing: 0.5px;
         }
 
         select {
@@ -462,7 +473,7 @@
         <!-- Header -->
         <div class="header">
             <h1>Pakistan Civil Aviation & Full Airport Operating System (AOMS)</h1>
-            <p>Enterprise Infrastructure, Reservation Engine, Refueling & Emergency Command by Ome Robab</p>
+            <p><i class="fa-solid fa-satellite-dish"></i> Enterprise Infrastructure, Airspace Telemetry & Command Center by Ome Robab</p>
             <div class="status-badge" onclick="showInfoModal('Aviation Network Status', '9 Major International Nodes Online', 'Islamabad, Lahore, Karachi, Sialkot, Peshawar, Quetta, Multan, Faisalabad, Gwadar connected via Vercel Edge Cloud System.')">
                 <span class="dot"></span> All Major Pakistan Airports Live & Connected
             </div>
@@ -485,11 +496,11 @@
         <!-- MAIN DASHBOARD CONTENT -->
         <div class="content" id="dashboardContent">
             
-            <!-- TAB 1: OVERVIEW (ADVANCED & INTERACTIVE) -->
+            <!-- TAB 1: OVERVIEW (ADVANCED & FLIGHT THEME) -->
             <div id="overview" class="tab-content active">
                 
                 <!-- 1. System Command Metadata -->
-                <div class="section-title">System Command Metadata</div>
+                <div class="section-title"><i class="fa-solid fa-terminal"></i> System Command Metadata</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('System Administrator Details', 'Ome Robab', 'Software Engineer & System Architect responsible for designing Pakistan Civil Aviation AOMS cloud console architecture.')">
                         <label>System Administrator</label>
@@ -510,53 +521,53 @@
                 </div>
 
                 <!-- 2. Aviation Performance Indicators -->
-                <div class="section-title">Aviation Performance Indicators</div>
+                <div class="section-title"><i class="fa-solid fa-chart-line"></i> Aviation Performance Indicators</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="switchTab('airports', document.querySelectorAll('.tab-btn')[1])">
                         <label>Connected Airports</label>
-                        <span style="color:#34d399; font-weight:bold;">9 Major Airports Active</span>
+                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-plane-circle-check"></i> 9 Major Airports Active</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('manifest', document.querySelectorAll('.tab-btn')[5])">
                         <label>Bookings Engine Status</label>
-                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;">Live PNR Engine Active</span>
+                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-ticket"></i> Live PNR Engine Active</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('missed', document.querySelectorAll('.tab-btn')[3])">
                         <label>Missed Claims Desk</label>
-                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;">Standby & Refund Online</span>
+                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;"><i class="fa-solid fa-rotate-right"></i> Standby & Refund Online</span>
                     </div>
                     <div class="clickable-card" onclick="switchTab('refuel', document.querySelectorAll('.tab-btn')[7])">
                         <label>Jet-A1 Fuel Stock</label>
-                        <span style="color:#34d399; font-weight:bold;">1.2M Liters (Hydrant Ready)</span>
+                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-gas-pump"></i> 1.2M Liters (Hydrant Ready)</span>
                     </div>
                 </div>
 
                 <!-- 3. Live Aviation Weather Ticker -->
-                <div class="section-title">Live METAR & Weather Telemetry</div>
+                <div class="section-title"><i class="fa-solid fa-cloud-sun"></i> Live METAR & Weather Telemetry</div>
                 <div class="grid">
                     <div class="weather-card" onclick="showInfoModal('Islamabad METAR', 'ISB / OPIS Weather Report', 'Temperature: 24°C | Wind: 12 kts (North) | Visibility: 10 KM | CAT-III ILS Operational.')">
-                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Islamabad (ISB)</div>
-                        <div style="font-size:16px; font-weight:700; margin:4px 0;">24°C <i class="fa-solid fa-sun" style="color:#fbbf24;"></i></div>
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-tower-broadcast"></i> Islamabad (ISB)</div>
+                        <div style="font-size:16px; font-weight:700; margin:6px 0;">24°C <i class="fa-solid fa-sun" style="color:#fbbf24;"></i></div>
                         <div style="font-size:11px; color:#94a3b8;">Wind 12 kts | Clear Sky</div>
                     </div>
                     <div class="weather-card" onclick="showInfoModal('Lahore METAR', 'LHE / OPLA Weather Report', 'Temperature: 22°C | Wind: 8 kts | Mild Haze | Smart Fog Landing System Standby.')">
-                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Lahore (LHE)</div>
-                        <div style="font-size:16px; font-weight:700; margin:4px 0;">22°C <i class="fa-solid fa-smog" style="color:#94a3b8;"></i></div>
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-tower-broadcast"></i> Lahore (LHE)</div>
+                        <div style="font-size:16px; font-weight:700; margin:6px 0;">22°C <i class="fa-solid fa-smog" style="color:#94a3b8;"></i></div>
                         <div style="font-size:11px; color:#94a3b8;">Wind 8 kts | Mild Haze</div>
                     </div>
                     <div class="weather-card" onclick="showInfoModal('Karachi METAR', 'KHI / OPKC Weather Report', 'Temperature: 29°C | Coastal Wind: 16 kts | Humidity: 65% | Optimal Flight Operations.')">
-                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Karachi (KHI)</div>
-                        <div style="font-size:16px; font-weight:700; margin:4px 0;">29°C <i class="fa-solid fa-wind" style="color:#38bdf8;"></i></div>
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-tower-broadcast"></i> Karachi (KHI)</div>
+                        <div style="font-size:16px; font-weight:700; margin:6px 0;">29°C <i class="fa-solid fa-wind" style="color:#38bdf8;"></i></div>
                         <div style="font-size:11px; color:#94a3b8;">Coastal Wind 16 kts</div>
                     </div>
                     <div class="weather-card" onclick="showInfoModal('Sialkot METAR', 'SKT / OPST Weather Report', 'Temperature: 23°C | Wind: 10 kts | Visibility: 10 KM | Export Cargo Flight Ready.')">
-                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Sialkot (SKT)</div>
-                        <div style="font-size:16px; font-weight:700; margin:4px 0;">23°C <i class="fa-solid fa-cloud-sun" style="color:#fbbf24;"></i></div>
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-tower-broadcast"></i> Sialkot (SKT)</div>
+                        <div style="font-size:16px; font-weight:700; margin:6px 0;">23°C <i class="fa-solid fa-cloud-sun" style="color:#fbbf24;"></i></div>
                         <div style="font-size:11px; color:#94a3b8;">Wind 10 kts | Clear</div>
                     </div>
                 </div>
 
                 <!-- 4. Cloud Infrastructure & Server Diagnostics -->
-                <div class="section-title">Cloud System Infrastructure Health</div>
+                <div class="section-title"><i class="fa-solid fa-server"></i> Cloud System Infrastructure Health</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('Cloud Edge Node Health', 'Vercel Serverless Edge', 'Status: 100% Operational | Response Latency: 12ms | Auto-Scaling Enabled.')">
                         <label>Server Edge Uptime</label>
@@ -573,7 +584,7 @@
                 </div>
 
                 <!-- 5. Quick Command Shortcuts -->
-                <div class="section-title">Quick Aviation Command Shortcuts</div>
+                <div class="section-title"><i class="fa-solid fa-bolt"></i> Quick Aviation Command Shortcuts</div>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-top:10px;">
                     <button class="quick-btn" onclick="switchTab('booking', document.querySelectorAll('.tab-btn')[2])"><i class="fa-solid fa-ticket"></i> Issue Quick Ticket</button>
                     <button class="quick-btn" style="background:linear-gradient(135deg, #d97706, #b45309);" onclick="switchTab('missed', document.querySelectorAll('.tab-btn')[3])"><i class="fa-solid fa-plane-slash"></i> Recover Missed Flight</button>
