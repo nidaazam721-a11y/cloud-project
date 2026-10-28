@@ -33,6 +33,7 @@
             overflow: hidden;
             border: 1px solid rgba(56, 189, 248, 0.3);
             animation: fadeIn 0.8s ease-in-out;
+            position: relative;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -51,6 +52,7 @@
             font-weight: 800;
             margin-bottom: 6px;
             letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
         .header p {
             font-size: 14px;
@@ -70,6 +72,10 @@
             margin-top: 15px;
             box-shadow: 0 0 18px rgba(52, 211, 153, 0.4);
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .status-badge:hover {
+            transform: scale(1.03);
         }
         .dot {
             height: 8px;
@@ -182,7 +188,10 @@
             right: 12px;
             font-size: 10px;
             color: #38bdf8;
-            opacity: 0.7;
+            opacity: 0.8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         .interactive-box {
@@ -195,7 +204,7 @@
 
         #archCanvas {
             width: 100%;
-            height: 180px;
+            height: 190px;
             background: #030712;
             border-radius: 12px;
             border: 1px solid rgba(56, 189, 248, 0.2);
@@ -242,53 +251,73 @@
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
 
-        /* Modal Popup Styling */
-        .modal-overlay {
+        /* Full Screen Detail View / Modal Overlay */
+        .detail-panel-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(15px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease-in-out;
         }
-        .modal-box {
-            background: #0f172a;
+        .detail-panel {
+            background: #0b1120;
             border: 1px solid #38bdf8;
-            border-radius: 18px;
-            padding: 25px;
-            max-width: 550px;
-            width: 90%;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 750px;
+            width: 92%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
             position: relative;
         }
-        .modal-header {
+        .detail-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .modal-header h3 {
+        .detail-header h2 {
             color: #38bdf8;
-            font-size: 16px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .close-modal {
-            background: transparent;
-            border: none;
+        .close-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #94a3b8;
-            font-size: 18px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
         }
-        .close-modal:hover { color: #f8fafc; }
-        .modal-body {
-            font-size: 13px;
-            color: #cbd5e1;
-            line-height: 1.6;
+        .close-panel:hover { color: #f8fafc; background: #ef4444; border-color: #ef4444; }
+        
+        .code-block {
+            background: #030712;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            color: #a5f3fc;
+            overflow-x: auto;
+            margin-top: 15px;
+            white-space: pre-wrap;
         }
 
         .footer {
@@ -299,6 +328,17 @@
             color: #94a3b8;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
+        select {
+            background: #0f172a;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 6px 12px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -308,77 +348,88 @@
         <div class="header">
             <h1>Cloud Computing Assignment Portfolio</h1>
             <p>Automated Enterprise Infrastructure & Continuous Deployment (CI/CD)</p>
-            <div class="status-badge" onclick="openModal('System Operational', 'All 12 edge nodes in North America, Europe, and Asia are functioning normally with 0% packet loss.')">
-                <span class="dot"></span> Live Deployment Active on Vercel Edge Network
+            <div class="status-badge" onclick="openDetail('Deployment Specs', 'Vercel Edge Anycast CDN', 'Global edge network consists of 12 active point-of-presence (PoP) locations delivering under 20ms latency worldwide.', '{\n  \"provider\": \"Vercel Edge Network\",\n  \"status\": \"Active\",\n  \"ssl\": \"TLS v1.3 Verified\",\n  \"anycast_dns\": \"Enabled\"\n}')">
+                <span class="dot"></span> Live Deployment Active on Vercel Edge Network <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('overview')"><i class="fa-solid fa-gauge"></i> Overview</button>
-            <button class="tab-btn" onclick="switchTab('architecture')"><i class="fa-solid fa-network-wired"></i> Architecture</button>
-            <button class="tab-btn" onclick="switchTab('telemetry')"><i class="fa-solid fa-chart-line"></i> Telemetry</button>
-            <button class="tab-btn" onclick="switchTab('pipeline')"><i class="fa-solid fa-code-branch"></i> CI/CD Pipeline</button>
+            <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
+            <button class="tab-btn" onclick="switchTab('architecture', this)"><i class="fa-solid fa-network-wired"></i> Architecture</button>
+            <button class="tab-btn" onclick="switchTab('telemetry', this)"><i class="fa-solid fa-chart-line"></i> Telemetry</button>
+            <button class="tab-btn" onclick="switchTab('pipeline', this)"><i class="fa-solid fa-code-branch"></i> CI/CD Pipeline</button>
         </div>
 
-        <!-- Tab 1: Overview -->
         <div class="content">
+            <!-- TAB 1: OVERVIEW -->
             <div id="overview" class="tab-content active">
-                <div class="section-title">Academic & Student Credentials (Click Card for Details)</div>
+                <div class="section-title">Academic & Student Credentials (Click to open full profile)</div>
                 <div class="grid">
-                    <div class="clickable-card" onclick="openModal('Student Profile', 'Name: Ome Robab<br>Degree: BS Software Engineering (BSSE)<br>Institution: University of Chenab (UChenab)<br>Role: Lead Cloud Architect & Student')">
-                        <span class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    <div class="clickable-card" onclick="openDetail('Student Profile', 'Ome Robab', 'Software Engineering student specializing in cloud architecture, DevOps pipelines, and distributed edge systems.', '{\n  \"student_name\": \"Ome Robab\",\n  \"role\": \"Lead Cloud Architect\",\n  \"degree\": \"BS Software Engineering (BSSE)\",\n  \"institution\": \"University of Chenab (UChenab)\"\n}')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Student Name</label>
                         <span>Ome Robab</span>
                     </div>
-                    <div class="clickable-card" onclick="openModal('Degree Program Details', 'BS Software Engineering focuses on modern distributed systems, cloud computing, continuous deployment pipelines, and enterprise design patterns.')">
-                        <span class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    <div class="clickable-card" onclick="openDetail('Degree Curriculum', 'BS Software Engineering', 'Comprehensive curriculum covering software architecture, cloud infrastructure, containerization, and enterprise backend engineering.', '{\n  \"program\": \"BSSE\",\n  \"department\": \"Faculty of Computer Science & SE\",\n  \"accreditation\": \"HEC Approved\"\n}')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Degree Program</label>
                         <span>BS Software Engineering</span>
                     </div>
-                    <div class="clickable-card" onclick="openModal('Institution Profile', 'University of Chenab (UChenab) - Faculty of Computer Science & Software Engineering.')">
-                        <span class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    <div class="clickable-card" onclick="openDetail('Institution Details', 'University of Chenab', 'Higher education institute empowering innovation in computer science and modern software engineering.', '{\n  \"university\": \"University of Chenab (UChenab)\",\n  \"faculty\": \"Faculty of Computer Science\",\n  \"location\": \"Punjab, Pakistan\"\n}')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Institution</label>
                         <span>University of Chenab</span>
                     </div>
-                    <div class="clickable-card" onclick="openModal('Course Information', 'Course: Cloud Computing Architecture<br>Instructor Assessment: Practical Automated Continuous Deployment & Serverless Hosting Assessment.')">
-                        <span class="click-hint"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                    <div class="clickable-card" onclick="openDetail('Course Scope', 'Cloud Computing Architecture', 'Practical assessment covering automated deployment pipelines, static hosting, and edge serverless optimization.', '{\n  \"course\": \"Cloud Computing Architecture\",\n  \"project_scope\": \"Automated CI/CD Deployment\",\n  \"assessment_year\": \"2026\"\n}')">
+                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Course Title</label>
                         <span>Cloud Computing</span>
                     </div>
                 </div>
 
-                <div class="section-title">Key Infrastructure Metrics</div>
+                <div class="section-title">Live Server & Metric Diagnostics</div>
                 <div class="grid">
-                    <div class="clickable-card" onclick="openModal('Latency Inspection', 'Current Response Time: 14ms<br>Edge Location: US-East (Virginia)<br>Routing Type: Anycast Low-Latency Gateway')">
+                    <div class="clickable-card" onclick="openDetail('Latency Diagnostic', '14 ms Latency', 'Anycast network routing automatically directs request packets to the geographically closest edge node.', '{\n  \"ping_time\": \"14ms\",\n  \"jitter\": \"1.2ms\",\n  \"routing\": \"Optimal Edge Gate\"\n}')">
                         <label>Global Latency</label>
                         <span style="color:#34d399; font-weight:bold;">14 ms (Optimal)</span>
                     </div>
-                    <div class="clickable-card" onclick="openModal('SLA Health', 'SLA Guaranteed Uptime: 99.99%<br>Last Incident: None<br>Active Replicas: 12 Global Regions')">
+                    <div class="clickable-card" onclick="openDetail('SLA Health Status', '99.99% Uptime', 'Zero-downtime architecture featuring multi-region redundancy and automated failover switches.', '{\n  \"uptime\": \"99.99%\",\n  \"redundancy\": \"Multi-Region Active\",\n  \"status\": \"Operational\"\n}')">
                         <label>System Uptime</label>
                         <span style="color:#34d399; font-weight:bold;">99.99% Operational</span>
                     </div>
-                    <div class="clickable-card" onclick="openModal('Security Audit', 'SSL Certificate: SHA-256 with RSA Encryption<br>DDoS Protection: Layer 7 Cloud Shield Active')">
-                        <label>SSL / Security</label>
-                        <span style="color:#34d399; font-weight:bold;">TLS v1.3 Verified</span>
+                    <div class="clickable-card" onclick="openDetail('SSL/TLS Security Audit', 'TLS v1.3 Standard', 'Automated Let\'s Encrypt SSL certificate auto-renewals with HSTS header security enforced.', '{\n  \"protocol\": \"TLS v1.3\",\n  \"cipher\": \"AES-256-GCM\",\n  \"hsts\": \"Enabled\"\n}')">
+                        <label>SSL Security</label>
+                        <span style="color:#34d399; font-weight:bold;">Active & Certified</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Tab 2: Architecture -->
+            <!-- TAB 2: ARCHITECTURE -->
             <div id="architecture" class="tab-content">
-                <div class="section-title">Live Architecture Network Traffic Simulation</div>
+                <div class="section-title">
+                    Live Enterprise Architecture Simulation
+                    <div>
+                        <select onchange="updateRegion(this.value)">
+                            <option value="us">US-East Node (14ms)</option>
+                            <option value="eu">EU-Central Node (42ms)</option>
+                            <option value="asia">AP-South Node (88ms)</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="interactive-box">
                     <canvas id="archCanvas"></canvas>
                 </div>
                 <div style="margin-top:15px; display:flex; gap:10px;">
-                    <button class="btn" onclick="openModal('Architecture Specs', 'Client -> Anycast DNS -> Load Balancer -> Vercel Edge Serverless Engine -> Global Cache / DB.')"><i class="fa-solid fa-circle-info"></i> Inspect Topology Specs</button>
+                    <button class="btn" onclick="openDetail('Full Architecture Graph', 'Serverless Edge Topology', 'An animated visualization of client HTTP request packets routed through DNS, Edge Proxies, and Serverless DB workers.', '{\n  \"entry\": \"Client Request\",\n  \"gateway\": \"Cloudflare / Vercel DNS\",\n  \"compute\": \"Edge Serverless Workers\",\n  \"storage\": \"Distributed KV & Edge Cache\"\n}')">
+                        <i class="fa-solid fa-code"></i> Inspect Architecture Topology JSON
+                    </button>
                 </div>
             </div>
 
-            <!-- Tab 3: Telemetry -->
+            <!-- TAB 3: TELEMETRY -->
             <div id="telemetry" class="tab-content">
-                <div class="section-title">Real-time Telemetry & Performance Charts</div>
+                <div class="section-title">Real-time Telemetry & Performance Analytics</div>
                 <div class="interactive-box">
                     <div class="chart-container">
                         <canvas id="telemetryChart"></canvas>
@@ -386,13 +437,13 @@
                 </div>
             </div>
 
-            <!-- Tab 4: CI/CD Pipeline -->
+            <!-- TAB 4: CI/CD PIPELINE -->
             <div id="pipeline" class="tab-content">
-                <div class="section-title">Automated CI/CD Build Engine</div>
+                <div class="section-title">Automated Continuous Integration & Deployment Engine</div>
                 <div class="interactive-box">
-                    <button class="btn" onclick="triggerBuild()"><i class="fa-solid fa-play"></i> Trigger Live Deployment</button>
+                    <button class="btn" onclick="runPipeline()"><i class="fa-solid fa-play"></i> Trigger Live CI/CD Build</button>
                     <div class="terminal" id="terminalLog" style="margin-top:15px;">
-                        <div class="terminal-line">[SYSTEM] Cloud environment active. Ready for build triggers.</div>
+                        <div class="terminal-line">[SYSTEM] Cloud environment active. Ready for automated pipeline trigger.</div>
                     </div>
                 </div>
             </div>
@@ -404,49 +455,56 @@
         </div>
     </div>
 
-    <!-- Modal Popup Box -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-box">
-            <div class="modal-header">
-                <h3 id="modalTitle">Details</h3>
-                <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    <!-- Full-Screen Detail View / Sub-Page Modal -->
+    <div class="detail-panel-overlay" id="detailOverlay">
+        <div class="detail-panel">
+            <div class="detail-header">
+                <h2 id="detailTitle"><i class="fa-solid fa-cube"></i> Module Inspector</h2>
+                <button class="close-panel" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body" id="modalBody">
-                Information content goes here.
+            <div id="detailSubtitle" style="font-size:16px; font-weight:700; color:#cbd5e1; margin-bottom:10px;"></div>
+            <div id="detailDescription" style="font-size:13px; color:#94a3b8; line-height:1.6;"></div>
+            
+            <div class="code-block" id="detailCode"></div>
+
+            <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn" onclick="closeDetail()">Close Window</button>
             </div>
         </div>
     </div>
 
-    <!-- Interactive JavaScript -->
+    <!-- JavaScript Engine -->
     <script>
-        // Tab Switcher Function
-        function switchTab(tabId) {
+        // 1. Tab Navigation Handler
+        function switchTab(tabId, element) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
-            event.currentTarget.classList.add('active');
+            element.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Modal Functions
-        function openModal(title, text) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalBody').innerHTML = text;
-            document.getElementById('modalOverlay').style.display = 'flex';
+        // 2. Open Full Detail Panel
+        function openDetail(title, subtitle, description, codeJson) {
+            document.getElementById('detailTitle').innerHTML = `<i class="fa-solid fa-microchip"></i> ${title}`;
+            document.getElementById('detailSubtitle').innerText = subtitle;
+            document.getElementById('detailDescription').innerText = description;
+            document.getElementById('detailCode').innerText = codeJson;
+            document.getElementById('detailOverlay').style.display = 'flex';
         }
 
-        function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
+        function closeDetail() {
+            document.getElementById('detailOverlay').style.display = 'none';
         }
 
-        // Real-time Chart Initialization
+        // 3. Chart.js Real-time Telemetry
         const ctx = document.getElementById('telemetryChart').getContext('2d');
         const telemetryChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['12:00', '12:05', '12:10', '12:15', '12:20', '12:25'],
                 datasets: [{
-                    label: 'Traffic Bandwidth (MB/s)',
+                    label: 'Bandwidth (MB/s)',
                     data: [15, 22, 18, 29, 25, 34],
                     borderColor: '#38bdf8',
                     backgroundColor: 'rgba(56, 189, 248, 0.1)',
@@ -465,19 +523,20 @@
             }
         });
 
-        // Architecture Canvas Animation
+        // 4. Live Canvas Topology Animation
         const canvas = document.getElementById('archCanvas');
         const c = canvas.getContext('2d');
-        
-        function drawCanvas() {
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = 180;
-            c.clearRect(0, 0, canvas.width, canvas.height);
+        let packets = [{x: 50, speed: 2}, {x: 200, speed: 2.5}];
 
+        function drawArchitecture() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 190;
             const w = canvas.width;
             const h = canvas.height;
 
-            // Draw Connection Line
+            c.clearRect(0, 0, w, h);
+
+            // Connect Line
             c.strokeStyle = 'rgba(56, 189, 248, 0.3)';
             c.lineWidth = 2;
             c.beginPath();
@@ -485,8 +544,19 @@
             c.lineTo(w * 0.9, h/2);
             c.stroke();
 
+            // Animated Packets
+            packets.forEach(p => {
+                p.x += p.speed;
+                if(p.x > w * 0.9) p.x = w * 0.1;
+
+                c.fillStyle = '#34d399';
+                c.beginPath();
+                c.arc(p.x, h/2, 5, 0, Math.PI * 2);
+                c.fill();
+            });
+
             // Draw Nodes
-            const nodes = ['Client', 'Anycast DNS', 'Edge Proxy', 'Database'];
+            const nodes = ['Client Request', 'Anycast DNS', 'Vercel Edge Proxy', 'Serverless DB'];
             nodes.forEach((label, idx) => {
                 const x = w * (0.1 + idx * 0.26);
                 c.fillStyle = '#0f172a';
@@ -502,21 +572,27 @@
                 c.textAlign = 'center';
                 c.fillText(label, x, h/2 + 32);
             });
-        }
-        drawCanvas();
-        window.addEventListener('resize', drawCanvas);
 
-        // Build Pipeline Trigger
-        function triggerBuild() {
+            requestAnimationFrame(drawArchitecture);
+        }
+        drawArchitecture();
+
+        // 5. Region Selector Helper
+        function updateRegion(val) {
+            alert("Edge node switched to: " + val.toUpperCase());
+        }
+
+        // 6. CI/CD Build Engine Trigger
+        function runPipeline() {
             const term = document.getElementById('terminalLog');
-            term.innerHTML += `<div class="terminal-line terminal-warn">[${new Date().toLocaleTimeString()}] Initiating webhook deployment...</div>`;
+            term.innerHTML += `<div class="terminal-line terminal-warn">[${new Date().toLocaleTimeString()}] Git webhook triggered by user action...</div>`;
             setTimeout(() => {
-                term.innerHTML += `<div class="terminal-line">[${new Date().toLocaleTimeString()}] Compiling static assets and running edge checks...</div>`;
-            }, 1000);
+                term.innerHTML += `<div class="terminal-line">[${new Date().toLocaleTimeString()}] Building static bundle and running compression...</div>`;
+            }, 800);
             setTimeout(() => {
-                term.innerHTML += `<div class="terminal-line terminal-success">[${new Date().toLocaleTimeString()}] Deployment live across global nodes!</div>`;
+                term.innerHTML += `<div class="terminal-line terminal-success">[${new Date().toLocaleTimeString()}] DEPLOYMENT SUCCESSFUL! Live in 2.1s across 12 Edge Nodes.</div>`;
                 term.scrollTop = term.scrollHeight;
-            }, 2200);
+            }, 2000);
         }
     </script>
 </body>
