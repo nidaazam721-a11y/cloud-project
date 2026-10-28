@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pakistan Airport Operating Management & Flight Reservation System - Ome Robab</title>
+    <title>Pakistan Airport Operating Management & Missed Flight Recovery System - Ome Robab</title>
     <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -290,6 +290,9 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
+        .btn-warning {
+            background: linear-gradient(135deg, #d97706, #b45309) !important;
+        }
 
         /* Sub-Pages Navigation */
         .page-view {
@@ -352,8 +355,8 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Pakistan Civil Aviation & Flight Reservation System</h1>
-            <p>Integrated Enterprise Telemetry, Flight Booking Engine & ATC Command Console by Ome Robab</p>
+            <h1>Pakistan Civil Aviation & Flight Management System</h1>
+            <p>Integrated Telemetry, Reservation Engine & Missed Flight Recovery Desk by Ome Robab</p>
             <div class="status-badge" onclick="openPage('status-page')">
                 <span class="dot"></span> All 9 Pakistan Airports Live & Connected <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
             </div>
@@ -363,11 +366,11 @@
         <div class="nav-tabs" id="mainNavTabs">
             <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
             <button class="tab-btn" onclick="switchTab('booking', this)"><i class="fa-solid fa-ticket"></i> Book Flight</button>
+            <button class="tab-btn" style="color:#fbbf24;" onclick="switchTab('missed', this)"><i class="fa-solid fa-plane-slash"></i> Missed Flight Desk</button>
             <button class="tab-btn" onclick="switchTab('airports', this)"><i class="fa-solid fa-building-ngo"></i> Airports</button>
             <button class="tab-btn" onclick="switchTab('radar', this)"><i class="fa-solid fa-plane-departure"></i> ATC Radar</button>
             <button class="tab-btn" onclick="switchTab('schedules', this)"><i class="fa-solid fa-calendar-days"></i> Flight Schedule</button>
             <button class="tab-btn" onclick="switchTab('manifest', this)"><i class="fa-solid fa-users"></i> Passengers DB</button>
-            <button class="tab-btn" onclick="switchTab('retail', this)"><i class="fa-solid fa-shop"></i> Terminal POS</button>
         </div>
 
         <!-- MAIN DASHBOARD CONTENT -->
@@ -391,7 +394,7 @@
                     </div>
                     <div class="clickable-card" onclick="openPage('course-page')">
                         <label>Project Scope</label>
-                        <span>Pakistan AOMS & Reservation Engine</span>
+                        <span>Pakistan AOMS & Recovery Desk</span>
                     </div>
                 </div>
 
@@ -406,8 +409,8 @@
                         <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;">1 Live Booking</span>
                     </div>
                     <div class="clickable-card">
-                        <label>Active Airlines Monitored</label>
-                        <span style="color:#34d399; font-weight:bold;">PIA, Airblue, Fly Jinnah, Serene</span>
+                        <label>Missed Flight Claims Handled</label>
+                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;">0 Claims Active</span>
                     </div>
                     <div class="clickable-card">
                         <label>Network Latency (ISB Node)</label>
@@ -416,7 +419,7 @@
                 </div>
             </div>
 
-            <!-- TAB 2: LIVE FLIGHT BOOKING SYSTEM (NEW MODULE) -->
+            <!-- TAB 2: LIVE FLIGHT BOOKING SYSTEM -->
             <div id="booking" class="tab-content">
                 <div class="section-title">Live Passenger Ticket Reservation System</div>
                 <div class="interactive-box">
@@ -453,11 +456,46 @@
                 </div>
             </div>
 
-            <!-- TAB 3: PAKISTAN AIRPORTS (WITH PICTURES) -->
+            <!-- TAB 3: MISSED FLIGHT RECOVERY DESK (NEW MODULE) -->
+            <div id="missed" class="tab-content">
+                <div class="section-title">Missed Flight Recovery, Rescheduling & Refund Desk</div>
+                <div class="interactive-box" style="border-color:#f59e0b;">
+                    <h3 style="color:#fbbf24; font-size:14px; margin-bottom:10px;"><i class="fa-solid fa-plane-slash"></i> Passenger Missed Flight Recovery Assistant</h3>
+                    <p style="font-size:12px; color:#94a3b8; margin-bottom:15px;">Agar aap ki flight late hone ya kisi vajah se reh gayi hai, toh yahan PNR code entered karke immediate rescheduling ya refund claim karein.</p>
+                    
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:12px;">
+                        <div>
+                            <label style="font-size:11px; color:#94a3b8;">Ticket PNR Code</label>
+                            <input type="text" class="form-control" id="missedPnr" placeholder="e.g. PK-PNR-1001">
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:#94a3b8;">Reason for Missing Flight</label>
+                            <select id="missedReason" class="form-control">
+                                <option value="Late Airport Arrival">Late Airport Arrival</option>
+                                <option value="Traffic / Transit Delay">Traffic / Transit Delay</option>
+                                <option value="Immigration / Security Line Delay">Immigration / Security Line Delay</option>
+                                <option value="Medical Emergency">Medical Emergency</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:11px; color:#94a3b8;">Action Required</label>
+                            <select id="missedAction" class="form-control">
+                                <option value="rebook">Rebook Next Available Flight (Standby)</option>
+                                <option value="refund">Request Full Refund / Credit Voucher</option>
+                                <option value="lounge">Issue Transit Lounge Stay Pass</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-warning" onclick="processMissedFlight()"><i class="fa-solid fa-arrows-rotate"></i> Process Missed Flight Action</button>
+
+                    <div id="missedResult" style="margin-top:15px; font-size:12px;"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: PAKISTAN AIRPORTS (WITH PICTURES) -->
             <div id="airports" class="tab-content">
                 <div class="section-title">Major International Airports of Pakistan</div>
                 <div class="grid">
-                    
                     <div class="img-card" onclick="openPage('isb-page')">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
@@ -468,7 +506,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="img-card" onclick="openPage('lhe-page')">
                         <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
                         <div class="img-card-body">
@@ -479,7 +516,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="img-card" onclick="openPage('khi-page')">
                         <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
                         <div class="img-card-body">
@@ -490,40 +526,18 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="img-card">
-                        <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
-                        <div class="img-card-body">
-                            <div class="img-card-title">Bacha Khan Intl, Peshawar (PEW)</div>
-                            <div class="img-card-sub">
-                                <span>Code: BKIP / OPPS</span>
-                                <span style="color:#34d399;">Active (18ms)</span>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
-            <!-- TAB 4: ATC RADAR -->
+            <!-- TAB 5: ATC RADAR -->
             <div id="radar" class="tab-content">
-                <div class="section-title">
-                    Air Traffic Control (ATC) Radar Sweep Across Pakistan
-                    <div>
-                        <select id="hubSelect" onchange="changeHub(this.value)">
-                            <option value="isb">Islamabad Intl (ISB)</option>
-                            <option value="lhe">Lahore Allama Iqbal (LHE)</option>
-                            <option value="khi">Karachi Jinnah (KHI)</option>
-                            <option value="pew">Peshawar Bacha Khan (PEW)</option>
-                        </select>
-                    </div>
-                </div>
+                <div class="section-title">Air Traffic Control (ATC) Radar Sweep Across Pakistan</div>
                 <div class="interactive-box">
                     <canvas id="radarCanvas"></canvas>
                 </div>
             </div>
 
-            <!-- TAB 5: FLIGHT SCHEDULES -->
+            <!-- TAB 6: FLIGHT SCHEDULES -->
             <div id="schedules" class="tab-content">
                 <div class="section-title">Pakistan Domestic & International Flight Schedules</div>
                 <div class="interactive-box">
@@ -568,7 +582,7 @@
                 </div>
             </div>
 
-            <!-- TAB 6: PASSENGER MANIFEST & BOOKED TICKETS DB -->
+            <!-- TAB 7: PASSENGER MANIFEST & BOOKED TICKETS DB -->
             <div id="manifest" class="tab-content">
                 <div class="section-title">Passenger Manifest & Verified Tickets DB</div>
                 <div class="interactive-box">
@@ -597,52 +611,18 @@
                 </div>
             </div>
 
-            <!-- TAB 7: TERMINAL POS RETAIL -->
-            <div id="retail" class="tab-content">
-                <div class="section-title">Terminal Retail & Duty-Free Revenue Analytics</div>
-                <div class="interactive-box">
-                    <div class="chart-container">
-                        <canvas id="retailChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <!-- ================= SUB-PAGES ================= -->
+        <!-- SUB-PAGES -->
         <div id="student-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Student Architect Profile</div>
-            <div class="interactive-box">
-                <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
-                <p style="color:#cbd5e1; font-size:14px;">Lead Software Engineer & Cloud Architect at University of Chenab (UChenab).</p>
-            </div>
+            <div class="interactive-box"><h2 style="color:#38bdf8;">Ome Robab</h2><p>Lead Software Engineer & Cloud Architect at University of Chenab.</p></div>
         </div>
         <div id="degree-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Degree Program</div>
             <div class="interactive-box"><h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3></div>
-        </div>
-        <div id="university-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Institution</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">University of Chenab (UChenab)</h3></div>
-        </div>
-        <div id="course-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Project Scope</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">Pakistan Civil Aviation & Flight Reservation Engine</h3></div>
-        </div>
-
-        <div id="isb-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Islamabad International Airport (ISB)</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">Primary Command Hub - Islamabad</h3></div>
-        </div>
-        <div id="lhe-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Allama Iqbal International Airport, Lahore (LHE)</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">Lahore Central Hub Node</h3></div>
         </div>
 
         <!-- Footer -->
@@ -654,6 +634,7 @@
     <!-- JavaScript Engine -->
     <script>
         let bookingCount = 1;
+        let missedCount = 0;
 
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -675,7 +656,7 @@
             document.getElementById('mainNavTabs').style.display = 'flex';
         }
 
-        // Flight Booking Engine
+        // Ticket Booking Engine
         function bookTicket() {
             const name = document.getElementById('paxName').value;
             const cnic = document.getElementById('paxCnic').value;
@@ -695,7 +676,6 @@
                     </div>
                 `;
 
-                // Record in Manifest DB
                 const manifest = document.getElementById('paxManifestBody');
                 const row = manifest.insertRow(0);
                 row.innerHTML = `<td>${pnr}</td><td>${name}</td><td>${flight}</td><td>${paxClass}</td><td>Seat ${seat}</td><td><span class="badge-status badge-green">Confirmed</span></td>`;
@@ -703,11 +683,51 @@
                 bookingCount++;
                 document.getElementById('bookingCountText').innerText = bookingCount + " Live Bookings";
 
-                // Clear Form Inputs
                 document.getElementById('paxName').value = '';
                 document.getElementById('paxCnic').value = '';
             } else {
-                res.innerHTML = `<span style="color:#ef4444;">Please fill in both Name and CNIC / Passport to issue ticket.</span>`;
+                res.innerHTML = `<span style="color:#ef4444;">Please fill in both Name and CNIC to issue ticket.</span>`;
+            }
+        }
+
+        // Missed Flight Processing Engine
+        function processMissedFlight() {
+            const pnr = document.getElementById('missedPnr').value;
+            const reason = document.getElementById('missedReason').value;
+            const action = document.getElementById('missedAction').value;
+            const res = document.getElementById('missedResult');
+
+            if(pnr) {
+                missedCount++;
+                document.getElementById('missedCountText').innerText = missedCount + " Claims Active";
+
+                if(action === 'rebook') {
+                    const nextFlightTime = "21:30 PKT (Next Flight)";
+                    res.innerHTML = `
+                        <div style="background:rgba(251, 191, 36, 0.15); border:1px solid #fbbf24; padding:12px; border-radius:10px; color:#fbbf24;">
+                            <strong><i class="fa-solid fa-clock-rotate-left"></i> Standby Rebooking Confirmed for PNR: ${pnr}</strong><br>
+                            Reason Recorded: <i>${reason}</i><br>
+                            Action Taken: Transferred to Standby Queue for Next Flight departing at <strong>${nextFlightTime}</strong>.
+                        </div>
+                    `;
+                } else if(action === 'refund') {
+                    const refundId = "RFD-" + Math.floor(10000 + Math.random() * 90000);
+                    res.innerHTML = `
+                        <div style="background:rgba(56, 189, 248, 0.15); border:1px solid #38bdf8; padding:12px; border-radius:10px; color:#38bdf8;">
+                            <strong><i class="fa-solid fa-receipt"></i> Refund Claim Approved (ID: ${refundId})</strong><br>
+                            PNR: <strong>${pnr}</strong> | Refund Credit Voucher sent to passenger email/SMS.
+                        </div>
+                    `;
+                } else {
+                    res.innerHTML = `
+                        <div style="background:rgba(52, 211, 153, 0.15); border:1px solid #34d399; padding:12px; border-radius:10px; color:#34d399;">
+                            <strong><i class="fa-solid fa-couch"></i> Airport Executive Transit Lounge Pass Issued!</strong><br>
+                            Pass Code: <strong>LNG-${pnr}</strong> | Unlimited access to Food, Wi-Fi & Resting Pods until next flight.
+                        </div>
+                    `;
+                }
+            } else {
+                res.innerHTML = `<span style="color:#ef4444;">Please enter a valid PNR Code to process missed flight action.</span>`;
             }
         }
 
@@ -725,7 +745,6 @@
             const cy = h / 2;
 
             rc.clearRect(0, 0, w, h);
-
             rc.strokeStyle = 'rgba(56, 189, 248, 0.2)';
             rc.beginPath(); rc.arc(cx, cy, 60, 0, Math.PI * 2); rc.stroke();
             rc.beginPath(); rc.arc(cx, cy, 110, 0, Math.PI * 2); rc.stroke();
@@ -738,52 +757,9 @@
             rc.lineTo(cx + Math.cos(angle) * 110, cy + Math.sin(angle) * 110);
             rc.stroke();
 
-            const planes = [
-                {x: cx + 55, y: cy - 40, code: 'PIA-302'},
-                {x: cx - 75, y: cy + 35, code: 'AIRBLUE-402'},
-                {x: cx + 65, y: cy + 65, code: 'JINNAH-801'}
-            ];
-
-            planes.forEach(p => {
-                rc.fillStyle = '#38bdf8';
-                rc.beginPath(); rc.arc(p.x, p.y, 4, 0, Math.PI * 2); rc.fill();
-                rc.fillStyle = '#94a3b8';
-                rc.font = '10px Segoe UI';
-                rc.fillText(p.code, p.x + 6, p.y + 3);
-            });
-
             requestAnimationFrame(drawRadar);
         }
         drawRadar();
-
-        // Chart.js Retail POS Chart
-        const ctx = document.getElementById('retailChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Duty Free', 'Dining / Cafes', 'VIP Lounges', 'Parking Slots', 'Transport Services'],
-                datasets: [{
-                    label: 'Hourly Terminal Revenue ($ USD)',
-                    data: [14200, 8900, 6500, 4300, 3100],
-                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
-                    borderColor: '#38bdf8',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: { ticks: { color: '#94a3b8' } },
-                    y: { ticks: { color: '#94a3b8' } }
-                },
-                plugins: { legend: { labels: { color: '#f8fafc' } } }
-            }
-        });
-
-        function changeHub(hub) {
-            alert(`Switched Control Tower Radar Node to: ${hub.toUpperCase()}`);
-        }
     </script>
 </body>
 </html>
