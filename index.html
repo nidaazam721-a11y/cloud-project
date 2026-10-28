@@ -430,7 +430,7 @@
             <h1>Pakistan Civil Aviation & Full Airport Operating System (AOMS)</h1>
             <p>Enterprise Infrastructure, Reservation Engine, Refueling & Emergency Command by Ome Robab</p>
             <div class="status-badge">
-                <span class="dot"></span> All 9 Pakistan Airports Live & Connected
+                <span class="dot"></span> All Major Pakistan Airports Live & Connected
             </div>
         </div>
 
@@ -477,7 +477,7 @@
                 <div class="grid">
                     <div class="clickable-card">
                         <label>Connected Airports</label>
-                        <span style="color:#34d399; font-weight:bold;">9 Major Airports</span>
+                        <span style="color:#34d399; font-weight:bold;">Major Airports Active</span>
                     </div>
                     <div class="clickable-card">
                         <label>Bookings Count</label>
@@ -494,12 +494,12 @@
                 </div>
             </div>
 
-            <!-- TAB 2: AIRPORTS HUB (ALL REGIONS COVERED WITH FLIGHT & AIRPORT DATA) -->
+            <!-- TAB 2: AIRPORTS HUB (INCLUDES SIALKOT IN PUNJAB) -->
             <div id="airports" class="tab-content">
                 <div class="section-title">Major International Airports of Pakistan</div>
                 
                 <div class="filter-container">
-                    <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Karachi, Peshawar, Quetta)..." onkeyup="filterAirports()">
+                    <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Sialkot, LHE, KHI)..." onkeyup="filterAirports()">
                     <button class="filter-btn active" onclick="filterByProvince('all', this)">All Regions</button>
                     <button class="filter-btn" onclick="filterByProvince('Punjab', this)">Punjab</button>
                     <button class="filter-btn" onclick="filterByProvince('Sindh', this)">Sindh</button>
@@ -509,7 +509,7 @@
 
                 <div class="grid" id="airportGrid">
                     
-                    <!-- PUNJAB AIRPORTS -->
+                    <!-- PUNJAB: ISLAMABAD -->
                     <div class="img-card" data-province="Punjab" data-search="islamabad isb opis iiap punjab" onclick="showFullInfoModal('Islamabad International Airport (ISB)', 'OPIS', 'Punjab', '14ms', 'Runway 10L/28R & 10R/28L Active', '24°C, Clear Sky', '28/32 Gates', 'PK-302 (Karachi), PA-402 (Jeddah), EK-612 (Dubai)', 'Primary Strategic Capital Hub with CAT-III ILS System.')">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
@@ -530,6 +530,7 @@
                         </div>
                     </div>
 
+                    <!-- PUNJAB: LAHORE -->
                     <div class="img-card" data-province="Punjab" data-search="lahore lhe opla aiia punjab" onclick="showFullInfoModal('Allama Iqbal Intl Airport, Lahore (LHE)', 'OPLA', 'Punjab', '16ms', 'Runway 36R/18L Active', '22°C, Mild Haze', '18/24 Gates', 'PA-402 (Jeddah), PK-303 (Karachi), QR-628 (Doha)', 'Main Aviation Gateway of Punjab with Advanced Smart Fog Landing Tech.')">
                         <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
                         <div class="img-card-body">
@@ -550,7 +551,28 @@
                         </div>
                     </div>
 
-                    <!-- SINDH AIRPORT -->
+                    <!-- PUNJAB: SIALKOT (NEWLY ADDED) -->
+                    <div class="img-card" data-province="Punjab" data-search="sialkot skt opst siap punjab" onclick="showFullInfoModal('Sialkot International Airport (SKT)', 'OPST', 'Punjab', '15ms', 'Runway 04/22 Active (3.6km)', '23°C, Clear Sky', '12 Stands / 5 Gates', 'G9-567 (Sharjah), FZ-338 (Dubai), PK-240 (Kuwait)', 'First Private Sector Commercial Airport in South Asia & Export Cargo Powerhouse.')">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=600&auto=format&fit=crop" alt="Sialkot Airport">
+                        <div class="img-card-body">
+                            <div>
+                                <div class="img-card-title">Sialkot International (SKT)</div>
+                                <div class="img-card-sub">
+                                    <span>SIAP / OPST (Punjab)</span>
+                                    <span style="color:#34d399; font-weight:bold;">Active (15ms)</span>
+                                </div>
+                                <div class="airport-tag-bar">
+                                    <span class="tag-pill">Private Sector Hub</span>
+                                    <span class="tag-pill">Export Cargo</span>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="action-btn-sm"><i class="fa-solid fa-circle-info"></i> View Full Info & Flights</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SINDH: KARACHI -->
                     <div class="img-card" data-province="Sindh" data-search="karachi khi opkc jiap sindh" onclick="showFullInfoModal('Jinnah International Airport, Karachi (KHI)', 'OPKC', 'Sindh', '22ms', 'Runway 25L/07R Active', '29°C, Coastal Wind', '31/42 Stands', 'PK-302 (Islamabad), SV-701 (Riyadh), FZ-334 (Dubai)', 'Largest Cargo & Passenger Aviation Hub in South Sindh.')">
                         <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
                         <div class="img-card-body">
@@ -571,7 +593,7 @@
                         </div>
                     </div>
 
-                    <!-- KPK AIRPORTS -->
+                    <!-- KPK: PESHAWAR -->
                     <div class="img-card" data-province="KPK" data-search="peshawar pew opps bkip kpk" onclick="showFullInfoModal('Bacha Khan Intl Airport, Peshawar (PEW)', 'OPPS', 'KPK', '18ms', 'Runway 17/35 Active', '20°C, Clear Sky', '8/12 Gates', 'ER-501 (Dubai), PK-217 (Abu Dhabi), PA-601 (Sharjah)', 'Key International Gateway for Khyber Pakhtunkhwa Region.')">
                         <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
                         <div class="img-card-body">
@@ -592,7 +614,7 @@
                         </div>
                     </div>
 
-                    <!-- BALOCHISTAN AIRPORTS -->
+                    <!-- BALOCHISTAN: QUETTA -->
                     <div class="img-card" data-province="Balochistan" data-search="quetta uet opqt qiap balochistan" onclick="showFullInfoModal('Quetta International Airport (UET)', 'OPQT', 'Balochistan', '26ms', 'Runway 13/31 Active', '16°C, Dry Sky', '4/8 Stands', '9P-801 (Islamabad), PK-325 (Karachi), G9-541 (Sharjah)', 'High-Altitude International Command Hub in Balochistan.')">
                         <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
                         <div class="img-card-body">
@@ -613,6 +635,7 @@
                         </div>
                     </div>
 
+                    <!-- BALOCHISTAN: GWADAR -->
                     <div class="img-card" data-province="Balochistan" data-search="gwadar gwd opgd giap balochistan" onclick="showFullInfoModal('New Gwadar International Airport (GWD)', 'OPGD', 'Balochistan', '28ms', 'Runway 06/24 Active', '27°C, Sunny', '3/10 Stands', 'PK-303 (Karachi), PK-112 (Muscat), Strategic Cargo Flights', 'CPEC Flagship Deep-Sea Port Aviation Gateway.')">
                         <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
                         <div class="img-card-body">
@@ -658,7 +681,7 @@
                                 <option value="PIA | PK-302 (KHI to ISB)">PIA | PK-302 (Karachi to Islamabad)</option>
                                 <option value="Airblue | PA-402 (LHE to JED)">Airblue | PA-402 (Lahore to Jeddah)</option>
                                 <option value="Fly Jinnah | 9P-801 (ISB to UET)">Fly Jinnah | 9P-801 (Islamabad to Quetta)</option>
-                                <option value="SereneAir | ER-501 (PEW to DXB)">SereneAir | ER-501 (Peshawar to Dubai)</option>
+                                <option value="Air Arabia | G9-567 (SKT to SHJ)">Air Arabia | G9-567 (Sialkot to Sharjah)</option>
                             </select>
                         </div>
                         <div>
@@ -739,6 +762,14 @@
                                 <td>Jeddah (JED)</td>
                                 <td>15:15 PKT</td>
                                 <td><span class="badge-status badge-yellow">Boarding</span></td>
+                            </tr>
+                            <tr>
+                                <td>G9-567</td>
+                                <td>Air Arabia</td>
+                                <td>Sialkot (SKT)</td>
+                                <td>Sharjah (SHJ)</td>
+                                <td>16:45 PKT</td>
+                                <td><span class="badge-status badge-green">On Time</span></td>
                             </tr>
                         </tbody>
                     </table>
