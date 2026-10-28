@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Airport Operating Management System (AOMS) - Ome Robab</title>
+    <title>Pakistan Airport Operating Management System (AOMS) - Ome Robab</title>
     <!-- FontAwesome Icons & Chart.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -40,7 +40,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .header {
-            background: linear-gradient(135deg, #0284c7, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, #0284c7, #2563eb, #059669);
             color: white;
             padding: 35px 25px;
             text-align: center;
@@ -90,7 +90,7 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* Top Navigation Bar */
+        /* Navigation Bar */
         .nav-tabs {
             display: flex;
             background: rgba(3, 7, 18, 0.9);
@@ -98,7 +98,7 @@
             overflow-x: auto;
         }
         .tab-btn {
-            padding: 14px 16px;
+            padding: 14px 18px;
             background: transparent;
             border: none;
             color: #94a3b8;
@@ -141,7 +141,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 16px;
         }
         .clickable-card {
@@ -158,7 +158,7 @@
         .clickable-card:hover {
             transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.08);
-            border-left-color: #818cf8;
+            border-left-color: #34d399;
             box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
         }
         .clickable-card label {
@@ -174,16 +174,40 @@
             color: #f8fafc;
             font-weight: 600;
         }
-        .clickable-card .click-hint {
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-size: 10px;
+
+        /* Image Cards */
+        .img-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .img-card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+        }
+        .img-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .img-card-body {
+            padding: 15px;
+        }
+        .img-card-title {
+            font-size: 14px;
+            font-weight: 700;
             color: #38bdf8;
-            opacity: 0.8;
-            background: rgba(56, 189, 248, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .img-card-sub {
+            font-size: 11px;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: space-between;
         }
 
         .interactive-box {
@@ -196,19 +220,13 @@
 
         #radarCanvas {
             width: 100%;
-            height: 240px;
+            height: 250px;
             background: #030712;
             border-radius: 12px;
             border: 1px solid rgba(56, 189, 248, 0.2);
         }
 
-        .chart-container {
-            position: relative;
-            height: 240px;
-            width: 100%;
-        }
-
-        /* Tables & Forms */
+        /* Tables & Badges */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -234,7 +252,6 @@
         .badge-green { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #34d399; }
         .badge-yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #fbbf24; }
         .badge-blue { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
-        .badge-red { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #f87171; }
 
         .form-control {
             width: 100%;
@@ -266,9 +283,6 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
         }
-        .btn-danger {
-            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-        }
 
         /* Sub-Pages Navigation */
         .page-view {
@@ -290,11 +304,6 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s;
-        }
-        .back-btn:hover {
-            background: rgba(56, 189, 248, 0.15);
-            color: #fff;
         }
 
         .code-block {
@@ -336,25 +345,21 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Airport Operating Management System (AOMS)</h1>
-            <p>Enterprise International Airport Command Console & Cloud Telemetry by Ome Robab</p>
+            <h1>Pakistan Civil Aviation & Airport Operating System</h1>
+            <p>Integrated Enterprise Telemetry, Air Traffic Control & Cloud Console by Ome Robab</p>
             <div class="status-badge" onclick="openPage('status-page')">
-                <span class="dot"></span> Live Airport Gateway & Control Tower Online <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
+                <span class="dot"></span> All 9 Pakistan Airports Live & Connected <i class="fa-solid fa-chevron-right" style="margin-left:8px; font-size:10px;"></i>
             </div>
         </div>
 
-        <!-- Navigation Bar -->
+        <!-- Navigation Tabs -->
         <div class="nav-tabs" id="mainNavTabs">
             <button class="tab-btn active" onclick="switchTab('overview', this)"><i class="fa-solid fa-gauge"></i> Overview</button>
-            <button class="tab-btn" onclick="switchTab('radar', this)"><i class="fa-solid fa-plane-departure"></i> ATC Radar</button>
+            <button class="tab-btn" onclick="switchTab('airports', this)"><i class="fa-solid fa-building-ngo"></i> Pakistan Airports</button>
+            <button class="tab-btn" onclick="switchTab('radar', this)"><i class="fa-solid fa-plane-departure"></i> ATC Radar Sweep</button>
             <button class="tab-btn" onclick="switchTab('schedules', this)"><i class="fa-solid fa-calendar-days"></i> Flight Schedule</button>
-            <button class="tab-btn" onclick="switchTab('gates', this)"><i class="fa-solid fa-door-open"></i> Gates & Terminal</button>
-            <button class="tab-btn" onclick="switchTab('cargo', this)"><i class="fa-solid fa-boxes-packing"></i> Cargo & AWB</button>
-            <button class="tab-btn" onclick="switchTab('baggage', this)"><i class="fa-solid fa-suitcase-rolling"></i> Baggage Hub</button>
-            <button class="tab-btn" onclick="switchTab('refuel', this)"><i class="fa-solid fa-gas-pump"></i> Refueling</button>
-            <button class="tab-btn" onclick="switchTab('security', this)"><i class="fa-solid fa-shield-halved"></i> Customs & TSA</button>
-            <button class="tab-btn" onclick="switchTab('emergency', this)"><i class="fa-solid fa-triangle-exclamation"></i> Emergency CFR</button>
-            <button class="tab-btn" onclick="switchTab('retail', this)"><i class="fa-solid fa-shop"></i> Duty-Free POS</button>
+            <button class="tab-btn" onclick="switchTab('airlines', this)"><i class="fa-solid fa-plane"></i> Pakistan Fleet</button>
+            <button class="tab-btn" onclick="switchTab('baggage', this)"><i class="fa-solid fa-suitcase-rolling"></i> Baggage & Cargo</button>
         </div>
 
         <!-- MAIN DASHBOARD CONTENT -->
@@ -362,64 +367,173 @@
             
             <!-- TAB 1: OVERVIEW -->
             <div id="overview" class="tab-content active">
-                <div class="section-title">Academic & Student Credentials (Click to inspect)</div>
+                <div class="section-title">Academic & Project Credentials</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="openPage('student-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Student Name</label>
                         <span>Ome Robab</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('degree-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Degree Program</label>
                         <span>BS Software Engineering</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('university-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Institution</label>
                         <span>University of Chenab</span>
                     </div>
                     <div class="clickable-card" onclick="openPage('course-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
                         <label>Project Scope</label>
-                        <span>Airport Operating System (AOMS)</span>
+                        <span>Pakistan AOMS Infrastructure</span>
                     </div>
                 </div>
 
-                <div class="section-title">Live Airport Key Performance Indicators (KPIs)</div>
+                <div class="section-title">Pakistan Aviation Key Metrics</div>
                 <div class="grid">
-                    <div class="clickable-card" onclick="openPage('airport-node-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Command Hub Node</label>
-                        <span style="color:#34d399; font-weight:bold;">Islamabad Intl (ISB)</span>
-                    </div>
-                    <div class="clickable-card" onclick="openPage('airport-flight-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>Daily Aircraft Movements</label>
-                        <span style="color:#38bdf8; font-weight:bold;">482 Operations</span>
-                    </div>
-                    <div class="clickable-card" onclick="openPage('airport-luggage-page')">
-                        <span class="click-hint">Inspect <i class="fa-solid fa-arrow-right"></i></span>
-                        <label>RFID Baggage Sorted</label>
-                        <span style="color:#34d399; font-weight:bold;">14,820 Bags (100% Synced)</span>
+                    <div class="clickable-card">
+                        <label>Total Connected Airports</label>
+                        <span style="color:#34d399; font-weight:bold;">9 International Nodes</span>
                     </div>
                     <div class="clickable-card">
-                        <label>Jet-A1 Fuel Reserves</label>
-                        <span style="color:#34d399; font-weight:bold;">1.2 Million Liters</span>
+                        <label>Daily Aircraft Movements</label>
+                        <span style="color:#38bdf8; font-weight:bold;">640+ Domestic & Intl</span>
+                    </div>
+                    <div class="clickable-card">
+                        <label>Active Airlines Monitored</label>
+                        <span style="color:#34d399; font-weight:bold;">PIA, Airblue, Fly Jinnah, Serene</span>
+                    </div>
+                    <div class="clickable-card">
+                        <label>Network Latency (ISB Node)</label>
+                        <span style="color:#34d399; font-weight:bold;">12 ms (Optimal Edge)</span>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: ATC RADAR -->
+            <!-- TAB 2: PAKISTAN AIRPORTS (WITH PICTURES) -->
+            <div id="airports" class="tab-content">
+                <div class="section-title">Major International Airports of Pakistan</div>
+                <div class="grid">
+                    
+                    <!-- Airport 1: Islamabad -->
+                    <div class="img-card" onclick="openPage('isb-page')">
+                        <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Islamabad International (ISB)</div>
+                            <div class="img-card-sub">
+                                <span>Code: IIAP / OPIS</span>
+                                <span style="color:#34d399;">Active (14ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 2: Lahore -->
+                    <div class="img-card" onclick="openPage('lhe-page')">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Allama Iqbal Intl, Lahore (LHE)</div>
+                            <div class="img-card-sub">
+                                <span>Code: AIIA / OPLA</span>
+                                <span style="color:#34d399;">Active (16ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 3: Karachi -->
+                    <div class="img-card" onclick="openPage('khi-page')">
+                        <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Jinnah Intl, Karachi (KHI)</div>
+                            <div class="img-card-sub">
+                                <span>Code: JIAP / OPKC</span>
+                                <span style="color:#34d399;">Active (22ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 4: Peshawar -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Bacha Khan Intl, Peshawar (PEW)</div>
+                            <div class="img-card-sub">
+                                <span>Code: BKIP / OPPS</span>
+                                <span style="color:#34d399;">Active (18ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 5: Quetta -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Quetta International (UET)</div>
+                            <div class="img-card-sub">
+                                <span>Code: QIAP / OPQT</span>
+                                <span style="color:#34d399;">Active (26ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 6: Multan -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?q=80&w=600&auto=format&fit=crop" alt="Multan Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Multan International (MUX)</div>
+                            <div class="img-card-sub">
+                                <span>Code: MIAP / OPMT</span>
+                                <span style="color:#34d399;">Active (19ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 7: Sialkot -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=600&auto=format&fit=crop" alt="Sialkot Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Sialkot International (SKT)</div>
+                            <div class="img-card-sub">
+                                <span>Code: SIAP / OPST</span>
+                                <span style="color:#34d399;">Active (15ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 8: Faisalabad -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=600&auto=format&fit=crop" alt="Faisalabad Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Faisalabad International (LYP)</div>
+                            <div class="img-card-sub">
+                                <span>Code: FIAP / OPFA</span>
+                                <span style="color:#34d399;">Active (17ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport 9: Gwadar -->
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
+                        <div class="img-card-body">
+                            <div class="img-card-title">New Gwadar International (GWD)</div>
+                            <div class="img-card-sub">
+                                <span>Code: GIAP / OPGD</span>
+                                <span style="color:#34d399;">Active (28ms)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 3: ATC RADAR -->
             <div id="radar" class="tab-content">
                 <div class="section-title">
-                    Air Traffic Control (ATC) Live Radar Sweep
+                    Air Traffic Control (ATC) Radar Sweep Across Pakistan
                     <div>
                         <select id="hubSelect" onchange="changeHub(this.value)">
                             <option value="isb">Islamabad Intl (ISB)</option>
-                            <option value="dxb">Dubai Intl (DXB)</option>
-                            <option value="lhr">London Heathrow (LHR)</option>
-                            <option value="jfk">New York JFK (JFK)</option>
+                            <option value="lhe">Lahore Allama Iqbal (LHE)</option>
+                            <option value="khi">Karachi Jinnah (KHI)</option>
+                            <option value="pew">Peshawar Bacha Khan (PEW)</option>
                         </select>
                     </div>
                 </div>
@@ -428,165 +542,121 @@
                 </div>
             </div>
 
-            <!-- TAB 3: FLIGHT SCHEDULES -->
+            <!-- TAB 4: FLIGHT SCHEDULES -->
             <div id="schedules" class="tab-content">
-                <div class="section-title">Flight Operations & Schedule Console</div>
+                <div class="section-title">Pakistan Domestic & International Flight Schedules</div>
                 <div class="interactive-box">
-                    <div style="display:flex; gap:10px; margin-bottom:15px; flex-wrap:wrap;">
-                        <input type="text" class="form-control" id="newFlightNo" placeholder="Flight No (e.g. PK-808)" style="flex:1;">
-                        <input type="text" class="form-control" id="newDest" placeholder="Destination / Origin" style="flex:1;">
-                        <button class="btn" onclick="addFlight()"><i class="fa-solid fa-plus"></i> Add Flight Schedule</button>
-                    </div>
-
                     <table class="data-table">
                         <thead>
                             <tr>
                                 <th>Flight No</th>
                                 <th>Airline</th>
-                                <th>Destination / Origin</th>
-                                <th>Schedule Time</th>
-                                <th>Gate</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Time</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="flightTableBody">
+                        <tbody>
                             <tr>
                                 <td>PK-302</td>
-                                <td>Pakistan International</td>
+                                <td>PIA (Pakistan Intl)</td>
                                 <td>Karachi (KHI)</td>
+                                <td>Islamabad (ISB)</td>
                                 <td>14:30 PKT</td>
-                                <td>Gate G-12</td>
                                 <td><span class="badge-status badge-green">In-Flight</span></td>
                             </tr>
                             <tr>
-                                <td>EK-612</td>
-                                <td>Emirates</td>
-                                <td>Dubai (DXB)</td>
-                                <td>15:10 PKT</td>
-                                <td>Gate G-15</td>
+                                <td>PA-402</td>
+                                <td>Airblue</td>
+                                <td>Lahore (LHE)</td>
+                                <td>Jeddah (JED)</td>
+                                <td>15:15 PKT</td>
                                 <td><span class="badge-status badge-yellow">Boarding</span></td>
                             </tr>
                             <tr>
-                                <td>QR-632</td>
-                                <td>Qatar Airways</td>
-                                <td>Doha (DOH)</td>
+                                <td>9P-801</td>
+                                <td>Fly Jinnah</td>
+                                <td>Islamabad (ISB)</td>
+                                <td>Quetta (UET)</td>
                                 <td>16:00 PKT</td>
-                                <td>Gate G-18</td>
                                 <td><span class="badge-status badge-blue">On Time</span></td>
+                            </tr>
+                            <tr>
+                                <td>ER-501</td>
+                                <td>SereneAir</td>
+                                <td>Peshawar (PEW)</td>
+                                <td>Dubai (DXB)</td>
+                                <td>17:30 PKT</td>
+                                <td><span class="badge-status badge-green">In-Flight</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TAB 4: GATES & TERMINAL -->
-            <div id="gates" class="tab-content">
-                <div class="section-title">Passenger Terminal & Departure Gate Management</div>
+            <!-- TAB 5: AIRLINES FLEET (WITH PICTURES) -->
+            <div id="airlines" class="tab-content">
+                <div class="section-title">Active Pakistan Airlines & Fleets</div>
                 <div class="grid">
-                    <div class="clickable-card">
-                        <label>Gate G-12 (Boeing 777)</label>
-                        <span style="color:#34d399; font-weight:bold;">Boarding Active</span>
-                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: PK-302 | Pax: 280/300</p>
-                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Close Gate</button>
+                    
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="PIA Plane">
+                        <div class="img-card-body">
+                            <div class="img-card-title">PIA (Pakistan International Airlines)</div>
+                            <div class="img-card-sub">
+                                <span>Boeing 777 & Airbus A320</span>
+                                <span style="color:#34d399;">30 Aircraft Active</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="clickable-card">
-                        <label>Gate G-15 (Airbus A380)</label>
-                        <span style="color:#fbbf24; font-weight:bold;">Final Call</span>
-                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: EK-612 | Pax: 410/450</p>
-                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Close Gate</button>
+
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1519074069444-1ba4eff56022?q=80&w=600&auto=format&fit=crop" alt="Airblue Plane">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Airblue</div>
+                            <div class="img-card-sub">
+                                <span>Airbus A320 & A321neo</span>
+                                <span style="color:#34d399;">12 Aircraft Active</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="clickable-card">
-                        <label>Gate G-18 (Airbus A350)</label>
-                        <span style="color:#38bdf8; font-weight:bold;">Scheduled</span>
-                        <p style="font-size:11px; color:#94a3b8; margin-top:4px;">Flight: QR-632 | Cleaning in progress</p>
-                        <button class="btn" style="margin-top:10px; padding:4px 8px; font-size:10px;" onclick="toggleGate(this)">Open Gate</button>
+
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1508873696983-2df515122519?q=80&w=600&auto=format&fit=crop" alt="Fly Jinnah">
+                        <div class="img-card-body">
+                            <div class="img-card-title">Fly Jinnah</div>
+                            <div class="img-card-sub">
+                                <span>Airbus A320 Fleet</span>
+                                <span style="color:#34d399;">5 Aircraft Active</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="img-card">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="SereneAir">
+                        <div class="img-card-body">
+                            <div class="img-card-title">SereneAir</div>
+                            <div class="img-card-sub">
+                                <span>Boeing 737 & Airbus A330</span>
+                                <span style="color:#34d399;">7 Aircraft Active</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- TAB 5: CARGO & AWB -->
-            <div id="cargo" class="tab-content">
-                <div class="section-title">Air Cargo & Freight Logistics Tracking (AWB)</div>
+            <!-- TAB 6: BAGGAGE & CARGO -->
+            <div id="baggage" class="tab-content">
+                <div class="section-title">Baggage RFID & Air Cargo Tracking (AWB)</div>
                 <div class="interactive-box">
-                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:10px;">Air Waybill Search Console</h3>
+                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:10px;">Air Waybill (AWB) Cargo Search</h3>
                     <div style="display:flex; gap:10px; margin-bottom:15px;">
-                        <input type="text" class="form-control" id="awbInput" placeholder="Enter AWB Number (e.g. AWB-9021)">
+                        <input type="text" class="form-control" id="awbInput" placeholder="Enter AWB Number (e.g. AWB-214-ISB)">
                         <button class="btn" onclick="trackAwb()"><i class="fa-solid fa-magnifying-glass"></i> Track Cargo</button>
                     </div>
                     <div id="awbResult" style="font-size:12px; color:#34d399;"></div>
-                </div>
-            </div>
-
-            <!-- TAB 6: BAGGAGE HUB -->
-            <div id="baggage" class="tab-content">
-                <div class="section-title">Baggage RFID Scanning & Claims Tracking Hub</div>
-                <div class="interactive-box">
-                    <h3 style="color:#38bdf8; font-size:14px; margin-bottom:10px;">Report Lost Baggage / Claim Form</h3>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-                        <input type="text" class="form-control" id="claimName" placeholder="Passenger Full Name">
-                        <input type="text" class="form-control" id="claimFlight" placeholder="Flight No (e.g. PK-302)">
-                    </div>
-                    <div style="margin-bottom:12px;">
-                        <input type="text" class="form-control" id="claimTag" placeholder="RFID Baggage Tag ID (e.g. ISB-84920)">
-                    </div>
-                    <button class="btn" onclick="submitClaim()"><i class="fa-solid fa-paper-plane"></i> Submit Baggage Claim</button>
-                    <div id="claimResult" style="margin-top:10px; font-size:12px; color:#34d399;"></div>
-                </div>
-            </div>
-
-            <!-- TAB 7: REFUELING -->
-            <div id="refuel" class="tab-content">
-                <div class="section-title">Ground Handling & Aviation Refueling Dispatch</div>
-                <div class="grid">
-                    <div class="clickable-card">
-                        <label>Fuel Truck Dispatcher #01</label>
-                        <span style="color:#34d399; font-weight:bold;">Refueling Flight EK-612 (Jet-A1)</span>
-                    </div>
-                    <div class="clickable-card">
-                        <label>Baggage Tug Fleet</label>
-                        <span style="color:#34d399; font-weight:bold;">18 / 20 Units Active</span>
-                    </div>
-                    <div class="clickable-card">
-                        <label>Catering Service Truck</label>
-                        <span style="color:#38bdf8; font-weight:bold;">Docked at Gate G-18</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 8: CUSTOMS & TSA -->
-            <div id="security" class="tab-content">
-                <div class="section-title">Customs, Border Control & Biometric Screening</div>
-                <div class="interactive-box">
-                    <div class="grid">
-                        <div class="clickable-card">
-                            <label>E-Gates Biometric Scanners</label>
-                            <span style="color:#34d399; font-weight:bold;">100% Operational (0 Queues)</span>
-                        </div>
-                        <div class="clickable-card">
-                            <label>AI X-Ray Threat Scanner</label>
-                            <span style="color:#34d399; font-weight:bold;">0 Threat Detected Today</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 9: EMERGENCY CFR -->
-            <div id="emergency" class="tab-content">
-                <div class="section-title">Crash Fire Rescue (CFR) & Airport Safety</div>
-                <div class="interactive-box" style="border-color:#ef4444;">
-                    <h3 style="color:#f87171; font-size:14px; margin-bottom:10px;">Runway Emergency Override Panel</h3>
-                    <button class="btn btn-danger" onclick="triggerEmergency()"><i class="fa-solid fa-bell"></i> TRIGGER RUNWAY ALARM PROTOCOL</button>
-                    <div id="emergencyStatus" style="margin-top:12px; font-size:12px;"></div>
-                </div>
-            </div>
-
-            <!-- TAB 10: DUTY-FREE POS -->
-            <div id="retail" class="tab-content">
-                <div class="section-title">Terminal Retail & Duty-Free POS Revenue Telemetry</div>
-                <div class="interactive-box">
-                    <div class="chart-container">
-                        <canvas id="retailChart"></canvas>
-                    </div>
                 </div>
             </div>
 
@@ -598,21 +668,13 @@
             <div class="section-title">Student Architect Profile</div>
             <div class="interactive-box">
                 <h2 style="color:#38bdf8; margin-bottom:10px;">Ome Robab</h2>
-                <p style="color:#cbd5e1; font-size:14px;">Lead Cloud & Airport Telemetry Architect at University of Chenab (UChenab).</p>
-                <div class="code-block">
-{
-  "student_name": "Ome Robab",
-  "role": "Lead AOMS System Architect",
-  "program": "BS Software Engineering (BSSE)",
-  "institution": "University of Chenab (UChenab)"
-}
-                </div>
+                <p style="color:#cbd5e1; font-size:14px;">Lead Software Engineer & Cloud Architect at University of Chenab (UChenab).</p>
             </div>
         </div>
         <div id="degree-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Degree Program</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3><p style="color:#cbd5e1; font-size:13px; margin-top:8px;">Focuses on distributed backend architectures, cloud serverless systems, and real-time aviation telemetry.</p></div>
+            <div class="interactive-box"><h3 style="color:#38bdf8;">BS Software Engineering (BSSE)</h3></div>
         </div>
         <div id="university-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
@@ -622,28 +684,25 @@
         <div id="course-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
             <div class="section-title">Project Scope</div>
-            <div class="interactive-box"><h3 style="color:#38bdf8;">Airport Operating Management System (AOMS)</h3></div>
-        </div>
-        <div id="status-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Gateway Status</div>
-            <div class="interactive-box"><h3 style="color:#34d399;">All International Airport Nodes Synchronized</h3></div>
+            <div class="interactive-box"><h3 style="color:#38bdf8;">Pakistan Civil Aviation & Airport Operating System</h3></div>
         </div>
 
-        <div id="airport-node-page" class="page-view">
+        <!-- Specific Airport Sub-Pages -->
+        <div id="isb-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Command Node</div>
-            <div class="interactive-box"><h3>Islamabad International Airport (ISB) Command Tower Active</h3></div>
+            <div class="section-title">Islamabad International Airport (ISB)</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">Primary Command Hub - Islamabad</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">Runways: 10L/28R & 10R/28L Active | Terminals: International & Domestic Connected.</p>
+            </div>
         </div>
-        <div id="airport-flight-page" class="page-view">
+        <div id="lhe-page" class="page-view">
             <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Aircraft Movements</div>
-            <div class="interactive-box"><h3>482 Total Commercial & Cargo Flights Tracked Today</h3></div>
-        </div>
-        <div id="airport-luggage-page" class="page-view">
-            <button class="back-btn" onclick="closePage()"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</button>
-            <div class="section-title">Baggage Telemetry</div>
-            <div class="interactive-box"><h3>RFID Automated Conveyor Belt Sorting Active with 0% Loss Ratio</h3></div>
+            <div class="section-title">Allama Iqbal International Airport, Lahore (LHE)</div>
+            <div class="interactive-box">
+                <h3 style="color:#38bdf8;">Lahore Central Hub Node</h3>
+                <p style="color:#cbd5e1; font-size:13px; margin-top:10px;">Runways: 36R/18L Active | Smart CAT-III Fog Landing System Operational.</p>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -681,7 +740,7 @@
 
         function drawRadar() {
             radarCanvas.width = radarCanvas.parentElement.clientWidth;
-            radarCanvas.height = 240;
+            radarCanvas.height = 250;
             const w = radarCanvas.width;
             const h = radarCanvas.height;
             const cx = w / 2;
@@ -702,9 +761,9 @@
             rc.stroke();
 
             const planes = [
-                {x: cx + 55, y: cy - 40, code: 'PK-302'},
-                {x: cx - 75, y: cy + 35, code: 'EK-612'},
-                {x: cx + 65, y: cy + 65, code: 'QR-632'}
+                {x: cx + 55, y: cy - 40, code: 'PIA-302'},
+                {x: cx - 75, y: cy + 35, code: 'AIRBLUE-402'},
+                {x: cx + 65, y: cy + 65, code: 'JINNAH-801'}
             ];
 
             planes.forEach(p => {
@@ -719,86 +778,16 @@
         }
         drawRadar();
 
-        // Retail Revenue Chart.js
-        const ctx = document.getElementById('retailChart').getContext('2d');
-        const retailChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Duty Free', 'Dining / Restaurants', 'VIP Lounges', 'Parking & Transport', 'Advertising'],
-                datasets: [{
-                    label: 'Hourly Revenue ($ USD)',
-                    data: [14200, 8900, 6500, 4300, 3100],
-                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
-                    borderColor: '#38bdf8',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                    y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
-                },
-                plugins: { legend: { labels: { color: '#f8fafc' } } }
-            }
-        });
-
-        // Functional Operations
-        function addFlight() {
-            const num = document.getElementById('newFlightNo').value;
-            const dest = document.getElementById('newDest').value;
-            if(num && dest) {
-                const tbody = document.getElementById('flightTableBody');
-                const row = tbody.insertRow(0);
-                row.innerHTML = `<td>${num}</td><td>Charter Flight</td><td>${dest}</td><td>18:00 PKT</td><td>Gate G-20</td><td><span class="badge-status badge-blue">On Time</span></td>`;
-                document.getElementById('newFlightNo').value = '';
-                document.getElementById('newDest').value = '';
-            }
-        }
-
-        function toggleGate(btn) {
-            const span = btn.previousElementSibling.previousElementSibling;
-            if(span.innerText.includes('Boarding') || span.innerText.includes('Final')) {
-                span.innerText = 'Gate Closed';
-                span.style.color = '#ef4444';
-                btn.innerText = 'Re-open Gate';
-            } else {
-                span.innerText = 'Boarding Active';
-                span.style.color = '#34d399';
-                btn.innerText = 'Close Gate';
-            }
-        }
-
         function trackAwb() {
             const input = document.getElementById('awbInput').value;
             const res = document.getElementById('awbResult');
             if(input) {
-                res.innerHTML = `AWB <strong>${input}</strong>: Status: Custom Cleared & Loaded in Cargo Hold Sector 4.`;
+                res.innerHTML = `AWB <strong>${input}</strong>: In Customs Transit at Islamabad Terminal. Cargo Status: Cleared.`;
             }
-        }
-
-        function submitClaim() {
-            const name = document.getElementById('claimName').value;
-            const flight = document.getElementById('claimFlight').value;
-            const tag = document.getElementById('claimTag').value;
-            const res = document.getElementById('claimResult');
-
-            if(name && flight && tag) {
-                const claimId = "CLM-" + Math.floor(10000 + Math.random() * 90000);
-                res.innerHTML = `Claim Registered Successfully! Tracking ID: <strong>${claimId}</strong>. Tracing RFID ${tag} across sorting line.`;
-            } else {
-                res.innerHTML = `<span style="color:#ef4444;">Please fill in all baggage claim fields.</span>`;
-            }
-        }
-
-        function triggerEmergency() {
-            const st = document.getElementById('emergencyStatus');
-            st.innerHTML = `<span style="color:#ef4444; font-weight:bold;"><i class="fa-solid fa-triangle-exclamation"></i> CRASH FIRE RESCUE (CFR) ALARM DISPATCHED! Units rolling out to Runway 10L.</span>`;
         }
 
         function changeHub(hub) {
-            alert(`Switched Command Hub to: ${hub.toUpperCase()}`);
+            alert(`Switched Control Tower Radar Node to: ${hub.toUpperCase()}`);
         }
     </script>
 </body>
