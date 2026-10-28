@@ -409,6 +409,7 @@
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6); }
         .btn-warning { background: linear-gradient(135deg, #d97706, #b45309) !important; box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4); }
         .btn-danger { background: linear-gradient(135deg, #dc2626, #b91c1c) !important; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4); }
+        .btn-success { background: linear-gradient(135deg, #059669, #047857) !important; box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4); }
 
         /* Modal Popup System */
         .modal-overlay {
@@ -501,8 +502,6 @@
             
             <!-- TAB 1: OVERVIEW -->
             <div id="overview" class="tab-content active">
-                
-                <!-- 1. System Command Metadata -->
                 <div class="section-title"><i class="fa-solid fa-terminal"></i> System Command Metadata</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('System Administrator Details', 'Ome Robab', 'Software Engineer & System Architect responsible for designing Pakistan Civil Aviation AOMS cloud console architecture.')">
@@ -523,7 +522,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Aviation Performance Indicators -->
                 <div class="section-title"><i class="fa-solid fa-chart-line"></i> Aviation Performance Indicators</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="switchTab('airports', document.querySelectorAll('.tab-btn')[1])">
@@ -544,7 +542,6 @@
                     </div>
                 </div>
 
-                <!-- 3. Live Aviation Weather Ticker -->
                 <div class="section-title"><i class="fa-solid fa-cloud-sun"></i> Live METAR & Weather Telemetry</div>
                 <div class="grid">
                     <div class="weather-card" onclick="showInfoModal('Islamabad METAR', 'ISB / OPIS Weather Report', 'Temperature: 24°C | Wind: 12 kts (North) | Visibility: 10 KM | CAT-III ILS Operational.')">
@@ -569,7 +566,6 @@
                     </div>
                 </div>
 
-                <!-- 4. Cloud Infrastructure & Server Diagnostics -->
                 <div class="section-title"><i class="fa-solid fa-server"></i> Cloud System Infrastructure Health</div>
                 <div class="grid">
                     <div class="clickable-card" onclick="showInfoModal('Cloud Edge Node Health', 'Vercel Serverless Edge', 'Status: 100% Operational | Response Latency: 12ms | Auto-Scaling Enabled.')">
@@ -586,7 +582,6 @@
                     </div>
                 </div>
 
-                <!-- 5. Quick Command Shortcuts -->
                 <div class="section-title"><i class="fa-solid fa-bolt"></i> Quick Aviation Command Shortcuts</div>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-top:10px;">
                     <button class="quick-btn" onclick="switchTab('booking', document.querySelectorAll('.tab-btn')[2])"><i class="fa-solid fa-ticket"></i> Issue Quick Ticket</button>
@@ -594,13 +589,11 @@
                     <button class="quick-btn" style="background:linear-gradient(135deg, #dc2626, #b91c1c);" onclick="switchTab('emergency', document.querySelectorAll('.tab-btn')[8])"><i class="fa-solid fa-triangle-exclamation"></i> CFR Emergency</button>
                     <button class="quick-btn" style="background:linear-gradient(135deg, #059669, #047857);" onclick="switchTab('manifest', document.querySelectorAll('.tab-btn')[5])"><i class="fa-solid fa-users"></i> View Passengers DB</button>
                 </div>
-
             </div>
 
             <!-- TAB 2: AIRPORTS HUB -->
             <div id="airports" class="tab-content">
                 <div class="section-title"><i class="fa-solid fa-building-ngo"></i> Major International Airports & Airfields of Pakistan</div>
-                
                 <div class="filter-container">
                     <input type="text" id="airportSearchInput" class="search-input" placeholder="Search by name, city, or code (ISB, Sialkot, LHE, KHI)..." onkeyup="filterAirports()">
                     <button class="filter-btn active" onclick="filterByProvince('all', this)">All Regions</button>
@@ -611,7 +604,6 @@
                 </div>
 
                 <div class="grid" id="airportGrid">
-                    
                     <div class="img-card" data-province="Punjab" data-search="islamabad isb opis iiap punjab" onclick="showFullInfoModal('Islamabad International Airport (ISB)', 'OPIS', 'Punjab', '14ms', 'Runway 10L/28R & 10R/28L Active', '24°C, Clear Sky', '28/32 Gates', 'PK-302 (Karachi), PA-402 (Jeddah), EK-612 (Dubai)', 'Primary Strategic Capital Hub with CAT-III ILS System.')">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
@@ -751,7 +743,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -936,17 +927,17 @@
                 </div>
             </div>
 
-            <!-- TAB 10: ADVANCED DUTY-FREE RETAIL POS -->
+            <!-- TAB 10: ADVANCED MULTI-ITEM DUTY-FREE RETAIL POS -->
             <div id="retail" class="tab-content">
-                <div class="section-title"><i class="fa-solid fa-shop"></i> Advanced Duty-Free Retail POS & Terminal Analytics</div>
+                <div class="section-title"><i class="fa-solid fa-shop"></i> Advanced Multi-Item Duty-Free POS & Terminal Analytics</div>
                 
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
-                    <!-- POS Billing System -->
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:20px;">
+                    <!-- POS Cart Checkout System -->
                     <div class="interactive-box" style="margin-top:0;">
-                        <h3 style="color:#38bdf8; font-size:14px; margin-bottom:12px;"><i class="fa-solid fa-cash-register"></i> Terminal Checkout Register</h3>
+                        <h3 style="color:#38bdf8; font-size:14px; margin-bottom:12px;"><i class="fa-solid fa-cart-shopping"></i> Tax-Free Terminal Cart Register</h3>
                         
                         <div style="margin-bottom:10px;">
-                            <label style="font-size:11px; color:#94a3b8;">Select Luxury Item / Duty-Free Good</label>
+                            <label style="font-size:11px; color:#94a3b8;">Select Luxury Duty-Free Item</label>
                             <select id="posItem" class="form-control">
                                 <option value="Luxury Perfume (Bleu de Chanel) | 120">Luxury Perfume (Bleu de Chanel) - $120</option>
                                 <option value="Swiss Automatic Watch (Tissot) | 450">Swiss Automatic Watch (Tissot) - $450</option>
@@ -956,15 +947,26 @@
                             </select>
                         </div>
 
-                        <div style="margin-bottom:15px;">
+                        <div style="margin-bottom:12px;">
                             <label style="font-size:11px; color:#94a3b8;">Quantity</label>
                             <input type="number" id="posQty" class="form-control" value="1" min="1" max="10">
                         </div>
 
-                        <button class="btn" onclick="addToCart()"><i class="fa-solid fa-cart-plus"></i> Add to Cart & Calculate</button>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn" style="flex:1;" onclick="addItemToCart()"><i class="fa-solid fa-plus"></i> Add Item</button>
+                            <button class="btn btn-danger" style="padding:10px 14px;" onclick="clearCart()"><i class="fa-solid fa-trash"></i></button>
+                        </div>
 
-                        <div id="cartReceipt" style="margin-top:15px; font-size:12px;">
-                            <span style="color:#94a3b8; font-style:italic;">No items added to current cart checkout.</span>
+                        <div style="margin-top:15px;">
+                            <label style="font-size:11px; color:#38bdf8; font-weight:bold;">Active Cart Items:</label>
+                            <div id="cartItemsList" style="max-height:130px; overflow-y:auto; margin-top:5px; border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:8px; font-size:11px; background:#030712;">
+                                <span style="color:#94a3b8; font-style:italic;">Cart is currently empty.</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:bold;">
+                            <span>Total Payable: <span id="cartTotalAmt" style="color:#34d399;">$0 USD</span></span>
+                            <button class="btn btn-success" onclick="checkoutCart()"><i class="fa-solid fa-credit-card"></i> Checkout & Print Slip</button>
                         </div>
                     </div>
 
@@ -1012,6 +1014,18 @@
             </div>
         </div>
 
+        <!-- Checkout Receipt Slip Modal -->
+        <div class="modal-overlay" id="receiptModal">
+            <div class="modal-box" style="max-width:450px;">
+                <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
+                <h2 style="color:#38bdf8; font-size:16px; margin-bottom:10px; text-align:center;"><i class="fa-solid fa-receipt"></i> Official Duty-Free Tax Receipt</h2>
+                <div class="interactive-box" id="receiptContent" style="font-size:12px; line-height:1.6;">
+                    <!-- Generated Slip HTML -->
+                </div>
+                <button class="btn" style="width:100%; margin-top:12px;" onclick="closeModal()">Close & Complete Sale</button>
+            </div>
+        </div>
+
         <!-- Footer -->
         <div class="footer">
             Designed, Formatted & Deployed by Ome Robab | Cloud Computing Assessment &copy; 2026
@@ -1022,6 +1036,7 @@
     <script>
         let bookingCount = 1;
         let missedCount = 0;
+        let cart = [];
 
         function switchTab(tabId, element) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1053,6 +1068,7 @@
         function closeModal() {
             document.getElementById('infoModal').classList.remove('active');
             document.getElementById('telemetryModal').classList.remove('active');
+            document.getElementById('receiptModal').classList.remove('active');
         }
 
         function filterAirports() {
@@ -1187,25 +1203,78 @@
             }
         }
 
-        // Advanced Duty-Free POS Add to Cart Logic
-        function addToCart() {
+        // Advanced Multi-Item Duty-Free POS Cart Functions
+        function addItemToCart() {
             const itemData = document.getElementById('posItem').value.split(' | ');
-            const itemName = itemData[0];
-            const itemPrice = parseFloat(itemData[1]);
+            const name = itemData[0];
+            const price = parseFloat(itemData[1]);
             const qty = parseInt(document.getElementById('posQty').value) || 1;
-            
-            const total = itemPrice * qty;
-            const invoiceNo = "POS-INV-" + Math.floor(100000 + Math.random() * 900000);
 
-            document.getElementById('cartReceipt').innerHTML = `
-                <div style="background:rgba(56, 189, 248, 0.15); border:1px solid #38bdf8; padding:12px; border-radius:10px; color:#f8fafc;">
-                    <div style="color:#38bdf8; font-weight:bold; margin-bottom:4px;"><i class="fa-solid fa-receipt"></i> Verified Tax-Free Invoice</div>
-                    Invoice No: <strong>${invoiceNo}</strong><br>
-                    Item: <strong>${itemName}</strong><br>
-                    Qty: <strong>${qty}</strong> | Unit Price: <strong>$${itemPrice}</strong><br>
-                    <div style="margin-top:6px; font-size:13px; color:#34d399; font-weight:bold;">Total Amount: $${total} USD (Paid & Cleared)</div>
-                </div>
+            cart.push({ name, price, qty });
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const listEl = document.getElementById('cartItemsList');
+            const totalEl = document.getElementById('cartTotalAmt');
+
+            if(cart.length === 0) {
+                listEl.innerHTML = `<span style="color:#94a3b8; font-style:italic;">Cart is currently empty.</span>`;
+                totalEl.innerText = `$0 USD`;
+                return;
+            }
+
+            let html = "";
+            let grandTotal = 0;
+
+            cart.forEach((item, index) => {
+                let sub = item.price * item.qty;
+                grandTotal += sub;
+                html += `<div>• ${item.name} (x${item.qty}) - <strong>$${sub}</strong></div>`;
+            });
+
+            listEl.innerHTML = html;
+            totalEl.innerText = `$${grandTotal} USD`;
+        }
+
+        function checkoutCart() {
+            if(cart.length === 0) {
+                alert("Please add items to cart before checking out!");
+                return;
+            }
+
+            let grandTotal = 0;
+            let itemsHtml = "";
+            cart.forEach(item => {
+                let sub = item.price * item.qty;
+                grandTotal += sub;
+                itemsHtml += `<li>${item.name} (Qty: ${item.qty}) - $${sub}</li>`;
+            });
+
+            const invNo = "POS-TAXFREE-" + Math.floor(100000 + Math.random() * 900000);
+            const taxSaved = Math.round(grandTotal * 0.17); // 17% VAT exempt savings
+
+            document.getElementById('receiptContent').innerHTML = `
+                <p><strong>Invoice Reference:</strong> ${invNo}</p>
+                <p><strong>Terminal Node:</strong> Pakistan International Duty-Free Hub</p>
+                <hr style="border-color:rgba(255,255,255,0.1); margin:8px 0;">
+                <ul style="padding-left:15px; margin-bottom:8px;">
+                    ${itemsHtml}
+                </ul>
+                <hr style="border-color:rgba(255,255,255,0.1); margin:8px 0;">
+                <p><strong>Gross Subtotal:</strong> $${grandTotal} USD</p>
+                <p style="color:#34d399;"><strong>Duty-Free VAT Exemption Saved:</strong> +$${taxSaved} USD</p>
+                <p style="font-size:14px; color:#38bdf8; margin-top:6px;"><strong>Final Paid Amount: $${grandTotal} USD</strong></p>
             `;
+
+            document.getElementById('receiptModal').classList.add('active');
+            cart = [];
+            updateCartUI();
         }
 
         // Fixed Web Audio API Emergency Siren Generator (Resumes context on click)
