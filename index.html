@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise Cloud Architecture Dashboard - Ome Robab</title>
+    <!-- FontAwesome & Chart.js for Dynamic Visualizations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -21,10 +24,10 @@
             padding: 30px 15px;
         }
         .container {
-            background: rgba(11, 17, 32, 0.9);
+            background: rgba(11, 17, 32, 0.95);
             backdrop-filter: blur(25px);
             width: 100%;
-            max-width: 1000px;
+            max-width: 1150px;
             border-radius: 24px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 40px rgba(56, 189, 248, 0.15);
             overflow: hidden;
@@ -38,7 +41,7 @@
         .header {
             background: linear-gradient(135deg, #0284c7, #2563eb, #7c3aed);
             color: white;
-            padding: 45px 30px;
+            padding: 40px 30px;
             text-align: center;
             position: relative;
             box-shadow: inset 0 -10px 25px rgba(0, 0, 0, 0.3);
@@ -84,7 +87,7 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
         .content {
-            padding: 40px;
+            padding: 35px;
         }
         .section-title {
             font-size: 13px;
@@ -96,13 +99,18 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .section-title:first-child {
             margin-top: 0;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 16px;
         }
         .info-card {
@@ -139,6 +147,128 @@
             color: #34d399 !important;
             font-weight: 700 !important;
         }
+        
+        .interactive-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .chart-container {
+            position: relative;
+            height: 220px;
+            width: 100%;
+        }
+        .terminal {
+            background: #050811;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            color: #38bdf8;
+            height: 140px;
+            overflow-y: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+        .terminal-line {
+            margin-bottom: 4px;
+            word-break: break-all;
+        }
+        .terminal-success { color: #34d399; }
+        .terminal-warn { color: #fbbf24; }
+
+        .control-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .toggle-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #94a3b8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #fff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #1e293b;
+            outline: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            box-shadow: 0 0 8px #38bdf8;
+        }
+
+        /* Animated Topology Canvas */
+        #archCanvas {
+            width: 100%;
+            height: 180px;
+            background: #030712;
+            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        /* Progress Bar for Pipeline */
+        .progress-bar-bg {
+            width: 100%;
+            background: #1e293b;
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #34d399);
+            transition: width 0.3s ease;
+        }
+
+        /* Table Styling */
+        .deploy-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .deploy-table th, .deploy-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .deploy-table th {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
@@ -153,45 +283,19 @@
             font-size: 12px;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .workflow-box {
-            background: rgba(7, 11, 20, 0.8);
-            border: 1px dashed rgba(56, 189, 248, 0.3);
-            padding: 24px;
-            border-radius: 16px;
-        }
-        .workflow-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 16px;
-            font-size: 13px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-        .workflow-step:last-child {
-            margin-bottom: 0;
-        }
-        .step-num {
-            background: linear-gradient(135deg, #0284c7, #2563eb);
-            color: white;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-            margin-right: 14px;
-            flex-shrink: 0;
-            margin-top: 2px;
-            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        .tech-tag:hover {
+            border-color: #38bdf8;
+            transform: scale(1.05);
         }
         .btn-group {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-top: 30px;
+            flex-wrap: wrap;
         }
         .btn {
             background: linear-gradient(135deg, #0284c7, #2563eb);
@@ -203,6 +307,11 @@
             font-size: 13px;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -217,6 +326,15 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             letter-spacing: 0.5px;
         }
+        select {
+            background: #0f172a;
+            color: #38bdf8;
+            border: 1px solid #38bdf8;
+            padding: 5px 10px;
+            border-radius: 6px;
+            outline: none;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -226,7 +344,7 @@
         <div class="header">
             <h1>Cloud Computing Assignment Portfolio</h1>
             <p>Automated Enterprise Infrastructure & Continuous Deployment (CI/CD)</p>
-            <div class="status-badge">
+            <div class="status-badge" id="statusBadge">
                 <span class="dot"></span> Live Deployment Active on Vercel Edge Network
             </div>
         </div>
@@ -263,136 +381,155 @@
                 </div>
             </div>
 
-            <!-- System Live Metrics -->
-            <div class="section-title">Live Server & Resource Metrics</div>
+            <!-- Dynamic Network & Architecture Simulation -->
+            <div class="section-title">
+                Live Enterprise Architecture Traffic Visualizer
+                <div>
+                    <label style="font-size:11px; color:#94a3b8; margin-right:5px;">Edge Region:</label>
+                    <select id="regionSelect" onchange="changeRegion(this.value)">
+                        <option value="us">US-East (N. Virginia) - 14ms</option>
+                        <option value="eu">EU-Central (Frankfurt) - 42ms</option>
+                        <option value="asia">AP-South (Mumbai) - 88ms</option>
+                    </select>
+                </div>
+            </div>
+            <div class="interactive-box">
+                <canvas id="archCanvas"></canvas>
+            </div>
+
+            <!-- Dynamic Live Metrics & Interactive Graph -->
+            <div class="section-title">
+                Live Server & Telemetry Metrics
+                <button class="toggle-btn" id="pingBtn" onclick="runPingTest()"><i class="fa-solid fa-bolt"></i> Run Ping Test</button>
+            </div>
             <div class="grid">
                 <div class="info-card">
-                    <label>Edge Network Latency</label>
-                    <span class="metric-value">14 ms (Optimal)</span>
+                    <label>Edge Latency</label>
+                    <span class="metric-value" id="latencyVal">14 ms (Optimal)</span>
                 </div>
                 <div class="info-card">
                     <label>Server Uptime Status</label>
-                    <span class="metric-value">99.99% Operational</span>
+                    <span class="metric-value" id="uptimeVal">99.99%</span>
                 </div>
                 <div class="info-card">
-                    <label>Bandwidth Utilization</label>
-                    <span class="metric-value">Unmetered Global CDN</span>
+                    <label>Requests Processed</label>
+                    <span class="metric-value" id="reqVal">12,840</span>
                 </div>
                 <div class="info-card">
-                    <label>SSL Certificate Health</label>
-                    <span class="metric-value">100% Valid & Active</span>
-                </div>
-            </div>
-
-            <!-- Cloud Infrastructure Details -->
-            <div class="section-title">Cloud Infrastructure & Environment Specs</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Repository ID</label>
-                    <span>cloud-project</span>
-                </div>
-                <div class="info-card">
-                    <label>Hosting Ecosystem</label>
-                    <span>Vercel Edge Network (Global CDN)</span>
-                </div>
-                <div class="info-card">
-                    <label>Deployment Pipeline</label>
-                    <span>Git Webhook Continuous Integration (CI/CD)</span>
-                </div>
-                <div class="info-card">
-                    <label>Security Standards</label>
-                    <span>TLS/SSL Certified (Automated HTTPS)</span>
-                </div>
-                <div class="info-card">
-                    <label>Server Edge Region</label>
-                    <span>Global Anycast CDN Distribution</span>
-                </div>
-                <div class="info-card">
-                    <label>System Architecture</label>
-                    <span>Serverless Edge Microservices</span>
+                    <label>CPU Utilization</label>
+                    <span class="metric-value" id="cpuVal">12%</span>
                 </div>
             </div>
 
-            <!-- Performance Metrics & DevOps Stats -->
-            <div class="section-title">DevOps Performance & Build Metrics</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Build Compilation Time</label>
-                    <span>&lt; 3.5 Seconds (Optimized)</span>
-                </div>
-                <div class="info-card">
-                    <label>Deployment Triggers</label>
-                    <span>Automated Push Event Integration</span>
-                </div>
-                <div class="info-card">
-                    <label>Version Control Branch</label>
-                    <span>Main Production Branch</span>
-                </div>
-                <div class="info-card">
-                    <label>Cache Policy</label>
-                    <span>Smart Edge Caching Enabled</span>
+            <!-- Real-time Chart -->
+            <div class="interactive-box">
+                <label style="font-size: 12px; color: #94a3b8; font-weight: 700; margin-bottom: 10px; display: block;">
+                    <i class="fa-solid fa-chart-line"></i> REAL-TIME TRAFFIC & BANDWIDTH (LIVE STREAM)
+                </label>
+                <div class="chart-container">
+                    <canvas id="telemetryChart"></canvas>
                 </div>
             </div>
 
-            <!-- Cloud Security & Compliance -->
-            <div class="section-title">Cloud Security & Governance</div>
-            <div class="grid">
-                <div class="info-card">
-                    <label>Data Encryption</label>
-                    <span>End-to-End Transport Layer Security</span>
+            <!-- Interactive Pipeline & Trigger Simulator -->
+            <div class="section-title">
+                Interactive CI/CD Deployment Engine
+                <button class="btn" style="padding: 6px 14px; font-size: 11px;" onclick="triggerPipeline()">
+                    <i class="fa-solid fa-play"></i> Trigger CI/CD Pipeline
+                </button>
+            </div>
+            
+            <div class="interactive-box">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="pipeProgress"></div>
                 </div>
-                <div class="info-card">
-                    <label>Access Control</label>
-                    <span>Role-Based Git Authentication</span>
+                <div class="terminal" id="terminalLog">
+                    <div class="terminal-line">[SYSTEM] Cloud architecture initialized. System standby.</div>
+                    <div class="terminal-line terminal-success">[SUCCESS] Global CDN Nodes connected (12 Regions).</div>
                 </div>
-                <div class="info-card">
-                    <label>Disaster Recovery</label>
-                    <span>Automated Snapshot Backups</span>
+
+                <table class="deploy-table">
+                    <thead>
+                        <tr>
+                            <th>Deployment ID</th>
+                            <th>Trigger</th>
+                            <th>Status</th>
+                            <th>Build Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deployHistory">
+                        <tr>
+                            <td>#dep-9482</td>
+                            <td>Git Commit (main)</td>
+                            <td style="color:#34d399;">Success</td>
+                            <td>2.8s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Cloud Infrastructure & Security Controls -->
+            <div class="section-title">Infrastructure Controls & Security Toggles</div>
+            <div class="interactive-box">
+                <div class="control-group">
+                    <div>
+                        <span style="font-size: 13px; font-weight: 600;">DDoS Shield Protection:</span>
+                        <button class="toggle-btn active" id="ddosBtn" onclick="toggleSecurity('ddosBtn')">ENABLED</button>
+                    </div>
+                    <div>
+                        <span style="font-size: 13px; font-weight: 600;">Edge Smart Caching:</span>
+                        <button class="toggle-btn active" id="cacheBtn" onclick="toggleSecurity('cacheBtn')">ENABLED</button>
+                    </div>
+                    <div>
+                        <span style="font-size: 13px; font-weight: 600;">Auto-Scaling Group:</span>
+                        <button class="toggle-btn active" id="scaleBtn" onclick="toggleSecurity('scaleBtn')">ACTIVE</button>
+                    </div>
                 </div>
-                <div class="info-card">
-                    <label>Compliance Status</label>
-                    <span>Enterprise Web Standards Met</span>
+            </div>
+
+            <!-- Dynamic Multi-Provider Cost Calculator -->
+            <div class="section-title">Interactive Multi-Cloud Cost Estimator</div>
+            <div class="interactive-box">
+                <div class="slider-container">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1;">
+                        <span>Monthly Traffic Volume: <strong id="trafficText">500 GB</strong></span>
+                    </div>
+                    <input type="range" min="100" max="10000" value="500" class="slider" id="trafficSlider" oninput="calculateCost(this.value)">
+                    <div class="grid" style="margin-top: 10px;">
+                        <div class="info-card" style="border-left-color: #38bdf8;">
+                            <label>Vercel Edge</label>
+                            <span id="costVercel" style="color:#34d399; font-weight:700;">$12.50 / mo</span>
+                        </div>
+                        <div class="info-card" style="border-left-color: #f59e0b;">
+                            <label>AWS CloudFront</label>
+                            <span id="costAWS" style="color:#f59e0b; font-weight:700;">$42.50 / mo</span>
+                        </div>
+                        <div class="info-card" style="border-left-color: #f43f5e;">
+                            <label>Cloudflare Pages</label>
+                            <span id="costCF" style="color:#f43f5e; font-weight:700;">$0.00 / mo</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Technology Stack -->
             <div class="section-title">Core Technical Stack & Skills</div>
             <div class="tech-stack">
-                <span class="tech-tag">HTML5 Markup Structure</span>
-                <span class="tech-tag">Advanced CSS3 Animations</span>
-                <span class="tech-tag">Git Version Control System</span>
-                <span class="tech-tag">GitHub Cloud Repository</span>
-                <span class="tech-tag">Vercel Edge Platform</span>
-                <span class="tech-tag">Continuous Integration (CI/CD)</span>
-                <span class="tech-tag">Serverless Deployment</span>
-                <span class="tech-tag">Responsive UI/UX Design</span>
-            </div>
-
-            <!-- System Architecture Pipeline -->
-            <div class="section-title">End-to-End Cloud Deployment Workflow</div>
-            <div class="workflow-box">
-                <div class="workflow-step">
-                    <div class="step-num">1</div>
-                    <div><strong>Local Source Code Authoring:</strong> Designed semantic UI structure and custom CSS dark-themed styling files locally.</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-num">2</div>
-                    <div><strong>Version Control Commit:</strong> Committed changes and pushed the code to the primary branch of the <code>cloud-project</code> GitHub repository.</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-num">3</div>
-                    <div><strong>Automated CI/CD Trigger:</strong> Vercel's automated Git integration detected code changes and initiated an instant build lifecycle.</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-num">4</div>
-                    <div><strong>Global Edge Distribution:</strong> Compiled assets were automatically pushed to high-speed CDN edge nodes worldwide.</div>
-                </div>
+                <span class="tech-tag" onclick="logTech('HTML5 Markup')"><i class="fa-brands fa-html5"></i> HTML5 Markup</span>
+                <span class="tech-tag" onclick="logTech('Advanced CSS3')"><i class="fa-brands fa-css3-alt"></i> CSS3 Animations</span>
+                <span class="tech-tag" onclick="logTech('Git VCS')"><i class="fa-brands fa-git-alt"></i> Git Version Control</span>
+                <span class="tech-tag" onclick="logTech('GitHub Ecosystem')"><i class="fa-brands fa-github"></i> GitHub Cloud Repo</span>
+                <span class="tech-tag" onclick="logTech('Vercel Edge Network')"><i class="fa-solid fa-bolt"></i> Vercel Edge</span>
+                <span class="tech-tag" onclick="logTech('CI/CD Automation')"><i class="fa-solid fa-gears"></i> Continuous Integration</span>
+                <span class="tech-tag" onclick="logTech('Serverless Edge')"><i class="fa-solid fa-server"></i> Serverless Architecture</span>
             </div>
 
             <!-- Action Buttons -->
             <div class="btn-group">
-                <a href="https://github.com" target="_blank" class="btn">View GitHub Repository</a>
-                <a href="#" class="btn" style="background: linear-gradient(135deg, #059669, #10b981);">System Status: Operational</a>
+                <a href="https://github.com" target="_blank" class="btn"><i class="fa-brands fa-github"></i> View GitHub Repo</a>
+                <button class="btn" style="background: linear-gradient(135deg, #059669, #10b981);" onclick="checkSystemStatus()">
+                    <i class="fa-solid fa-circle-check"></i> System Status: Operational
+                </button>
             </div>
 
         </div>
@@ -403,5 +540,220 @@
         </div>
     </div>
 
+    <!-- Advanced JavaScript logic -->
+    <script>
+        // 1. Chart.js Initialization
+        const ctx = document.getElementById('telemetryChart').getContext('2d');
+        const telemetryChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['12:00', '12:05', '12:10', '12:15', '12:20', '12:25', '12:30'],
+                datasets: [{
+                    label: 'Bandwidth (MB/s)',
+                    data: [12, 19, 15, 25, 22, 30, 28],
+                    borderColor: '#38bdf8',
+                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Latency (ms)',
+                    data: [15, 14, 16, 13, 14, 12, 14],
+                    borderColor: '#34d399',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                },
+                plugins: {
+                    legend: { labels: { color: '#f8fafc' } }
+                }
+            }
+        });
+
+        // 2. Real-time Telemetry Updates
+        let requestCount = 12840;
+        let baseLatency = 14;
+
+        setInterval(() => {
+            requestCount += Math.floor(Math.random() * 15) + 1;
+            document.getElementById('reqVal').innerText = requestCount.toLocaleString();
+
+            const currentLatency = baseLatency + Math.floor(Math.random() * 4) - 2;
+            document.getElementById('latencyVal').innerText = currentLatency + " ms";
+
+            document.getElementById('cpuVal').innerText = (Math.floor(Math.random() * 10) + 10) + "%";
+
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            telemetryChart.data.labels.shift();
+            telemetryChart.data.labels.push(now);
+            
+            telemetryChart.data.datasets[0].data.shift();
+            telemetryChart.data.datasets[0].data.push(Math.floor(Math.random() * 20) + 15);
+            
+            telemetryChart.data.datasets[1].data.shift();
+            telemetryChart.data.datasets[1].data.push(currentLatency);
+
+            telemetryChart.update('quiet');
+        }, 3000);
+
+        // 3. Live Architecture Canvas Animation
+        const canvas = document.getElementById('archCanvas');
+        const c = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 180;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let packets = [];
+        for(let i=0; i<5; i++) {
+            packets.push({ x: Math.random() * 100, speed: 1.5 + Math.random() });
+        }
+
+        function drawArchitecture() {
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const nodes = [
+                { label: 'Client', x: w * 0.15, y: h / 2, color: '#38bdf8' },
+                { label: 'DNS / CDN', x: w * 0.4, y: h / 2, color: '#818cf8' },
+                { label: 'Vercel Edge', x: w * 0.65, y: h / 2, color: '#34d399' },
+                { label: 'Serverless DB', x: w * 0.88, y: h / 2, color: '#f59e0b' }
+            ];
+
+            // Connect Lines
+            c.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+            c.lineWidth = 2;
+            c.beginPath();
+            c.moveTo(nodes[0].x, nodes[0].y);
+            c.lineTo(nodes[3].x, nodes[3].y);
+            c.stroke();
+
+            // Draw Packets Animation
+            packets.forEach(p => {
+                p.x += p.speed;
+                if(p.x > w * 0.88) p.x = w * 0.15;
+
+                c.fillStyle = '#34d399';
+                c.shadowBlur = 10;
+                c.shadowColor = '#34d399';
+                c.beginPath();
+                c.arc(p.x, h / 2, 4, 0, Math.PI * 2);
+                c.fill();
+                c.shadowBlur = 0;
+            });
+
+            // Draw Nodes
+            nodes.forEach(n => {
+                c.fillStyle = '#0f172a';
+                c.strokeStyle = n.color;
+                c.lineWidth = 3;
+                c.beginPath();
+                c.arc(n.x, n.y, 18, 0, Math.PI * 2);
+                c.fill();
+                c.stroke();
+
+                c.fillStyle = '#f8fafc';
+                c.font = '10px Segoe UI';
+                c.textAlign = 'center';
+                c.fillText(n.label, n.x, n.y + 32);
+            });
+
+            requestAnimationFrame(drawArchitecture);
+        }
+        drawArchitecture();
+
+        // 4. Region Selector Logic
+        function changeRegion(region) {
+            if(region === 'us') baseLatency = 14;
+            if(region === 'eu') baseLatency = 42;
+            if(region === 'asia') baseLatency = 88;
+            addLog(`Switched primary CDN edge region to: ${region.toUpperCase()}`, "warn");
+        }
+
+        // 5. Terminal Logger
+        function addLog(message, type = '') {
+            const terminal = document.getElementById('terminalLog');
+            const line = document.createElement('div');
+            line.className = 'terminal-line ' + (type === 'success' ? 'terminal-success' : type === 'warn' ? 'terminal-warn' : '');
+            line.innerText = `[${new Date().toLocaleTimeString()}] ${message}`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        // 6. Interactive CI/CD Build Simulator with Progress Bar
+        function triggerPipeline() {
+            const progress = document.getElementById('pipeProgress');
+            progress.style.width = '0%';
+            addLog("Triggering manual Git Webhook deployment...", "warn");
+            
+            setTimeout(() => { progress.style.width = '30%'; addLog("Fetching latest commits from 'main' branch..."); }, 600);
+            setTimeout(() => { progress.style.width = '70%'; addLog("Compiling static assets and running optimizations..."); }, 1500);
+            setTimeout(() => { 
+                progress.style.width = '100%'; 
+                addLog("DEPLOYMENT SUCCESSFUL! Build live across global nodes.", "success");
+
+                // Add to history table
+                const table = document.getElementById('deployHistory');
+                const row = table.insertRow(0);
+                const id = "#dep-" + Math.floor(1000 + Math.random() * 9000);
+                row.innerHTML = `<td>${id}</td><td>Manual Trigger</td><td style="color:#34d399;">Success</td><td>2.4s</td>`;
+            }, 2500);
+        }
+
+        // 7. Ping Test Function
+        function runPingTest() {
+            const btn = document.getElementById('pingBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testing...';
+            setTimeout(() => {
+                const ms = baseLatency + Math.floor(Math.random() * 3);
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> ${ms} ms`;
+                addLog(`Ping test completed. Node Latency: ${ms}ms`, "success");
+            }, 800);
+        }
+
+        // 8. Security Toggles
+        function toggleSecurity(id) {
+            const btn = document.getElementById(id);
+            if (btn.classList.contains('active')) {
+                btn.classList.remove('active');
+                btn.innerText = 'DISABLED';
+                addLog(`Security Module [${id.replace('Btn', '').toUpperCase()}] Disabled`, 'warn');
+            } else {
+                btn.classList.add('active');
+                btn.innerText = 'ACTIVE';
+                addLog(`Security Module [${id.replace('Btn', '').toUpperCase()}] Activated`, 'success');
+            }
+        }
+
+        // 9. Cost Calculator for Multiple Clouds
+        function calculateCost(gb) {
+            document.getElementById('trafficText').innerText = gb + ' GB';
+            document.getElementById('costVercel').innerText = `$${(gb * 0.025).toFixed(2)} / mo`;
+            document.getElementById('costAWS').innerText = `$${(gb * 0.085).toFixed(2)} / mo`;
+            document.getElementById('costCF').innerText = `$0.00 / mo (Free Tier)`;
+        }
+
+        // 10. Tech Tag Logging
+        function logTech(techName) {
+            addLog(`Inspecting module configuration: ${techName}`, 'success');
+        }
+
+        // 11. System Status Alert
+        function checkSystemStatus() {
+            alert("All global edge nodes are operating normally with 99.99% SLA uptime.");
+        }
+    </script>
 </body>
 </html>
