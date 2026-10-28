@@ -175,6 +175,40 @@
             font-weight: 600;
         }
 
+        .weather-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .weather-card:hover {
+            transform: translateY(-3px);
+            border-color: #34d399;
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .quick-btn {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
         .img-card {
             background: rgba(15, 23, 42, 0.85);
             border-radius: 16px;
@@ -429,7 +463,7 @@
         <div class="header">
             <h1>Pakistan Civil Aviation & Full Airport Operating System (AOMS)</h1>
             <p>Enterprise Infrastructure, Reservation Engine, Refueling & Emergency Command by Ome Robab</p>
-            <div class="status-badge">
+            <div class="status-badge" onclick="showInfoModal('Aviation Network Status', '9 Major International Nodes Online', 'Islamabad, Lahore, Karachi, Sialkot, Peshawar, Quetta, Multan, Faisalabad, Gwadar connected via Vercel Edge Cloud System.')">
                 <span class="dot"></span> All Major Pakistan Airports Live & Connected
             </div>
         </div>
@@ -451,50 +485,105 @@
         <!-- MAIN DASHBOARD CONTENT -->
         <div class="content" id="dashboardContent">
             
-            <!-- TAB 1: OVERVIEW -->
+            <!-- TAB 1: OVERVIEW (ADVANCED & INTERACTIVE) -->
             <div id="overview" class="tab-content active">
-                <div class="section-title">Academic Credentials</div>
+                
+                <!-- 1. System Command Metadata -->
+                <div class="section-title">System Command Metadata</div>
                 <div class="grid">
-                    <div class="clickable-card">
-                        <label>Student Name</label>
+                    <div class="clickable-card" onclick="showInfoModal('System Administrator Details', 'Ome Robab', 'Software Engineer & System Architect responsible for designing Pakistan Civil Aviation AOMS cloud console architecture.')">
+                        <label>System Administrator</label>
                         <span>Ome Robab</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Degree Program</label>
-                        <span>BS Software Engineering</span>
+                    <div class="clickable-card" onclick="showInfoModal('Console Architecture', 'Enterprise Cloud & AOMS', 'Built with single-page Client Rendering Engine, Chart.js POS analytics, HTML5 Radar Canvas, and real-time PNR Generation algorithm.')">
+                        <label>Console Architecture</label>
+                        <span>Enterprise Cloud & AOMS</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Institution</label>
-                        <span>University of Chenab</span>
+                    <div class="clickable-card" onclick="showInfoModal('Civil Aviation Authority', 'National Command Hub', 'Centralized telemetry hub managing flight schedules, fuel hydrant systems, and emergency dispatch protocols across Pakistan.')">
+                        <label>Civil Aviation Authority</label>
+                        <span>National Command Hub</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Project Scope</label>
-                        <span>Pakistan Civil Aviation AOMS</span>
+                    <div class="clickable-card" onclick="showInfoModal('System Deployment Status', 'Fully Operational - Node 9', 'All 9 primary international airport telemetry nodes are online with average response latency below 20ms.')">
+                        <label>System Deployment Status</label>
+                        <span>Fully Operational - Node 9</span>
                     </div>
                 </div>
 
+                <!-- 2. Aviation Performance Indicators -->
                 <div class="section-title">Aviation Performance Indicators</div>
                 <div class="grid">
-                    <div class="clickable-card">
+                    <div class="clickable-card" onclick="switchTab('airports', document.querySelectorAll('.tab-btn')[1])">
                         <label>Connected Airports</label>
-                        <span style="color:#34d399; font-weight:bold;">Major Airports Active</span>
+                        <span style="color:#34d399; font-weight:bold;">9 Major Airports Active</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Bookings Count</label>
-                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;">1 Live Booking</span>
+                    <div class="clickable-card" onclick="switchTab('manifest', document.querySelectorAll('.tab-btn')[5])">
+                        <label>Bookings Engine Status</label>
+                        <span id="bookingCountText" style="color:#38bdf8; font-weight:bold;">Live PNR Engine Active</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Missed Claims Handled</label>
-                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;">0 Claims Active</span>
+                    <div class="clickable-card" onclick="switchTab('missed', document.querySelectorAll('.tab-btn')[3])">
+                        <label>Missed Claims Desk</label>
+                        <span id="missedCountText" style="color:#fbbf24; font-weight:bold;">Standby & Refund Online</span>
                     </div>
-                    <div class="clickable-card">
-                        <label>Jet-A1 Fuel Capacity</label>
-                        <span style="color:#34d399; font-weight:bold;">1.2M Liters</span>
+                    <div class="clickable-card" onclick="switchTab('refuel', document.querySelectorAll('.tab-btn')[7])">
+                        <label>Jet-A1 Fuel Stock</label>
+                        <span style="color:#34d399; font-weight:bold;">1.2M Liters (Hydrant Ready)</span>
                     </div>
                 </div>
+
+                <!-- 3. Live Aviation Weather Ticker -->
+                <div class="section-title">Live METAR & Weather Telemetry</div>
+                <div class="grid">
+                    <div class="weather-card" onclick="showInfoModal('Islamabad METAR', 'ISB / OPIS Weather Report', 'Temperature: 24°C | Wind: 12 kts (North) | Visibility: 10 KM | CAT-III ILS Operational.')">
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Islamabad (ISB)</div>
+                        <div style="font-size:16px; font-weight:700; margin:4px 0;">24°C <i class="fa-solid fa-sun" style="color:#fbbf24;"></i></div>
+                        <div style="font-size:11px; color:#94a3b8;">Wind 12 kts | Clear Sky</div>
+                    </div>
+                    <div class="weather-card" onclick="showInfoModal('Lahore METAR', 'LHE / OPLA Weather Report', 'Temperature: 22°C | Wind: 8 kts | Mild Haze | Smart Fog Landing System Standby.')">
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Lahore (LHE)</div>
+                        <div style="font-size:16px; font-weight:700; margin:4px 0;">22°C <i class="fa-solid fa-smog" style="color:#94a3b8;"></i></div>
+                        <div style="font-size:11px; color:#94a3b8;">Wind 8 kts | Mild Haze</div>
+                    </div>
+                    <div class="weather-card" onclick="showInfoModal('Karachi METAR', 'KHI / OPKC Weather Report', 'Temperature: 29°C | Coastal Wind: 16 kts | Humidity: 65% | Optimal Flight Operations.')">
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Karachi (KHI)</div>
+                        <div style="font-size:16px; font-weight:700; margin:4px 0;">29°C <i class="fa-solid fa-wind" style="color:#38bdf8;"></i></div>
+                        <div style="font-size:11px; color:#94a3b8;">Coastal Wind 16 kts</div>
+                    </div>
+                    <div class="weather-card" onclick="showInfoModal('Sialkot METAR', 'SKT / OPST Weather Report', 'Temperature: 23°C | Wind: 10 kts | Visibility: 10 KM | Export Cargo Flight Ready.')">
+                        <div style="font-size:12px; color:#38bdf8; font-weight:bold;">Sialkot (SKT)</div>
+                        <div style="font-size:16px; font-weight:700; margin:4px 0;">23°C <i class="fa-solid fa-cloud-sun" style="color:#fbbf24;"></i></div>
+                        <div style="font-size:11px; color:#94a3b8;">Wind 10 kts | Clear</div>
+                    </div>
+                </div>
+
+                <!-- 4. Cloud Infrastructure & Server Diagnostics -->
+                <div class="section-title">Cloud System Infrastructure Health</div>
+                <div class="grid">
+                    <div class="clickable-card" onclick="showInfoModal('Cloud Edge Node Health', 'Vercel Serverless Edge', 'Status: 100% Operational | Response Latency: 12ms | Auto-Scaling Enabled.')">
+                        <label>Server Edge Uptime</label>
+                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-server"></i> 100% Edge Active</span>
+                    </div>
+                    <div class="clickable-card" onclick="showInfoModal('Database Sync Diagnostic', 'Real-time Passenger Sync', 'PNR Database connected via JavaScript memory array with instant Manifest view.')">
+                        <label>Database Sync Protocol</label>
+                        <span style="color:#38bdf8; font-weight:bold;"><i class="fa-solid fa-database"></i> Realtime DB Ready</span>
+                    </div>
+                    <div class="clickable-card" onclick="showInfoModal('Security SSL Status', 'TLS 1.3 / SSL Encryption', 'All passenger details (CNIC & PNR) processed via client-side validated input layers.')">
+                        <label>Security & SSL Shield</label>
+                        <span style="color:#34d399; font-weight:bold;"><i class="fa-solid fa-shield-halved"></i> SSL Active</span>
+                    </div>
+                </div>
+
+                <!-- 5. Quick Command Shortcuts -->
+                <div class="section-title">Quick Aviation Command Shortcuts</div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-top:10px;">
+                    <button class="quick-btn" onclick="switchTab('booking', document.querySelectorAll('.tab-btn')[2])"><i class="fa-solid fa-ticket"></i> Issue Quick Ticket</button>
+                    <button class="quick-btn" style="background:linear-gradient(135deg, #d97706, #b45309);" onclick="switchTab('missed', document.querySelectorAll('.tab-btn')[3])"><i class="fa-solid fa-plane-slash"></i> Recover Missed Flight</button>
+                    <button class="quick-btn" style="background:linear-gradient(135deg, #dc2626, #b91c1c);" onclick="switchTab('emergency', document.querySelectorAll('.tab-btn')[8])"><i class="fa-solid fa-triangle-exclamation"></i> CFR Emergency</button>
+                    <button class="quick-btn" style="background:linear-gradient(135deg, #059669, #047857);" onclick="switchTab('manifest', document.querySelectorAll('.tab-btn')[5])"><i class="fa-solid fa-users"></i> View Passengers DB</button>
+                </div>
+
             </div>
 
-            <!-- TAB 2: AIRPORTS HUB (INCLUDES SIALKOT IN PUNJAB) -->
+            <!-- TAB 2: AIRPORTS HUB -->
             <div id="airports" class="tab-content">
                 <div class="section-title">Major International Airports of Pakistan</div>
                 
@@ -509,7 +598,6 @@
 
                 <div class="grid" id="airportGrid">
                     
-                    <!-- PUNJAB: ISLAMABAD -->
                     <div class="img-card" data-province="Punjab" data-search="islamabad isb opis iiap punjab" onclick="showFullInfoModal('Islamabad International Airport (ISB)', 'OPIS', 'Punjab', '14ms', 'Runway 10L/28R & 10R/28L Active', '24°C, Clear Sky', '28/32 Gates', 'PK-302 (Karachi), PA-402 (Jeddah), EK-612 (Dubai)', 'Primary Strategic Capital Hub with CAT-III ILS System.')">
                         <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop" alt="Islamabad Airport">
                         <div class="img-card-body">
@@ -530,7 +618,6 @@
                         </div>
                     </div>
 
-                    <!-- PUNJAB: LAHORE -->
                     <div class="img-card" data-province="Punjab" data-search="lahore lhe opla aiia punjab" onclick="showFullInfoModal('Allama Iqbal Intl Airport, Lahore (LHE)', 'OPLA', 'Punjab', '16ms', 'Runway 36R/18L Active', '22°C, Mild Haze', '18/24 Gates', 'PA-402 (Jeddah), PK-303 (Karachi), QR-628 (Doha)', 'Main Aviation Gateway of Punjab with Advanced Smart Fog Landing Tech.')">
                         <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop" alt="Lahore Airport">
                         <div class="img-card-body">
@@ -551,7 +638,6 @@
                         </div>
                     </div>
 
-                    <!-- PUNJAB: SIALKOT (NEWLY ADDED) -->
                     <div class="img-card" data-province="Punjab" data-search="sialkot skt opst siap punjab" onclick="showFullInfoModal('Sialkot International Airport (SKT)', 'OPST', 'Punjab', '15ms', 'Runway 04/22 Active (3.6km)', '23°C, Clear Sky', '12 Stands / 5 Gates', 'G9-567 (Sharjah), FZ-338 (Dubai), PK-240 (Kuwait)', 'First Private Sector Commercial Airport in South Asia & Export Cargo Powerhouse.')">
                         <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?q=80&w=600&auto=format&fit=crop" alt="Sialkot Airport">
                         <div class="img-card-body">
@@ -572,7 +658,6 @@
                         </div>
                     </div>
 
-                    <!-- SINDH: KARACHI -->
                     <div class="img-card" data-province="Sindh" data-search="karachi khi opkc jiap sindh" onclick="showFullInfoModal('Jinnah International Airport, Karachi (KHI)', 'OPKC', 'Sindh', '22ms', 'Runway 25L/07R Active', '29°C, Coastal Wind', '31/42 Stands', 'PK-302 (Islamabad), SV-701 (Riyadh), FZ-334 (Dubai)', 'Largest Cargo & Passenger Aviation Hub in South Sindh.')">
                         <img src="https://images.unsplash.com/photo-1506015391300-4802dc74de2e?q=80&w=600&auto=format&fit=crop" alt="Karachi Airport">
                         <div class="img-card-body">
@@ -593,7 +678,6 @@
                         </div>
                     </div>
 
-                    <!-- KPK: PESHAWAR -->
                     <div class="img-card" data-province="KPK" data-search="peshawar pew opps bkip kpk" onclick="showFullInfoModal('Bacha Khan Intl Airport, Peshawar (PEW)', 'OPPS', 'KPK', '18ms', 'Runway 17/35 Active', '20°C, Clear Sky', '8/12 Gates', 'ER-501 (Dubai), PK-217 (Abu Dhabi), PA-601 (Sharjah)', 'Key International Gateway for Khyber Pakhtunkhwa Region.')">
                         <img src="https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=600&auto=format&fit=crop" alt="Peshawar Airport">
                         <div class="img-card-body">
@@ -614,7 +698,6 @@
                         </div>
                     </div>
 
-                    <!-- BALOCHISTAN: QUETTA -->
                     <div class="img-card" data-province="Balochistan" data-search="quetta uet opqt qiap balochistan" onclick="showFullInfoModal('Quetta International Airport (UET)', 'OPQT', 'Balochistan', '26ms', 'Runway 13/31 Active', '16°C, Dry Sky', '4/8 Stands', '9P-801 (Islamabad), PK-325 (Karachi), G9-541 (Sharjah)', 'High-Altitude International Command Hub in Balochistan.')">
                         <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=600&auto=format&fit=crop" alt="Quetta Airport">
                         <div class="img-card-body">
@@ -635,7 +718,6 @@
                         </div>
                     </div>
 
-                    <!-- BALOCHISTAN: GWADAR -->
                     <div class="img-card" data-province="Balochistan" data-search="gwadar gwd opgd giap balochistan" onclick="showFullInfoModal('New Gwadar International Airport (GWD)', 'OPGD', 'Balochistan', '28ms', 'Runway 06/24 Active', '27°C, Sunny', '3/10 Stands', 'PK-303 (Karachi), PK-112 (Muscat), Strategic Cargo Flights', 'CPEC Flagship Deep-Sea Port Aviation Gateway.')">
                         <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=600&auto=format&fit=crop" alt="Gwadar Airport">
                         <div class="img-card-body">
@@ -852,11 +934,23 @@
 
         </div>
 
+        <!-- UNIVERSAL INTERACTIVE MODAL -->
+        <div class="modal-overlay" id="infoModal">
+            <div class="modal-box">
+                <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
+                <h2 id="modalTitle" style="color:#38bdf8; font-size:18px; margin-bottom:12px;">System Diagnostic</h2>
+                <div class="interactive-box">
+                    <h3 id="modalSub" style="color:#fbbf24; font-size:14px; margin-bottom:8px;">Header Sub</h3>
+                    <p id="modalDesc" style="font-size:12px; color:#cbd5e1; line-height:1.6;">Detailed info text...</p>
+                </div>
+            </div>
+        </div>
+
         <!-- FULL AIRPORT & FLIGHT INFO MODAL -->
         <div class="modal-overlay" id="telemetryModal">
             <div class="modal-box">
                 <i class="fa-solid fa-xmark modal-close" onclick="closeModal()"></i>
-                <h2 id="modalTitle" style="color:#38bdf8; font-size:18px; margin-bottom:15px;">Airport Telemetry</h2>
+                <h2 id="modalTitleAirport" style="color:#38bdf8; font-size:18px; margin-bottom:15px;">Airport Telemetry</h2>
                 <div class="interactive-box">
                     <div style="font-size:13px; line-height:1.8;">
                         <p><strong>Province / Region:</strong> <span id="modalProvince" style="color:#fbbf24;">-</span></p>
@@ -890,6 +984,31 @@
             document.getElementById(tabId).classList.add('active');
         }
 
+        function showInfoModal(title, sub, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalSub').innerText = sub;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('infoModal').classList.add('active');
+        }
+
+        function showFullInfoModal(name, icao, province, latency, runway, weather, capacity, flights, overview) {
+            document.getElementById('modalTitleAirport').innerText = name;
+            document.getElementById('modalIcao').innerText = icao;
+            document.getElementById('modalProvince').innerText = province;
+            document.getElementById('modalLatency').innerText = latency;
+            document.getElementById('modalRunway').innerText = runway;
+            document.getElementById('modalWeather').innerText = weather;
+            document.getElementById('modalCapacity').innerText = capacity;
+            document.getElementById('modalFlights').innerText = flights;
+            document.getElementById('modalOverview').innerText = overview;
+            document.getElementById('telemetryModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').classList.remove('active');
+            document.getElementById('telemetryModal').classList.remove('active');
+        }
+
         function filterAirports() {
             const query = document.getElementById('airportSearchInput').value.toLowerCase();
             const cards = document.querySelectorAll('#airportGrid .img-card');
@@ -910,23 +1029,6 @@
                     card.style.display = 'none';
                 }
             });
-        }
-
-        function showFullInfoModal(name, icao, province, latency, runway, weather, capacity, flights, overview) {
-            document.getElementById('modalTitle').innerText = name;
-            document.getElementById('modalIcao').innerText = icao;
-            document.getElementById('modalProvince').innerText = province;
-            document.getElementById('modalLatency').innerText = latency;
-            document.getElementById('modalRunway').innerText = runway;
-            document.getElementById('modalWeather').innerText = weather;
-            document.getElementById('modalCapacity').innerText = capacity;
-            document.getElementById('modalFlights').innerText = flights;
-            document.getElementById('modalOverview').innerText = overview;
-            document.getElementById('telemetryModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('telemetryModal').classList.remove('active');
         }
 
         function validateInputs() {
